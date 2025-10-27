@@ -16,13 +16,11 @@ src/
 ├── widgets/ → общие макеты интерфейса (Header, Sidebar, Footer)
 ├── features/ → бизнес‑модули (разделы приложения)
 │ ├── auth/
-│ │ ├── components/
 │ │ ├── hooks/
 │ │ ├── services/
 │ │ ├── types.ts
 │ │ └── index.ts
 │ ├── posts/
-│ │ ├── components/
 │ │ ├── hooks/
 │ │ ├── views/
 │ │ ├── routes.ts

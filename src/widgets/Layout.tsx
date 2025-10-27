@@ -8,6 +8,7 @@ import { AppHeader } from '@/widgets/AppHeader'
 
 export function Layout({ children }: { children?: ReactNode }) {
   const [open, setOpen] = useState(false)
+
   return (
     <div className="flex h-screen w-screen">
       <SidebarProvider open={open} onOpenChange={setOpen}>

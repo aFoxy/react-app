@@ -30,7 +30,15 @@ export default defineConfig([
     },
     rules: {
       'unused-imports/no-unused-imports': 'warn',
-      "react-refresh/only-export-components": "warn"
+      'react-refresh/only-export-components': 'warn',
+      'newline-before-return': 'error',
+      'padding-line-between-statements': [
+        'error',
+        { blankLine: 'always', prev: '*', next: ['if'] },
+        { blankLine: 'always', prev: ['if'], next: '*' },
+        { blankLine: 'always', prev: '*', next: 'function' },
+        { blankLine: 'always', prev: 'function', next: '*' },
+      ],
     },
   },
 ])
