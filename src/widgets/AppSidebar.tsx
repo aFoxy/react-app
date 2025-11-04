@@ -11,37 +11,37 @@ import {
   SidebarMenuItem,
   SidebarMenuSub,
   SidebarMenuSubItem,
-  SidebarTrigger,
-} from '@/components/ui/Sidebar/sidebar'
-import { Separator } from '@/components/ui/separator'
+} from '@shared/ui/sidebar'
+import { Separator } from '@shared/ui/separator'
 import { Calendar, ChevronDown, Home, Inbox, Search, Settings } from 'lucide-react'
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@shared/ui/collapsible'
+import { NavLink } from 'react-router'
 
 // Menu items.
 const items = [
   {
     title: 'Home',
-    url: '#',
+    url: '/',
     icon: Home,
   },
   {
-    title: 'Inbox',
-    url: '#',
+    title: 'Refs',
+    url: '/refs',
     icon: Inbox,
   },
   {
-    title: 'Calendar',
-    url: '#',
+    title: 'Dashboard',
+    url: '/dashboard',
     icon: Calendar,
   },
   {
-    title: 'Search',
-    url: '#',
+    title: 'Audit',
+    url: '/audit',
     icon: Search,
   },
   {
-    title: 'Settings',
-    url: '#',
+    title: 'Users',
+    url: '/users/33',
     icon: Settings,
   },
 ]
@@ -62,12 +62,19 @@ export function AppSidebar() {
               <SidebarMenu>
                 {items.map((item) => (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild>
-                      <a href={item.url}>
-                        <item.icon />
-                        <span>{item.title}</span>
-                      </a>
-                    </SidebarMenuButton>
+                    <NavLink
+                      to={item.url}
+                      className={({ isActive }) =>
+                        isActive ? 'font-bold text-blue-500' : 'text-gray-500'
+                      }
+                    >
+                      {({ isActive }) => (
+                        <SidebarMenuButton isActive={isActive}>
+                          <item.icon />
+                          <span>{item.title}</span>
+                        </SidebarMenuButton>
+                      )}
+                    </NavLink>
                   </SidebarMenuItem>
                 ))}
                 <Collapsible defaultOpen className="group/collapsible">
@@ -97,8 +104,7 @@ export function AppSidebar() {
         </SidebarContent>
 
         <SidebarFooter>
-          <div className="px-4 py-3 text-xs text-muted-foreground">© 2025</div>
-          <SidebarTrigger></SidebarTrigger>
+          <div className="px-4 py-3 text-xs text-muted-foreground">React app © 2025</div>
         </SidebarFooter>
       </Sidebar>
     </div>
