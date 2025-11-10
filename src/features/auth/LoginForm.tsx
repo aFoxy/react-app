@@ -1,39 +1,21 @@
 import { Form } from 'react-router'
 import { Button } from '@shared/ui/button'
 import { Input } from '@shared/ui/input'
-import { useAuth } from '@features/auth/auth-context'
-import { useForm } from 'react-hook-form'
+import { useLoginForm } from '@features/auth/use-login-form'
 
 type LoginFormProps = {
   onSuccess: () => void
 }
 
-type LoginForm = {
-  email: string
-  password: string
-}
-
 export const LoginForm = ({ onSuccess }: LoginFormProps) => {
-  const { login } = useAuth()
+  const { form, onSubmit } = useLoginForm({ onSuccess })
 
-  const { register, handleSubmit } = useForm<LoginForm>({
-    defaultValues: { email: '', password: '' },
-  })
-
-  const onSubmit = async ({ email }: LoginForm) => {
-    try {
-      login({ username: email, id: crypto.randomUUID() })
-      onSuccess()
-    } catch (err) {
-      // setError('Неверный логин или пароль');
-      console.log(err)
-    }
-  }
+  const { register } = form
 
   return (
     <div>
       <h1 className="mb-4 text-center text-4xl font-bold text-gray-800">Login</h1>
-      <Form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
+      <Form onSubmit={onSubmit} className="flex flex-col gap-6">
         <Input
           type="email"
           placeholder="Email Address"

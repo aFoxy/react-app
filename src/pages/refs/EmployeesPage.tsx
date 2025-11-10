@@ -2,7 +2,7 @@ import type { EmployeeFilters } from '@features/references/types'
 import { EmployeesTable } from '@features/references/EmployeeTable'
 import { EmployeesFilters } from '@features/references/EmployeeFilters'
 import { useLoaderData } from 'react-router'
-import { useTableState } from '@features/references/useTableState'
+import { useTableState } from '@features/references/use-table-state'
 import { useCallback, useMemo, useState } from 'react'
 
 export default function EmployeesPage() {

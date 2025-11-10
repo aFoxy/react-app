@@ -1,6 +1,6 @@
 import { isRouteErrorResponse, useRouteError } from 'react-router'
 
-export function ErrorBoundary() {
+export function AuditErrorBoundary() {
   const error = useRouteError()
 
   if (isRouteErrorResponse(error)) {
