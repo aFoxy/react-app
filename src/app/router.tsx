@@ -1,6 +1,8 @@
 import { createBrowserRouter, isRouteErrorResponse, useRouteError } from 'react-router'
-import App from '@/App'
 import HydrationSpinner from '@shared/components/HydrationSpinner'
+import * as pages from '@/pages'
+import { ProtectedRoute } from '@features/auth/ProtectedRoute'
+import { Layout } from '@widgets/Layout'
 
 function DataErrorBoundary() {
   const error = useRouteError()
@@ -26,19 +28,6 @@ function DataErrorBoundary() {
   return null
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function convert(module: any) {
-  const { clientLoader, clientAction, default: Component, ...rest } = module
-
-  return {
-    ...rest,
-    loader: clientLoader,
-    action: clientAction,
-    // errorElement: <DataErrorBoundary />,
-    Component,
-  }
-}
-
 async function loggingMiddleware({ request }: { request: Request }, next: () => Promise<unknown>) {
   const url = new URL(request.url)
   console.log(`Starting navigation: ${url.pathname}${url.search}`)
@@ -49,14 +38,15 @@ async function loggingMiddleware({ request }: { request: Request }, next: () => 
 }
 
 export const router = createBrowserRouter([
-  {
-    path: '/login',
-    lazy: () => import('@pages/Login').then(convert),
-  },
+  pages.loginRoute,
   {
     path: '/',
     middleware: [loggingMiddleware],
-    element: <App />,
+    element: (
+      <Layout>
+        <ProtectedRoute />
+      </Layout>
+    ),
     hydrateFallbackElement: <HydrationSpinner />,
     errorElement: <DataErrorBoundary />,
     children: [
@@ -64,27 +54,11 @@ export const router = createBrowserRouter([
         index: true,
         element: <div>Hello World</div>,
       },
-
-      {
-        path: 'dashboard',
-        lazy: () => import('@pages/Dashboard').then(convert),
-      },
-      {
-        path: 'audit',
-        lazy: () => import('@pages/Audit').then(convert),
-      },
-      {
-        path: 'refs',
-        lazy: () => import('@pages/EmployeesPage').then(convert),
-      },
-      {
-        path: '/users/:id',
-        lazy: () => import('@pages/Users').then(convert),
-      },
+      pages.dashboardRoute,
+      pages.auditRoute,
+      pages.refsRoute,
+      pages.userRoute,
     ],
   },
-  {
-    path: '*',
-    lazy: () => import('@pages/NotFound').then(convert),
-  },
+  pages.notFoundRoute,
 ])

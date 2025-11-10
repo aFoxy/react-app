@@ -2,19 +2,26 @@ import { Form } from 'react-router'
 import { Button } from '@shared/ui/button'
 import { Input } from '@shared/ui/input'
 import { useAuth } from '@features/auth/auth-context'
+import { useForm } from 'react-hook-form'
 
 type LoginFormProps = {
   onSuccess: () => void
 }
 
+type LoginForm = {
+  email: string
+  password: string
+}
+
 export const LoginForm = ({ onSuccess }: LoginFormProps) => {
   const { login } = useAuth()
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const { register, handleSubmit } = useForm<LoginForm>({
+    defaultValues: { email: '', password: '' },
+  })
+
+  const onSubmit = async ({ email }: LoginForm) => {
     try {
-      const formData = new FormData(e.currentTarget as HTMLFormElement)
-      const email = formData.get('email') as string
       login({ username: email, id: crypto.randomUUID() })
       onSuccess()
     } catch (err) {
@@ -26,9 +33,17 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
   return (
     <div>
       <h1 className="mb-4 text-center text-4xl font-bold text-gray-800">Login</h1>
-      <Form onSubmit={handleSubmit} className="flex flex-col gap-6">
-        <Input type="email" name="email" placeholder="Email Address" />
-        <Input type="password" name="password" placeholder="Password" />
+      <Form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
+        <Input
+          type="email"
+          placeholder="Email Address"
+          {...register('email', { required: true })}
+        />
+        <Input
+          type="password"
+          placeholder="Password"
+          {...register('password', { required: true })}
+        />
         <div>
           <Button
             // isLoading={login.isPending}

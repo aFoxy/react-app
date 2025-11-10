@@ -1,10 +1,16 @@
 import { useLoaderData, useSearchParams } from 'react-router'
 import { EmployeesTable } from '@features/references/EmployeeTable'
 import { MOCK_EMPLOYEES } from '@shared/mocks/employees'
-import EmployeesPage from '@pages/EmployeesPage'
+import EmployeesPage from '@pages/refs/EmployeesPage'
+
+async function fetchData() {
+  return new Promise((resolve) => setTimeout(() => resolve(MOCK_EMPLOYEES), 500))
+}
 
 export async function clientLoader() {
-  return MOCK_EMPLOYEES
+  const items = await fetchData()
+
+  return { items }
 }
 
 const TABLE_COMPONENTS = {
@@ -29,11 +35,9 @@ export default function RefsPage() {
   }
 
   return (
-    <div className="grid h-full gap-8 overflow-hidden">
-      <h1>Справочники</h1>
-      <EmployeesPage />
-    </div>
+    // <div className="grid h-full gap-8 overflow-hidden">
+    //   <h1>Справочники</h1>
+    <EmployeesPage />
+    // </div>
   )
 }
-
-// clientAction, ErrorBoundary, etc.

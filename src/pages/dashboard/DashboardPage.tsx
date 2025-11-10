@@ -6,7 +6,7 @@ export async function clientLoader() {
   }
 }
 
-export default function Dashboard() {
+export default function DashboardPage() {
   const data = useLoaderData()
 
   return <h1>{data.title}</h1>

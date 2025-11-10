@@ -2,7 +2,7 @@ import { useNavigate, useSearchParams } from 'react-router'
 import { LoginForm } from '@features/auth/LoginForm'
 import { Card } from '@shared/ui/card'
 
-export default function Login() {
+export default function LoginPage() {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const redirectTo = searchParams.get('from')

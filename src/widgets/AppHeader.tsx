@@ -23,7 +23,7 @@ export function AppHeader() {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Avatar className="cursor-pointer">
-              <AvatarImage src="/user.png" alt="User" />
+              <AvatarImage src="/user.png" alt="UserPage" />
               <AvatarFallback>{user?.username.slice(0, 2).toUpperCase()}</AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>

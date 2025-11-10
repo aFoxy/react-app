@@ -1,20 +1,9 @@
 import type { EmployeeFilters } from '@features/references/types'
-import { MOCK_EMPLOYEES } from '@shared/mocks/employees'
 import { EmployeesTable } from '@features/references/EmployeeTable'
 import { EmployeesFilters } from '@features/references/EmployeeFilters'
 import { useLoaderData } from 'react-router'
 import { useTableState } from '@features/references/useTableState'
-import { useMemo, useState } from 'react'
-
-async function fetchData() {
-  return new Promise((resolve) => setTimeout(() => resolve(MOCK_EMPLOYEES), 500))
-}
-
-export async function clientLoader() {
-  const items = await fetchData()
-
-  return { items }
-}
+import { useCallback, useMemo, useState } from 'react'
 
 export default function EmployeesPage() {
   const { setMultipleParams, getAllFilters, page, size } = useTableState()
@@ -56,18 +45,21 @@ export default function EmployeesPage() {
     setFiltersPending(true)
   }
 
-  const handlePaginationChange = (newState: { pageIndex: number; pageSize: number }) => {
-    if (filtersPending) {
-      setFiltersPending(false)
+  const handlePaginationChange = useCallback(
+    (newState: { pageIndex: number; pageSize: number }) => {
+      if (filtersPending) {
+        setFiltersPending(false)
 
-      return
-    }
+        return
+      }
 
-    setMultipleParams({
-      page: String(newState.pageIndex + 1),
-      size: String(newState.pageSize),
-    })
-  }
+      setMultipleParams({
+        page: String(newState.pageIndex + 1),
+        size: String(newState.pageSize),
+      })
+    },
+    []
+  )
 
   return (
     <div className="container mx-auto flex h-full flex-col gap-4 py-10">

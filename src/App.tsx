@@ -1,15 +1,16 @@
 import './App.css'
-import { Layout } from '@widgets/Layout'
 import { AuthProvider } from '@features/auth/auth-context'
-import { ProtectedRoute } from '@features/auth/ProtectedRoute'
+import { RouterProvider } from 'react-router/dom'
+import { router } from '@/app/router'
+import ErrorBoundary from '@shared/components/ErrorBoundary'
 
 function App() {
   return (
-    <AuthProvider>
-      <Layout>
-        <ProtectedRoute />
-      </Layout>
-    </AuthProvider>
+    <ErrorBoundary>
+      <AuthProvider>
+        <RouterProvider router={router}></RouterProvider>
+      </AuthProvider>
+    </ErrorBoundary>
   )
 }
 

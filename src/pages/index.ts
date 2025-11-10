@@ -1,0 +1,6 @@
+export { auditRoute } from '@pages/audit'
+export { loginRoute } from '@pages/login'
+export { userRoute } from '@pages/users'
+export { notFoundRoute } from '@pages/not-found'
+export { refsRoute } from '@pages/refs'
+export { dashboardRoute } from '@pages/dashboard'
