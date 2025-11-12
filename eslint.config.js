@@ -6,6 +6,7 @@ import tseslint from 'typescript-eslint'
 import { defineConfig, globalIgnores } from 'eslint/config'
 import tailwind from 'eslint-plugin-tailwindcss'
 import unusedImports from 'eslint-plugin-unused-imports'
+import pluginQuery from '@tanstack/eslint-plugin-query'
 
 export default defineConfig([
   globalIgnores(['dist']),
@@ -15,6 +16,7 @@ export default defineConfig([
     },
     files: ['**/*.{ts,tsx}'],
     extends: [
+      pluginQuery.configs['flat/recommended'],
       js.configs.recommended,
       tseslint.configs.recommended,
       reactHooks.configs['recommended-latest'],

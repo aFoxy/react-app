@@ -7,7 +7,7 @@ import {
   DropdownMenuTrigger,
 } from '@shared/ui/dropdown-menu'
 import { Avatar, AvatarFallback, AvatarImage } from '@shared/ui/avatar'
-import { useAuth } from '@features/auth/auth-context'
+import { useAuth } from '@features/auth/hooks/use-auth'
 
 export function AppHeader() {
   const { logout, user } = useAuth()
@@ -24,7 +24,7 @@ export function AppHeader() {
           <DropdownMenuTrigger asChild>
             <Avatar className="cursor-pointer">
               <AvatarImage src="/user.png" alt="UserPage" />
-              <AvatarFallback>{user?.username.slice(0, 2).toUpperCase()}</AvatarFallback>
+              <AvatarFallback>{user?.username?.slice(0, 2).toUpperCase()}</AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">

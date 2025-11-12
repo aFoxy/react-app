@@ -6,6 +6,9 @@ export const Routes = {
   DASHBOARD: '/dashboard',
   AUDIT: '/audit',
   REFS: '/refs',
+  REF: '/refs/:id',
+  REF_EDIT: '/refs/:id/edit',
+  REF_CREATE: '/refs/create',
   USER: '/users/:id',
 } as const
 

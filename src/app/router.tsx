@@ -1,32 +1,9 @@
-import { createBrowserRouter, isRouteErrorResponse, useRouteError } from 'react-router'
+import { createBrowserRouter } from 'react-router'
 import HydrationSpinner from '@shared/components/HydrationSpinner'
 import * as pages from '@/pages'
 import { ProtectedRoute } from '@features/auth/ProtectedRoute'
 import { Layout } from '@widgets/Layout'
-
-function DataErrorBoundary() {
-  const error = useRouteError()
-
-  if (isRouteErrorResponse(error)) {
-    return (
-      <div>
-        <h1>Ошибка {error.status}</h1>
-        <p>{error.statusText}</p>
-      </div>
-    )
-  }
-
-  if (error instanceof Error) {
-    return (
-      <div>
-        <h1>Ошибка загрузки данных</h1>
-        <p>{error.message}</p>
-      </div>
-    )
-  }
-
-  return null
-}
+import { DataErrorBoundary } from '@shared/components/DataErrorBoundary'
 
 async function loggingMiddleware({ request }: { request: Request }, next: () => Promise<unknown>) {
   const url = new URL(request.url)
