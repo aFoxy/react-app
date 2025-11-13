@@ -1,4 +1,22 @@
-import type { Employee } from '@features/references/types'
+import type { Employee } from '@shared/api/employees/types'
+
+export const DEPARTMENTS = [
+  'IT',
+  'Development',
+  'QA',
+  'Analytics',
+  'Management',
+  'Marketing',
+  'HR',
+  'Finance',
+  'Sales',
+  'Support',
+  'Administration',
+  'Architecture',
+  'Quality Control',
+  'DevOps',
+  'Security',
+]
 
 export const MOCK_EMPLOYEES: Employee[] = [
   {

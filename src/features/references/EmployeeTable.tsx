@@ -1,5 +1,4 @@
-import type { Employee } from '@features/references/types'
-import { employeeColumns } from '@features/references/columns'
+import type { Employee } from '@shared/api/employees/types'
 import { DataTable } from '@shared/components/DataTable'
 import {
   getCoreRowModel,
@@ -9,6 +8,7 @@ import {
 } from '@tanstack/react-table'
 import type { ColumnFiltersState } from '@tanstack/react-table'
 import { useEffect } from 'react'
+import { useEmployeesColumns } from '@features/references/hooks/use-employees-columns'
 
 interface EmployeesTableProps {
   items: Employee[]
@@ -23,6 +23,7 @@ export function EmployeesTable({
   onPaginationChange,
   columnFilters,
 }: EmployeesTableProps) {
+  const employeeColumns = useEmployeesColumns()
   const table = useReactTable({
     data: items,
     columns: employeeColumns,
@@ -30,11 +31,15 @@ export function EmployeesTable({
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     state: { pagination, columnFilters: columnFilters },
-    onColumnFiltersChange: () => {},
+    autoResetPageIndex: false,
     onPaginationChange: (updater) => {
       const newPagination = typeof updater === 'function' ? updater(pagination) : updater
 
-      if (!table.getPageCount()) return
+      if (
+        pagination.pageIndex === newPagination.pageIndex &&
+        pagination.pageSize === newPagination.pageSize
+      )
+        return
 
       onPaginationChange!(newPagination)
     },
@@ -51,7 +56,7 @@ export function EmployeesTable({
         pageSize: pagination.pageSize,
       })
     }
-  }, [table.getFilteredRowModel().rows.length, pagination.pageIndex, pagination.pageSize])
+  }, [onPaginationChange, items.length, pagination])
 
   return <DataTable table={table} />
 }

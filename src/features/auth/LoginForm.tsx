@@ -1,7 +1,7 @@
 import { Form } from 'react-router'
 import { Button } from '@shared/ui/button'
 import { Input } from '@shared/ui/input'
-import { useLoginForm } from '@features/auth/use-login-form'
+import { useLoginForm } from '@features/auth/hooks/use-login-form'
 
 type LoginFormProps = {
   onSuccess: () => void
