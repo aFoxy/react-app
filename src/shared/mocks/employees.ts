@@ -1,4 +1,4 @@
-import type { Employee } from '@shared/api//employees/types'
+import type { Employee } from '@shared/api/employees/types'
 
 export const DEPARTMENTS = [
   'IT',

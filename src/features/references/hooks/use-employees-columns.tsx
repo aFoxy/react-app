@@ -1,9 +1,9 @@
 import type { ColumnDef } from '@tanstack/react-table'
 import { NavLink, useLocation } from 'react-router'
 import { Edit, Trash, View } from 'lucide-react'
-import { useDeleteEmployee } from '@shared/api//employees/hooks/use-delete-employee'
+import { useDeleteEmployee } from '@shared/api/employees/hooks/use-delete-employee'
 import type { FilterFn } from '@tanstack/react-table'
-import type { Employee } from '@shared/api//employees/types'
+import type { Employee } from '@shared/api/employees/types'
 import { toast } from 'sonner'
 
 export const dateRangeFilterFn: FilterFn<Employee> = (row, columnId, filterValue) => {

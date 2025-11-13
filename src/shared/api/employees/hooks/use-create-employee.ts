@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { employeesService } from '@shared/api//employees/employees.service'
-import type { Employee } from '@shared/api//employees/types'
+import { employeesService } from '@shared/api/employees/employees.service'
+import type { Employee } from '@shared/api/employees/types'
 import { queryKeys } from '@shared/api/queryKeys'
 
 interface UseCreateEmployeeOptions {

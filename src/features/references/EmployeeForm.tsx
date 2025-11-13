@@ -5,7 +5,7 @@ import { CardContent, CardHeader } from '@shared/ui/card'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@shared/ui/select'
 import { Field, FieldContent, FieldLabel } from '@shared/ui/field'
 import { Switch } from '@shared/ui/switch'
-import type { Employee } from '@shared/api//employees/types'
+import type { Employee } from '@shared/api/employees/types'
 import { useEmployeeForm } from '@features/references/hooks/use-employee-form'
 
 type EmployeeFormProps = {

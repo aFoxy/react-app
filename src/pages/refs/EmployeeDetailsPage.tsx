@@ -2,7 +2,7 @@ import { useParams } from 'react-router'
 import { EmployeeView } from '@features/references/EmployeeView'
 import { Button } from '@shared/ui/button'
 import { ArrowLeft } from 'lucide-react'
-import { useEmployee } from '@shared/api//employees/hooks/use-employee'
+import { useEmployee } from '@shared/api/employees/hooks/use-employee'
 import { useReturnNavigation } from '@features/references/hooks/use-return-navigation'
 
 export default function EmployeePage() {

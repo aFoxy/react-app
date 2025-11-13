@@ -1,5 +1,5 @@
-import { api } from '@shared/api//api-client'
-import type { Employee } from '@shared/api//employees/types'
+import { api } from '@shared/api/api-client'
+import type { Employee } from '@shared/api/employees/types'
 
 export const employeesService = {
   getEmployees: async (): Promise<Employee[]> => {

@@ -3,7 +3,7 @@ import { HttpResponse, http } from 'msw'
 import { API_URL } from '../env'
 import { db } from '../db'
 import { authenticate, hash, requireAuth, AUTH_COOKIE, networkDelay } from '../utils'
-import type { User } from '@shared/api//auth/types'
+import type { User } from '@shared/api/auth/types'
 
 type LoginBody = {
   email: string

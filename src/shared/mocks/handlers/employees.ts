@@ -4,7 +4,7 @@ import { API_URL } from '../env'
 import { db, persistDb } from '../db'
 import { networkDelay, requireAuth } from '../utils'
 import { DEPARTMENTS } from '@shared/mocks/employees'
-import type { Employee } from '@shared/api//employees/types'
+import type { Employee } from '@shared/api/employees/types'
 
 export const employeesHandlers = [
   http.get(`${API_URL}/employees/departments`, async () => {
