@@ -40,10 +40,10 @@ export function EmployeesTable({
       },
     })
   }
-  const employeeColumns = getEmployeesColumns({ handleDelete, location, isPending })
+
   const table = useReactTable({
     data: items,
-    columns: employeeColumns,
+    columns: getEmployeesColumns({ handleDelete, location, isPending }),
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
