@@ -8,7 +8,10 @@ import {
 } from '@tanstack/react-table'
 import type { ColumnFiltersState } from '@tanstack/react-table'
 import { useEffect } from 'react'
-import { useEmployeesColumns } from '@features/references/hooks/use-employees-columns'
+import { getEmployeesColumns } from '@features/references/get-employees-columns'
+import { toast } from 'sonner'
+import { useLocation } from 'react-router'
+import { useDeleteEmployee } from '@shared/api/employees/hooks/use-delete-employee'
 
 interface EmployeesTableProps {
   items: Employee[]
@@ -23,7 +26,21 @@ export function EmployeesTable({
   onPaginationChange,
   columnFilters,
 }: EmployeesTableProps) {
-  const employeeColumns = useEmployeesColumns()
+  const { mutate: deleteItem, isPending } = useDeleteEmployee()
+  const location = useLocation()
+  const handleDelete = (id: string) => {
+    if (!window.confirm('Are you sure?')) return
+
+    deleteItem(id, {
+      onSuccess: () => {
+        toast.success('Employee deleted')
+      },
+      onError: (error: Error) => {
+        toast.error(error?.message || 'Employee delete error')
+      },
+    })
+  }
+  const employeeColumns = getEmployeesColumns({ handleDelete, location, isPending })
   const table = useReactTable({
     data: items,
     columns: employeeColumns,
@@ -56,7 +73,7 @@ export function EmployeesTable({
         pageSize: pagination.pageSize,
       })
     }
-  }, [onPaginationChange, items.length, pagination])
+  }, [table, onPaginationChange, items.length, pagination])
 
   return <DataTable table={table} />
 }

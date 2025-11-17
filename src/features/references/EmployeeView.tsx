@@ -1,5 +1,6 @@
 import { CardContent, CardHeader, CardTitle } from '@/shared/ui/card'
 import type { Employee } from '@shared/api/employees/types'
+import { formatSalary } from '@features/references/utils'
 
 interface EmployeeViewProps {
   employee: Employee
@@ -10,16 +11,6 @@ export const EmployeeView: React.FC<EmployeeViewProps> = ({ employee }) => {
     if (!date) return '—'
 
     return date
-  }
-
-  const formatSalary = (salary?: number) => {
-    if (!salary) return '—'
-
-    return new Intl.NumberFormat('ru-RU', {
-      style: 'currency',
-      currency: 'RUB',
-      minimumFractionDigits: 0,
-    }).format(salary)
   }
 
   return (

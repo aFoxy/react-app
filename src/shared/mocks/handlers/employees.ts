@@ -19,10 +19,16 @@ export const employeesHandlers = [
     }
   }),
 
-  http.get(`${API_URL}/employees`, async () => {
+  http.get(`${API_URL}/employees`, async ({ cookies }) => {
     await networkDelay()
 
     try {
+      const { error } = requireAuth(cookies)
+
+      if (error) {
+        return HttpResponse.json({ message: error }, { status: 401 })
+      }
+
       const result = db.employees.getAll()
 
       return HttpResponse.json({ data: result })

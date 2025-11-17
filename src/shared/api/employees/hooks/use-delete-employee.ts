@@ -9,7 +9,6 @@ export const useDeleteEmployee = () => {
   return useMutation({
     mutationFn: employeesService.deleteEmployee,
     onMutate: async (id: string) => {
-      await queryClient.cancelQueries({ queryKey: queryKeys.employees.list() })
       const previousList = queryClient.getQueryData<Employee[]>(queryKeys.employees.list())
       queryClient.setQueryData(
         queryKeys.employees.list(),
