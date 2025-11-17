@@ -1,35 +1,46 @@
 import type { EmployeeFilters } from '@features/references/types'
 import { EmployeesTable } from '@features/references/EmployeeTable'
 import { EmployeesFilters } from '@features/references/EmployeeFilters'
-import { useLoaderData } from 'react-router'
-import { useTableState } from '@features/references/use-table-state'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo } from 'react'
+import { useTableState } from '@features/references/hooks/use-table-state'
+import { useEmployees } from '@shared/api/employees/hooks/use-employees'
+import { useEmployeesDepartments } from '@shared/api/employees/hooks/use-employees-departments'
+import { Button } from '@shared/ui/button'
+import { Plus } from 'lucide-react'
+import { NavLink } from 'react-router'
+import { Routes } from '@/app/routes'
 
 export default function EmployeesPage() {
   const { setMultipleParams, getAllFilters, page, size } = useTableState()
-
-  const data = useLoaderData()
-
-  const [filters, setFilters] = useState({
-    ...(getAllFilters() as EmployeeFilters),
-  })
-
-  const [filtersPending, setFiltersPending] = useState(false)
-
+  const filters = getAllFilters() as EmployeeFilters
+  const employees = useEmployees()
+  const departments = useEmployeesDepartments()
   const columnFilters = useMemo(() => {
-    return Object.entries(filters)
+    const urlFilters = getAllFilters() as EmployeeFilters
+
+    return Object.entries(urlFilters)
       .filter(([, value]) => value !== undefined && value !== null && value !== '')
       .map(([id, value]) => {
         if (id === 'dateFrom' || id === 'dateTo') {
           return {
             id: 'hireDate',
-            value: [filters.dateFrom, filters.dateTo],
+            value: [urlFilters.dateFrom, urlFilters.dateTo],
           }
         }
 
         return { id, value }
       })
-  }, [filters])
+  }, [getAllFilters])
+
+  const handlePaginationChange = useCallback(
+    (newState: { pageIndex: number; pageSize: number }) => {
+      setMultipleParams({
+        page: String(newState.pageIndex + 1),
+        size: String(newState.pageSize),
+      })
+    },
+    [getAllFilters]
+  )
 
   const pagination = useMemo(
     () => ({
@@ -40,39 +51,44 @@ export default function EmployeesPage() {
   )
 
   const handleFiltersChange = (newFilters: EmployeeFilters) => {
+    console.log('newFilters', newFilters)
     setMultipleParams({ ...newFilters, page: '1' })
-    setFilters(newFilters)
-    setFiltersPending(true)
+    // setFilters(newFilters)
+    // setFiltersPending(true)
   }
 
-  const handlePaginationChange = useCallback(
-    (newState: { pageIndex: number; pageSize: number }) => {
-      if (filtersPending) {
-        setFiltersPending(false)
+  let tableContent
 
-        return
-      }
-
-      setMultipleParams({
-        page: String(newState.pageIndex + 1),
-        size: String(newState.pageSize),
-      })
-    },
-    []
-  )
-
-  return (
-    <div className="container mx-auto flex h-full flex-col gap-4 py-10">
-      <EmployeesFilters
-        filters={filters}
-        onFiltersChange={(newFilters) => handleFiltersChange(newFilters)}
-      />
+  if (employees.data) {
+    tableContent = (
       <EmployeesTable
-        items={data.items}
+        key="emTabl"
+        items={employees.data ?? []}
         columnFilters={columnFilters}
         pagination={pagination}
         onPaginationChange={handlePaginationChange}
       />
+    )
+  } else if (employees.error) {
+    tableContent = 'An error has occurred: ' + employees.error.message
+  } else {
+    tableContent = 'Loading...'
+  }
+
+  return (
+    <div className="container mx-auto flex h-full flex-col gap-4 py-10">
+      <NavLink to={Routes.REF_CREATE}>
+        <Button className="w-fit">
+          <Plus />
+          Create
+        </Button>
+      </NavLink>
+      <EmployeesFilters
+        departments={departments.data ?? []}
+        filters={filters}
+        onFiltersChange={(newFilters) => handleFiltersChange(newFilters)}
+      />
+      {tableContent}
     </div>
   )
 }

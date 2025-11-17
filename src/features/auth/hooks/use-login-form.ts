@@ -1,4 +1,4 @@
-import { useAuth } from '@features/auth/auth-context'
+import { useAuth } from '@features/auth/hooks/use-auth'
 import { useForm } from 'react-hook-form'
 
 const DEFAULT_VALUES: LoginForm = {
@@ -24,8 +24,9 @@ export const useLoginForm = ({ onSuccess }: UseLoginFormProps) => {
 
   const onSubmit = async (data: LoginForm) => {
     try {
-      login({
-        username: data.email,
+      await login({
+        email: data.email,
+        password: data.password,
         id: crypto.randomUUID(),
       })
       onSuccess()

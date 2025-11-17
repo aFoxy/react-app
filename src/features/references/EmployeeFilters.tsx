@@ -6,27 +6,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 interface EmployeesFilterProps {
   filters: EmployeeFilters
   onFiltersChange: (filters: EmployeeFilters) => void
+  departments: string[]
 }
 
-const departments = [
-  'IT',
-  'Development',
-  'QA',
-  'Analytics',
-  'Management',
-  'Marketing',
-  'HR',
-  'Finance',
-  'Sales',
-  'Support',
-  'Administration',
-  'Architecture',
-  'Quality Control',
-  'DevOps',
-  'Security',
-]
-
-export function EmployeesFilters({ filters, onFiltersChange }: EmployeesFilterProps) {
+export function EmployeesFilters({ filters, onFiltersChange, departments }: EmployeesFilterProps) {
   const resetFilters = () => {
     onFiltersChange({
       ...filters,

@@ -1,4 +1,4 @@
-import { useAuth } from '@features/auth/auth-context'
+import { useAuth } from '@features/auth/hooks/use-auth'
 import { Navigate, Outlet } from 'react-router'
 
 export const ProtectedRoute = () => {

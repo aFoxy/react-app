@@ -1,5 +1,4 @@
-import type { Employee } from '@features/references/types'
-import { employeeColumns } from '@features/references/columns'
+import type { Employee } from '@shared/api/employees/types'
 import { DataTable } from '@shared/components/DataTable'
 import {
   getCoreRowModel,
@@ -9,6 +8,10 @@ import {
 } from '@tanstack/react-table'
 import type { ColumnFiltersState } from '@tanstack/react-table'
 import { useEffect } from 'react'
+import { getEmployeesColumns } from '@features/references/get-employees-columns'
+import { toast } from 'sonner'
+import { useLocation } from 'react-router'
+import { useDeleteEmployee } from '@shared/api/employees/hooks/use-delete-employee'
 
 interface EmployeesTableProps {
   items: Employee[]
@@ -23,18 +26,37 @@ export function EmployeesTable({
   onPaginationChange,
   columnFilters,
 }: EmployeesTableProps) {
+  const { mutate: deleteItem, isPending } = useDeleteEmployee()
+  const location = useLocation()
+  const handleDelete = (id: string) => {
+    if (!window.confirm('Are you sure?')) return
+
+    deleteItem(id, {
+      onSuccess: () => {
+        toast.success('Employee deleted')
+      },
+      onError: (error: Error) => {
+        toast.error(error?.message || 'Employee delete error')
+      },
+    })
+  }
+
   const table = useReactTable({
     data: items,
-    columns: employeeColumns,
+    columns: getEmployeesColumns({ handleDelete, location, isPending }),
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     state: { pagination, columnFilters: columnFilters },
-    onColumnFiltersChange: () => {},
+    autoResetPageIndex: false,
     onPaginationChange: (updater) => {
       const newPagination = typeof updater === 'function' ? updater(pagination) : updater
 
-      if (!table.getPageCount()) return
+      if (
+        pagination.pageIndex === newPagination.pageIndex &&
+        pagination.pageSize === newPagination.pageSize
+      )
+        return
 
       onPaginationChange!(newPagination)
     },
@@ -51,7 +73,7 @@ export function EmployeesTable({
         pageSize: pagination.pageSize,
       })
     }
-  }, [table.getFilteredRowModel().rows.length, pagination.pageIndex, pagination.pageSize])
+  }, [table, onPaginationChange, items.length, pagination])
 
   return <DataTable table={table} />
 }

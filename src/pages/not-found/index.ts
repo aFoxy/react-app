@@ -2,7 +2,7 @@ import type { RouteObject } from 'react-router'
 import { Routes } from '@/app/routes'
 
 export const notFoundRoute: RouteObject = {
-  path: Routes.NOT_FOUND,
+  path: Routes.ANY,
   handle: {
     title: 'Not found',
   },
