@@ -1,6 +1,7 @@
 import { factory, primaryKey } from '@mswjs/data'
 import { nanoid } from 'nanoid'
 import { MOCK_EMPLOYEES } from '@shared/mocks/employees'
+import { AUDIT_MOCKS } from '@shared/mocks/audit-records'
 
 const models = {
   user: {
@@ -21,6 +22,13 @@ const models = {
     salary: Number,
     isActive: Boolean,
     createdAt: Date.now,
+  },
+  audit: {
+    id: primaryKey(nanoid),
+    status: String,
+    userId: String,
+    action: String,
+    timestamp: Date,
   },
 }
 
@@ -79,6 +87,10 @@ export const initializeDb = async () => {
   const database = await loadDb()
   MOCK_EMPLOYEES.forEach((value) => {
     db.employees.create({ ...value })
+  })
+
+  AUDIT_MOCKS.forEach((value) => {
+    db.audit.create({ ...value })
   })
 
   Object.entries(db).forEach(([key, model]) => {

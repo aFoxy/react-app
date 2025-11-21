@@ -51,7 +51,7 @@ export function EmployeesFilters({ filters, onFiltersChange, departments }: Empl
         </SelectContent>
       </Select>
       <div>
-        <Button type="button" className="w-full" onClick={() => resetFilters()}>
+        <Button type="button" className="w-full" onClick={resetFilters}>
           Clear
         </Button>
       </div>

@@ -16,15 +16,15 @@ export const useUpdateEmployee = (employeeId: string, options?: UseUpdateEmploye
 
     onMutate: async (newData) => {
       await queryClient.cancelQueries({
-        queryKey: queryKeys.employees.details(employeeId),
+        queryKey: queryKeys.employees.getDetails(employeeId),
       })
 
       const previousEmployee = queryClient.getQueryData<Employee>(
-        queryKeys.employees.details(employeeId)
+        queryKeys.employees.getDetails(employeeId)
       )
 
       if (previousEmployee) {
-        queryClient.setQueryData(queryKeys.employees.details(employeeId), {
+        queryClient.setQueryData(queryKeys.employees.getDetails(employeeId), {
           ...previousEmployee,
           ...newData,
         })
@@ -34,9 +34,9 @@ export const useUpdateEmployee = (employeeId: string, options?: UseUpdateEmploye
     },
 
     onSuccess: (updatedEmployee) => {
-      queryClient.setQueryData(queryKeys.employees.details(employeeId), updatedEmployee)
+      queryClient.setQueryData(queryKeys.employees.getDetails(employeeId), updatedEmployee)
       queryClient.invalidateQueries({
-        queryKey: queryKeys.employees.list(),
+        queryKey: queryKeys.employees.getList(),
         type: 'active',
       })
 
@@ -45,7 +45,10 @@ export const useUpdateEmployee = (employeeId: string, options?: UseUpdateEmploye
 
     onError: (error: Error, _, context) => {
       if (context?.previousEmployee) {
-        queryClient.setQueryData(queryKeys.employees.details(employeeId), context.previousEmployee)
+        queryClient.setQueryData(
+          queryKeys.employees.getDetails(employeeId),
+          context.previousEmployee
+        )
       }
 
       options?.onError?.(error)
