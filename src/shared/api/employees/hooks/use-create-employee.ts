@@ -17,11 +17,11 @@ export const useCreateEmployee = (options?: UseCreateEmployeeOptions) => {
     onMutate: async (newEmployee) => {
       // Отменить активные запросы
       await queryClient.cancelQueries({
-        queryKey: queryKeys.employees.list(),
+        queryKey: queryKeys.employees.getList(),
       })
 
       // Получить старые данные для отката
-      const previousList = queryClient.getQueryData<Employee[]>(queryKeys.employees.list())
+      const previousList = queryClient.getQueryData<Employee[]>(queryKeys.employees.getList())
 
       const tempEmployee: Employee = {
         ...newEmployee,
@@ -30,7 +30,7 @@ export const useCreateEmployee = (options?: UseCreateEmployeeOptions) => {
 
       // Обновить кэш сразу (optimistic)
       if (previousList) {
-        queryClient.setQueryData(queryKeys.employees.list(), {
+        queryClient.setQueryData(queryKeys.employees.getList(), {
           ...previousList,
           ...tempEmployee,
         })
@@ -41,10 +41,10 @@ export const useCreateEmployee = (options?: UseCreateEmployeeOptions) => {
 
     onSuccess: (newEmployee) => {
       // Подтвердить обновление окончательными данными
-      queryClient.setQueryData(queryKeys.employees.details(newEmployee.id), newEmployee)
+      queryClient.setQueryData(queryKeys.employees.getDetails(newEmployee.id), newEmployee)
 
       queryClient.invalidateQueries({
-        queryKey: queryKeys.employees.list(),
+        queryKey: queryKeys.employees.getList(),
         type: 'active',
       })
 

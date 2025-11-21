@@ -13,6 +13,8 @@ import type { AuditRecord } from '@shared/api/audit/types'
 import { auditService } from '@shared/api/audit/audit.service'
 import { csvExport } from '@shared/lib/csv-export'
 
+const EXPORT_HEADERS: Array<keyof AuditRecord> = ['id', 'action', 'status', 'timestamp']
+
 export default function Audit() {
   const { setMultipleParams, getAllFilters, sortBy, page, size } = useTableState()
   const [rowSelection, setRowSelection] = useState({})
@@ -58,11 +60,12 @@ export default function Audit() {
   const handleExport = async () => {
     if (!Object.entries(rowSelection).length) return
 
-    const headers: Array<keyof AuditRecord> = ['id', 'action', 'status', 'timestamp']
     const rowsData = await auditService.getAuditRecordsForExport(Object.keys(rowSelection))
     const csvRows = [
-      headers.join(';'),
-      ...rowsData.map((row) => headers.map((field) => JSON.stringify(row[field] ?? '')).join(';')),
+      EXPORT_HEADERS.join(';'),
+      ...rowsData.map((row) =>
+        EXPORT_HEADERS.map((field) => JSON.stringify(row[field] ?? '')).join(';')
+      ),
     ]
     csvExport(csvRows, 'audit-records')
   }
@@ -80,6 +83,12 @@ export default function Audit() {
         onPaginationChange={handlePaginationChange}
         isFetching={auditData.isFetching}
         isLoading={auditData.isLoading}
+        editClickHandler={(row) => {
+          console.log('Edit', row.id)
+        }}
+        deleteClickHandler={(row) => {
+          console.log('Delete', row.id)
+        }}
       >
         <>
           <h2>Audit Records</h2>

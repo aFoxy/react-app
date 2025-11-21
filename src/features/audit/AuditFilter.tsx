@@ -52,11 +52,9 @@ export function AuditFilter({ filters, onFiltersChange }: AuditFilterProps) {
           ))}
         </SelectContent>
       </Select>
-      <div>
-        <Button type="button" className="w-full" onClick={() => resetFilters()}>
-          Clear
-        </Button>
-      </div>
+      <Button type="button" className="w-full" onClick={resetFilters}>
+        Clear
+      </Button>
     </div>
   )
 }

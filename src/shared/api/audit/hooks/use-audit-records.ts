@@ -5,7 +5,7 @@ import type { AuditParams } from '@shared/api/audit/types'
 
 export const useAuditRecords = (params: AuditParams) => {
   return useQuery({
-    queryKey: queryKeys.audit.list(params),
+    queryKey: queryKeys.audit.getList(params),
     queryFn: () => auditService.getAuditRecords(params),
     placeholderData: keepPreviousData,
   })

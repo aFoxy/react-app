@@ -19,6 +19,8 @@ interface AuditTableProps {
   onPaginationChange: ({ pageIndex, pageSize }: { pageIndex: number; pageSize: number }) => void
   isLoading: boolean
   isFetching: boolean
+  editClickHandler: (row: AuditRecord) => void
+  deleteClickHandler: (row: AuditRecord) => void
   onSortChange: (sorting: SortingState) => void
   children: ReactNode
   rowSelection: RowSelectionState
@@ -34,13 +36,15 @@ export function AuditTable({
   onPaginationChange,
   isLoading,
   isFetching,
+  editClickHandler,
+  deleteClickHandler,
   onSortChange,
   children,
 }: AuditTableProps) {
   const table = useReactTable({
     data: data?.content ?? [],
     rowCount: data?.totalElements ?? 0,
-    columns: getAuditColumns(),
+    columns: getAuditColumns({ deleteClickHandler, editClickHandler }),
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),

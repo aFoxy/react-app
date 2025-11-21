@@ -4,7 +4,7 @@ import { employeesService } from '@shared/api/employees/employees.service'
 
 export const useEmployee = (id: string) => {
   return useQuery({
-    queryKey: queryKeys.employees.details(id),
+    queryKey: queryKeys.employees.getDetails(id),
     queryFn: () => employeesService.getEmployee(id),
   })
 }

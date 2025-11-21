@@ -5,7 +5,12 @@ import { Checkbox } from '@shared/ui/checkbox'
 import { createActionsColumn } from '@shared/components/create-actions-column'
 import { SortableHeader } from '@shared/components/SortableHeader'
 
-export const getAuditColumns = () => {
+interface AuditColumnsProps {
+  editClickHandler: (row: AuditRecord) => void
+  deleteClickHandler: (row: AuditRecord) => void
+}
+
+export const getAuditColumns = ({ editClickHandler, deleteClickHandler }: AuditColumnsProps) => {
   const columns: ColumnDef<AuditRecord>[] = [
     {
       id: 'select-col',
@@ -57,12 +62,12 @@ export const getAuditColumns = () => {
       {
         label: 'Edit',
         icon: <Edit className="size-4" />,
-        onClick: (row) => console.log('Edit:', row.id),
+        onClick: editClickHandler,
       },
       {
         label: 'Delete',
         icon: <Trash2 className="size-4" />,
-        onClick: (row) => console.log('Delete:', row.id),
+        onClick: deleteClickHandler,
       },
     ]),
   ]

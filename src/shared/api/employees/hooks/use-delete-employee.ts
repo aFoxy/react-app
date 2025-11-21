@@ -9,24 +9,24 @@ export const useDeleteEmployee = () => {
   return useMutation({
     mutationFn: employeesService.deleteEmployee,
     onMutate: async (id: string) => {
-      const previousList = queryClient.getQueryData<Employee[]>(queryKeys.employees.list())
+      const previousList = queryClient.getQueryData<Employee[]>(queryKeys.employees.getList())
       queryClient.setQueryData(
-        queryKeys.employees.list(),
+        queryKeys.employees.getList(),
         (old: Employee[] | undefined) => old?.filter((item) => item.id !== id) ?? []
       )
 
       return { previousList }
     },
     onSuccess: (data, id) => {
-      queryClient.removeQueries({ queryKey: queryKeys.employees.details(id) })
+      queryClient.removeQueries({ queryKey: queryKeys.employees.getDetails(id) })
     },
     onError: (error, id, context) => {
       if (context?.previousList) {
-        queryClient.setQueryData(queryKeys.employees.list(), context.previousList)
+        queryClient.setQueryData(queryKeys.employees.getList(), context.previousList)
       }
     },
     onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.employees.list() })
+      queryClient.invalidateQueries({ queryKey: queryKeys.employees.getList() })
     },
   })
 }
