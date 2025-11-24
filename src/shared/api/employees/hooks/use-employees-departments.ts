@@ -4,7 +4,7 @@ import { queryKeys } from '@shared/api/queryKeys'
 
 export const useEmployeesDepartments = () => {
   return useQuery({
-    queryKey: queryKeys.employees.departments(),
+    queryKey: queryKeys.employees.getDepartments(),
     queryFn: () => employeesService.getDepartments(),
     staleTime: Infinity,
   })
