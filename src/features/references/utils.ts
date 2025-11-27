@@ -1,7 +1,7 @@
 import type { FilterFn } from '@tanstack/react-table'
-import type { Employee } from '@shared/api/employees/types'
+import type { Employee } from '@/schemas/employee-schema'
 
-export const formatSalary = (salary?: number) => {
+export const formatSalary = (salary?: number | null) => {
   if (!salary) return '—'
 
   return new Intl.NumberFormat('ru-RU', {

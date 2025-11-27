@@ -1,11 +1,12 @@
 import type { AuditParams } from '@shared/api/audit/types'
+import { EMPLOYEES_PATH } from '@shared/api/employees/employees.service'
 
 export const queryKeys = {
   employees: {
-    getAll: () => ['employees'],
-    getList: () => [...queryKeys.employees.getAll(), 'list'],
-    getDetails: (id: string) => [...queryKeys.employees.getAll(), id],
-    getDepartments: () => [...queryKeys.employees.getAll(), 'departments'],
+    getList: () => [EMPLOYEES_PATH, 'list'],
+    getDetails: (id: string) => [EMPLOYEES_PATH, id],
+    getDepartments: () => [EMPLOYEES_PATH, 'departments'],
+    getPositions: (department: string) => [EMPLOYEES_PATH, department, 'positions'],
   },
   audit: {
     getAll: () => ['audit'],

@@ -1,4 +1,4 @@
-import type { Employee } from '@shared/api/employees/types'
+import type { Employee } from '@/schemas/employee-schema'
 
 export const DEPARTMENTS = [
   'IT',
@@ -16,7 +16,45 @@ export const DEPARTMENTS = [
   'Quality Control',
   'DevOps',
   'Security',
-]
+] as const
+
+export type Department = (typeof DEPARTMENTS)[number]
+
+export const POSITIONS_BY_DEPARTMENT: Record<Department, string[]> = {
+  IT: ['IT Support Engineer', 'System Administrator', 'Network Engineer', 'IT Project Manager'],
+  Development: [
+    'Frontend Developer',
+    'Backend Developer',
+    'Fullstack Developer',
+    'Team Lead',
+    'Junior Developer',
+    'Senior Developer',
+  ],
+  QA: ['QA Engineer', 'Test Automation Engineer', 'Manual Tester', 'QA Team Lead'],
+  Analytics: ['Business Analyst', 'Data Analyst', 'BI Developer', 'Financial Analyst'],
+  Management: ['CEO', 'CTO', 'COO', 'Project Manager', 'Program Manager', 'Product Manager'],
+  Marketing: [
+    'Marketing Manager',
+    'Digital Marketer',
+    'Content Manager',
+    'SMM Specialist',
+    'PR Manager',
+  ],
+  HR: ['HR Manager', 'Recruiter', 'HR Business Partner', 'Talent Acquisition Specialist'],
+  Finance: ['Accountant', 'Financial Controller', 'Chief Accountant', 'CFO'],
+  Sales: ['Sales Manager', 'Account Executive', 'Lead Generation Specialist', 'Head of Sales'],
+  Support: ['Support Specialist', 'Customer Service Manager', 'Helpdesk Operator'],
+  Administration: ['Office Manager', 'Administrative Assistant', 'Receptionist'],
+  Architecture: ['Solution Architect', 'Enterprise Architect', 'Architect'],
+  'Quality Control': ['Quality Control Engineer', 'QC Inspector', 'Head of QC'],
+  DevOps: ['DevOps Engineer', 'Site Reliability Engineer', 'CI/CD Specialist'],
+  Security: [
+    'Security Engineer',
+    'Information Security Analyst',
+    'Security Officer',
+    'SOC Analyst',
+  ],
+}
 
 export const MOCK_EMPLOYEES: Employee[] = [
   {
@@ -33,7 +71,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0002',
     name: 'Alexey Mironov',
-    position: 'Junior Developer',
+    position: 'Data Analyst',
     department: 'Analytics',
     email: 'alexey.mironov993@company.com',
     phone: '+7 (994) 649-55-59',
@@ -44,7 +82,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0003',
     name: 'Leonid Orlov',
-    position: 'CTO',
+    position: 'Manual Tester',
     department: 'QA',
     email: 'leonid.orlov46@company.com',
     phone: '+7 (954) 936-16-49',
@@ -55,7 +93,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0004',
     name: 'Gennady Vishnyakov',
-    position: 'HR Manager',
+    position: 'QA Team Lead',
     department: 'QA',
     email: 'gennady.vishnyakov276@company.com',
     phone: '+7 (907) 994-27-69',
@@ -66,7 +104,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0005',
     name: 'Mikhail Bakhtin',
-    position: 'Copywriter',
+    position: 'Security Engineer',
     department: 'Security',
     email: 'mikhail.bakhtin665@company.com',
     phone: '+7 (966) 272-81-28',
@@ -77,7 +115,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0006',
     name: 'Nikolay Orlov',
-    position: 'Copywriter',
+    position: 'Test Automation Engineer',
     department: 'QA',
     email: 'nikolay.orlov805@company.com',
     phone: '+7 (994) 427-47-82',
@@ -88,7 +126,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0007',
     name: 'Natalia Fedorov',
-    position: 'Product Manager',
+    position: 'Quality Control Engineer',
     department: 'Quality Control',
     email: 'natalia.fedorov924@company.com',
     phone: '+7 (931) 676-84-22',
@@ -99,7 +137,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0008',
     name: 'Veronika Fedorov',
-    position: 'CTO',
+    position: 'Talent Acquisition Specialist',
     department: 'HR',
     email: 'veronika.fedorov904@company.com',
     phone: '+7 (986) 695-98-91',
@@ -110,7 +148,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0009',
     name: 'Liudmila Ivanov',
-    position: 'CTO',
+    position: 'Backend Developer',
     department: 'Development',
     email: 'liudmila.ivanov357@company.com',
     phone: '+7 (996) 661-72-76',
@@ -121,7 +159,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0010',
     name: 'Anatoly Vishnyakov',
-    position: 'Analyst',
+    position: 'Quality Control Engineer',
     department: 'Quality Control',
     email: 'anatoly.vishnyakov695@company.com',
     phone: '+7 (967) 581-31-47',
@@ -132,7 +170,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0011',
     name: 'Denis Sidorov',
-    position: 'Middle Developer',
+    position: 'Business Analyst',
     department: 'Analytics',
     email: 'denis.sidorov36@company.com',
     phone: '+7 (925) 543-66-11',
@@ -143,7 +181,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0012',
     name: 'Maria Yakushev',
-    position: 'Chief Architect',
+    position: 'System Administrator',
     department: 'IT',
     email: 'maria.yakushev688@company.com',
     phone: '+7 (970) 880-43-35',
@@ -154,7 +192,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0013',
     name: 'Artem Zabara',
-    position: 'Functional Consultant',
+    position: 'QA Team Lead',
     department: 'QA',
     email: 'artem.zabara436@company.com',
     phone: '+7 (938) 824-64-96',
@@ -165,7 +203,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0014',
     name: 'Aleksandr Ivanov',
-    position: 'Lead Developer',
+    position: 'CI/CD Specialist',
     department: 'DevOps',
     email: 'aleksandr.ivanov39@company.com',
     phone: '+7 (971) 821-56-59',
@@ -176,7 +214,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0015',
     name: 'Petr Chernov',
-    position: 'Copywriter',
+    position: 'COO',
     department: 'Management',
     email: 'petr.chernov403@company.com',
     phone: '+7 (943) 528-38-72',
@@ -187,7 +225,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0016',
     name: 'Yury Orlov',
-    position: 'Financial Analyst',
+    position: 'CEO',
     department: 'Management',
     email: 'yury.orlov9@company.com',
     phone: '+7 (941) 202-47-19',
@@ -198,7 +236,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0017',
     name: 'Yulia Smolentsev',
-    position: 'Senior Developer',
+    position: 'HR Business Partner',
     department: 'HR',
     email: 'yulia.smolentsev176@company.com',
     phone: '+7 (953) 814-37-61',
@@ -220,7 +258,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0019',
     name: 'Yury Leontiev',
-    position: 'Analyst',
+    position: 'Data Analyst',
     department: 'Analytics',
     email: 'yury.leontiev309@company.com',
     phone: '+7 (945) 140-16-80',
@@ -231,7 +269,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0020',
     name: 'Svetlana Smolentsev',
-    position: 'Marketer',
+    position: 'Head of Sales',
     department: 'Sales',
     email: 'svetlana.smolentsev881@company.com',
     phone: '+7 (918) 462-27-86',
@@ -242,7 +280,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0021',
     name: 'Valery Matveev',
-    position: 'System Administrator',
+    position: 'Backend Developer',
     department: 'Development',
     email: 'valery.matveev793@company.com',
     phone: '+7 (924) 890-67-80',
@@ -253,7 +291,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0022',
     name: 'Victoria Zabara',
-    position: 'Designer',
+    position: 'Digital Marketer',
     department: 'Marketing',
     email: 'victoria.zabara308@company.com',
     phone: '+7 (968) 697-10-71',
@@ -264,7 +302,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0023',
     name: 'Vitaly Kuznetsov',
-    position: 'Lead Developer',
+    position: 'QA Engineer',
     department: 'QA',
     email: 'vitaly.kuznetsov67@company.com',
     phone: '+7 (990) 645-47-76',
@@ -275,7 +313,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0024',
     name: 'Victoria Bakhtin',
-    position: 'CTO',
+    position: 'Backend Developer',
     department: 'Development',
     email: 'victoria.bakhtin244@company.com',
     phone: '+7 (906) 645-58-65',
@@ -286,7 +324,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0025',
     name: 'Svetlana Rudakov',
-    position: 'CEO',
+    position: 'Solution Architect',
     department: 'Architecture',
     email: 'svetlana.rudakov280@company.com',
     phone: '+7 (928) 775-32-93',
@@ -297,7 +335,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0026',
     name: 'Sophia Kozlov',
-    position: 'HR Manager',
+    position: 'Business Analyst',
     department: 'Analytics',
     email: 'sophia.kozlov93@company.com',
     phone: '+7 (946) 862-79-63',
@@ -308,7 +346,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0027',
     name: 'Kirill Dmitriev',
-    position: 'Analyst',
+    position: 'Receptionist',
     department: 'Administration',
     email: 'kirill.dmitriev631@company.com',
     phone: '+7 (985) 191-19-40',
@@ -319,7 +357,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0028',
     name: 'Maksim Rudakov',
-    position: 'Analyst',
+    position: 'Account Executive',
     department: 'Sales',
     email: 'maksim.rudakov41@company.com',
     phone: '+7 (906) 673-31-85',
@@ -330,7 +368,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0029',
     name: 'Mikhail Leontiev',
-    position: 'Copywriter',
+    position: 'COO',
     department: 'Management',
     email: 'mikhail.leontiev985@company.com',
     phone: '+7 (916) 658-90-77',
@@ -341,7 +379,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0030',
     name: 'Dmitry Smirnov',
-    position: 'HR Manager',
+    position: 'Enterprise Architect',
     department: 'Architecture',
     email: 'dmitry.smirnov80@company.com',
     phone: '+7 (976) 445-47-42',
@@ -352,7 +390,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0031',
     name: 'Nadezhda Safonov',
-    position: 'Lead Developer',
+    position: 'BI Developer',
     department: 'Analytics',
     email: 'nadezhda.safonov370@company.com',
     phone: '+7 (926) 638-30-70',
@@ -363,7 +401,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0032',
     name: 'Aleksandr Novikov',
-    position: 'Head of Department',
+    position: 'Enterprise Architect',
     department: 'Architecture',
     email: 'aleksandr.novikov305@company.com',
     phone: '+7 (949) 106-28-20',
@@ -374,7 +412,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0033',
     name: 'Sergey Sokolov',
-    position: 'Architect',
+    position: 'Site Reliability Engineer',
     department: 'DevOps',
     email: 'sergey.sokolov16@company.com',
     phone: '+7 (930) 569-17-36',
@@ -385,7 +423,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0034',
     name: 'Elena Volkov',
-    position: 'Middle Developer',
+    position: 'HR Business Partner',
     department: 'HR',
     email: 'elena.volkov5@company.com',
     phone: '+7 (996) 880-83-56',
@@ -396,7 +434,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0035',
     name: 'Petr Kozlov',
-    position: 'Junior Developer',
+    position: 'Program Manager',
     department: 'Management',
     email: 'petr.kozlov577@company.com',
     phone: '+7 (909) 456-45-43',
@@ -407,7 +445,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0036',
     name: 'Elena Matveev',
-    position: 'Functional Consultant',
+    position: 'Enterprise Architect',
     department: 'Architecture',
     email: 'elena.matveev919@company.com',
     phone: '+7 (912) 428-98-51',
@@ -429,7 +467,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0038',
     name: 'Liudmila Kozlov',
-    position: 'Middle Developer',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'liudmila.kozlov964@company.com',
     phone: '+7 (940) 464-68-25',
@@ -440,7 +478,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0039',
     name: 'Anna Chernov',
-    position: 'Analyst',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'anna.chernov495@company.com',
     phone: '+7 (948) 791-26-89',
@@ -451,7 +489,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0040',
     name: 'Denis Zabara',
-    position: 'Senior Developer',
+    position: 'Security Engineer',
     department: 'Security',
     email: 'denis.zabara818@company.com',
     phone: '+7 (963) 257-50-28',
@@ -462,7 +500,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0041',
     name: 'Gennady Volkov',
-    position: 'Head of Department',
+    position: 'SMM Specialist',
     department: 'Marketing',
     email: 'gennady.volkov76@company.com',
     phone: '+7 (917) 184-61-71',
@@ -473,7 +511,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0042',
     name: 'Boris Smirnov',
-    position: 'Copywriter',
+    position: 'Enterprise Architect',
     department: 'Architecture',
     email: 'boris.smirnov606@company.com',
     phone: '+7 (940) 796-25-20',
@@ -495,7 +533,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0044',
     name: 'Maria Leontiev',
-    position: 'CFO',
+    position: 'Fullstack Developer',
     department: 'Development',
     email: 'maria.leontiev404@company.com',
     phone: '+7 (918) 603-45-63',
@@ -506,7 +544,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0045',
     name: 'Mikhail Smolentsev',
-    position: 'Financial Analyst',
+    position: 'QC Inspector',
     department: 'Quality Control',
     email: 'mikhail.smolentsev914@company.com',
     phone: '+7 (909) 263-43-59',
@@ -517,7 +555,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0046',
     name: 'Roman Orlov',
-    position: 'QA Engineer',
+    position: 'Lead Generation Specialist',
     department: 'Sales',
     email: 'roman.orlov842@company.com',
     phone: '+7 (990) 883-25-32',
@@ -528,7 +566,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0047',
     name: 'Alexey Dmitriev',
-    position: 'Copywriter',
+    position: 'Frontend Developer',
     department: 'Development',
     email: 'alexey.dmitriev68@company.com',
     phone: '+7 (984) 239-90-76',
@@ -539,7 +577,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0048',
     name: 'Boris Yakushev',
-    position: 'Designer',
+    position: 'Business Analyst',
     department: 'Analytics',
     email: 'boris.yakushev412@company.com',
     phone: '+7 (936) 524-42-33',
@@ -550,7 +588,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0049',
     name: 'Leonid Novikov',
-    position: 'Functional Consultant',
+    position: 'Project Manager',
     department: 'Management',
     email: 'leonid.novikov770@company.com',
     phone: '+7 (909) 717-19-58',
@@ -561,7 +599,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0050',
     name: 'Vladimir Zabara',
-    position: 'Architect',
+    position: 'CTO',
     department: 'Management',
     email: 'vladimir.zabara356@company.com',
     phone: '+7 (988) 465-34-96',
@@ -572,7 +610,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0051',
     name: 'Roman Ilyin',
-    position: 'QA Engineer',
+    position: 'Digital Marketer',
     department: 'Marketing',
     email: 'roman.ilyin258@company.com',
     phone: '+7 (976) 964-29-67',
@@ -583,7 +621,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0052',
     name: 'Yury Sokolov',
-    position: 'CTO',
+    position: 'Sales Manager',
     department: 'Sales',
     email: 'yury.sokolov785@company.com',
     phone: '+7 (940) 126-26-92',
@@ -594,7 +632,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0053',
     name: 'Sophia Sonin',
-    position: 'Analyst',
+    position: 'Data Analyst',
     department: 'Analytics',
     email: 'sophia.sonin51@company.com',
     phone: '+7 (917) 691-48-32',
@@ -605,7 +643,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0054',
     name: 'Zinaida Volkov',
-    position: 'Financial Analyst',
+    position: 'Helpdesk Operator',
     department: 'Support',
     email: 'zinaida.volkov907@company.com',
     phone: '+7 (968) 649-39-61',
@@ -616,7 +654,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0055',
     name: 'Vladimir Lebedev',
-    position: 'Analyst',
+    position: 'Project Manager',
     department: 'Management',
     email: 'vladimir.lebedev527@company.com',
     phone: '+7 (952) 395-16-95',
@@ -627,7 +665,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0056',
     name: 'Dmitry Ilyin',
-    position: 'Analyst',
+    position: 'Junior Developer',
     department: 'Development',
     email: 'dmitry.ilyin680@company.com',
     phone: '+7 (983) 897-88-54',
@@ -638,7 +676,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0057',
     name: 'Vladislav Tretyakov',
-    position: 'Copywriter',
+    position: 'Junior Developer',
     department: 'Development',
     email: 'vladislav.tretyakov856@company.com',
     phone: '+7 (929) 312-54-40',
@@ -649,7 +687,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0058',
     name: 'Galina Smirnov',
-    position: 'Copywriter',
+    position: 'CEO',
     department: 'Management',
     email: 'galina.smirnov375@company.com',
     phone: '+7 (954) 201-31-28',
@@ -660,7 +698,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0059',
     name: 'Vitaly Orlov',
-    position: 'Copywriter',
+    position: 'Helpdesk Operator',
     department: 'Support',
     email: 'vitaly.orlov296@company.com',
     phone: '+7 (968) 442-95-24',
@@ -671,7 +709,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0060',
     name: 'Sophia Ivanov',
-    position: 'Functional Consultant',
+    position: 'Network Engineer',
     department: 'IT',
     email: 'sophia.ivanov754@company.com',
     phone: '+7 (968) 358-22-57',
@@ -682,7 +720,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0061',
     name: 'Dmitry Sidorov',
-    position: 'System Administrator',
+    position: 'HR Business Partner',
     department: 'HR',
     email: 'dmitry.sidorov909@company.com',
     phone: '+7 (903) 122-92-55',
@@ -693,7 +731,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0062',
     name: 'Svetlana Leontiev',
-    position: 'CFO',
+    position: 'PR Manager',
     department: 'Marketing',
     email: 'svetlana.leontiev180@company.com',
     phone: '+7 (974) 579-80-97',
@@ -704,7 +742,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0063',
     name: 'Leonid Sokolov',
-    position: 'QA Engineer',
+    position: 'SOC Analyst',
     department: 'Security',
     email: 'leonid.sokolov427@company.com',
     phone: '+7 (913) 599-36-42',
@@ -715,7 +753,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0064',
     name: 'Artem Sidorov',
-    position: 'Financial Analyst',
+    position: 'Talent Acquisition Specialist',
     department: 'HR',
     email: 'artem.sidorov279@company.com',
     phone: '+7 (994) 125-53-34',
@@ -726,7 +764,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0065',
     name: 'Natalia Yakushev',
-    position: 'Product Manager',
+    position: 'CI/CD Specialist',
     department: 'DevOps',
     email: 'natalia.yakushev591@company.com',
     phone: '+7 (964) 451-23-38',
@@ -737,7 +775,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0066',
     name: 'Andrey Ivanov',
-    position: 'Financial Analyst',
+    position: 'Quality Control Engineer',
     department: 'Quality Control',
     email: 'andrey.ivanov114@company.com',
     phone: '+7 (912) 303-57-93',
@@ -748,7 +786,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0067',
     name: 'Galina Rudakov',
-    position: 'DevOps Engineer',
+    position: 'Manual Tester',
     department: 'QA',
     email: 'galina.rudakov862@company.com',
     phone: '+7 (945) 150-51-94',
@@ -759,7 +797,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0068',
     name: 'Gennady Tretyakov',
-    position: 'Chief Architect',
+    position: 'Receptionist',
     department: 'Administration',
     email: 'gennady.tretyakov45@company.com',
     phone: '+7 (943) 443-76-68',
@@ -770,7 +808,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0069',
     name: 'Aleksandr Sonin',
-    position: 'Architect',
+    position: 'Team Lead',
     department: 'Development',
     email: 'aleksandr.sonin56@company.com',
     phone: '+7 (920) 664-50-65',
@@ -781,7 +819,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0070',
     name: 'Artem Kozlov',
-    position: 'Marketer',
+    position: 'Solution Architect',
     department: 'Architecture',
     email: 'artem.kozlov995@company.com',
     phone: '+7 (970) 247-94-94',
@@ -792,7 +830,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0071',
     name: 'Liudmila Tretyakov',
-    position: 'Senior Developer',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'liudmila.tretyakov877@company.com',
     phone: '+7 (988) 425-69-21',
@@ -803,7 +841,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0072',
     name: 'Sophia Kozlovskiy',
-    position: 'Junior Developer',
+    position: 'Sales Manager',
     department: 'Sales',
     email: 'sophia.kozlovskiy856@company.com',
     phone: '+7 (967) 641-67-76',
@@ -814,7 +852,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0073',
     name: 'Ivan Kozlovskiy',
-    position: 'Functional Consultant',
+    position: 'Marketing Manager',
     department: 'Marketing',
     email: 'ivan.kozlovskiy833@company.com',
     phone: '+7 (912) 584-37-82',
@@ -825,7 +863,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0074',
     name: 'Aleksandr Chernov',
-    position: 'Lead Developer',
+    position: 'Security Engineer',
     department: 'Security',
     email: 'aleksandr.chernov7@company.com',
     phone: '+7 (901) 275-46-92',
@@ -847,7 +885,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0076',
     name: 'Marina Ilyin',
-    position: 'QA Engineer',
+    position: 'Accountant',
     department: 'Finance',
     email: 'marina.ilyin676@company.com',
     phone: '+7 (963) 110-98-37',
@@ -858,7 +896,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0077',
     name: 'Kristina Kuznetsov',
-    position: 'Designer',
+    position: 'Test Automation Engineer',
     department: 'QA',
     email: 'kristina.kuznetsov376@company.com',
     phone: '+7 (952) 934-73-73',
@@ -869,7 +907,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0078',
     name: 'Svetlana Gavrilov',
-    position: 'DevOps Engineer',
+    position: 'QA Team Lead',
     department: 'QA',
     email: 'svetlana.gavrilov74@company.com',
     phone: '+7 (965) 740-99-84',
@@ -880,7 +918,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0079',
     name: 'Galina Zabara',
-    position: 'Functional Consultant',
+    position: 'CFO',
     department: 'Finance',
     email: 'galina.zabara159@company.com',
     phone: '+7 (964) 706-96-95',
@@ -891,7 +929,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0080',
     name: 'Maria Vishnyakov',
-    position: 'QA Engineer',
+    position: 'HR Manager',
     department: 'HR',
     email: 'maria.vishnyakov272@company.com',
     phone: '+7 (988) 457-36-22',
@@ -902,7 +940,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0081',
     name: 'Kirill Safonov',
-    position: 'Lead Developer',
+    position: 'Account Executive',
     department: 'Sales',
     email: 'kirill.safonov39@company.com',
     phone: '+7 (997) 808-95-19',
@@ -913,7 +951,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0082',
     name: 'Nadezhda Sidorov',
-    position: 'Designer',
+    position: 'Frontend Developer',
     department: 'Development',
     email: 'nadezhda.sidorov253@company.com',
     phone: '+7 (963) 336-37-54',
@@ -924,7 +962,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0083',
     name: 'Mikhail Gavrilov',
-    position: 'Designer',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'mikhail.gavrilov883@company.com',
     phone: '+7 (931) 167-92-81',
@@ -935,7 +973,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0084',
     name: 'Ivan Sosnin',
-    position: 'Head of Department',
+    position: 'Talent Acquisition Specialist',
     department: 'HR',
     email: 'ivan.sosnin977@company.com',
     phone: '+7 (980) 714-18-42',
@@ -946,7 +984,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0085',
     name: 'Olga Sokolov',
-    position: 'Analyst',
+    position: 'Quality Control Engineer',
     department: 'Quality Control',
     email: 'olga.sokolov843@company.com',
     phone: '+7 (931) 184-52-55',
@@ -957,7 +995,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0086',
     name: 'Petr Yakushev',
-    position: 'CEO',
+    position: 'PR Manager',
     department: 'Marketing',
     email: 'petr.yakushev350@company.com',
     phone: '+7 (941) 619-27-15',
@@ -968,7 +1006,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0087',
     name: 'Oleg Lebedev',
-    position: 'Copywriter',
+    position: 'Information Security Analyst',
     department: 'Security',
     email: 'oleg.lebedev236@company.com',
     phone: '+7 (919) 968-23-55',
@@ -979,7 +1017,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0088',
     name: 'Olga Safonov',
-    position: 'Product Manager',
+    position: 'Information Security Analyst',
     department: 'Security',
     email: 'olga.safonov152@company.com',
     phone: '+7 (988) 991-96-60',
@@ -990,7 +1028,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0089',
     name: 'Leonid Kozlov',
-    position: 'Copywriter',
+    position: 'Support Specialist',
     department: 'Support',
     email: 'leonid.kozlov14@company.com',
     phone: '+7 (923) 101-46-38',
@@ -1001,7 +1039,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0090',
     name: 'Yury Egorov',
-    position: 'Analyst',
+    position: 'Head of Sales',
     department: 'Sales',
     email: 'yury.egorov422@company.com',
     phone: '+7 (917) 128-37-58',
@@ -1012,7 +1050,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0091',
     name: 'Evgeniya Tikhonov',
-    position: 'Head of Department',
+    position: 'CFO',
     department: 'Finance',
     email: 'evgeniya.tikhonov798@company.com',
     phone: '+7 (927) 299-48-31',
@@ -1023,7 +1061,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0092',
     name: 'Kirill Morozov',
-    position: 'Product Manager',
+    position: 'Content Manager',
     department: 'Marketing',
     email: 'kirill.morozov951@company.com',
     phone: '+7 (936) 218-26-49',
@@ -1034,7 +1072,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0093',
     name: 'Viktor Novikov',
-    position: 'Manager',
+    position: 'Security Officer',
     department: 'Security',
     email: 'viktor.novikov980@company.com',
     phone: '+7 (956) 233-33-74',
@@ -1045,7 +1083,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0094',
     name: 'Kristina Novikov',
-    position: 'Middle Developer',
+    position: 'Site Reliability Engineer',
     department: 'DevOps',
     email: 'kristina.novikov564@company.com',
     phone: '+7 (987) 710-42-20',
@@ -1056,7 +1094,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0095',
     name: 'Sophia Orlov',
-    position: 'Manager',
+    position: 'SOC Analyst',
     department: 'Security',
     email: 'sophia.orlov392@company.com',
     phone: '+7 (908) 141-24-40',
@@ -1067,7 +1105,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0096',
     name: 'Denis Leontiev',
-    position: 'Financial Analyst',
+    position: 'Product Manager',
     department: 'Management',
     email: 'denis.leontiev263@company.com',
     phone: '+7 (986) 323-16-94',
@@ -1078,7 +1116,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0097',
     name: 'Sergey Zabara',
-    position: 'CEO',
+    position: 'SMM Specialist',
     department: 'Marketing',
     email: 'sergey.zabara456@company.com',
     phone: '+7 (958) 868-51-36',
@@ -1089,7 +1127,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0098',
     name: 'Evgeniya Matveev',
-    position: 'Senior Developer',
+    position: 'QA Team Lead',
     department: 'QA',
     email: 'evgeniya.matveev368@company.com',
     phone: '+7 (928) 776-26-10',
@@ -1100,7 +1138,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0099',
     name: 'Sergey Petrov',
-    position: 'CFO',
+    position: 'Helpdesk Operator',
     department: 'Support',
     email: 'sergey.petrov665@company.com',
     phone: '+7 (952) 819-38-18',
@@ -1111,7 +1149,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0100',
     name: 'Ivan Safonov',
-    position: 'Head of Department',
+    position: 'Architect',
     department: 'Architecture',
     email: 'ivan.safonov334@company.com',
     phone: '+7 (913) 191-30-69',
@@ -1122,7 +1160,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0101',
     name: 'Liudmila Leontiev',
-    position: 'QA Engineer',
+    position: 'CFO',
     department: 'Finance',
     email: 'liudmila.leontiev160@company.com',
     phone: '+7 (964) 858-82-64',
@@ -1133,7 +1171,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0102',
     name: 'Vladimir Smirnov',
-    position: 'Lead Developer',
+    position: 'CEO',
     department: 'Management',
     email: 'vladimir.smirnov431@company.com',
     phone: '+7 (939) 678-43-94',
@@ -1144,7 +1182,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0103',
     name: 'Ekaterina Ilyin',
-    position: 'Chief Architect',
+    position: 'System Administrator',
     department: 'IT',
     email: 'ekaterina.ilyin664@company.com',
     phone: '+7 (985) 739-34-33',
@@ -1155,7 +1193,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0104',
     name: 'Yulia Chernov',
-    position: 'Lead Developer',
+    position: 'Receptionist',
     department: 'Administration',
     email: 'yulia.chernov767@company.com',
     phone: '+7 (971) 234-99-63',
@@ -1166,7 +1204,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0105',
     name: 'Artem Smolentsev',
-    position: 'CTO',
+    position: 'Architect',
     department: 'Architecture',
     email: 'artem.smolentsev522@company.com',
     phone: '+7 (939) 138-33-89',
@@ -1177,7 +1215,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0106',
     name: 'Anton Sosnin',
-    position: 'Copywriter',
+    position: 'CI/CD Specialist',
     department: 'DevOps',
     email: 'anton.sosnin244@company.com',
     phone: '+7 (964) 648-13-94',
@@ -1188,7 +1226,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0107',
     name: 'Igor Sokolov',
-    position: 'Senior Developer',
+    position: 'Solution Architect',
     department: 'Architecture',
     email: 'igor.sokolov94@company.com',
     phone: '+7 (910) 275-27-59',
@@ -1199,7 +1237,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0108',
     name: 'Leonid Ivanov',
-    position: 'Head of Department',
+    position: 'SOC Analyst',
     department: 'Security',
     email: 'leonid.ivanov821@company.com',
     phone: '+7 (967) 664-37-78',
@@ -1210,7 +1248,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0109',
     name: 'Denis Vishnyakov',
-    position: 'Lead Developer',
+    position: 'Team Lead',
     department: 'Development',
     email: 'denis.vishnyakov943@company.com',
     phone: '+7 (976) 990-62-87',
@@ -1221,7 +1259,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0110',
     name: 'Sergey Morozov',
-    position: 'HR Manager',
+    position: 'Security Officer',
     department: 'Security',
     email: 'sergey.morozov612@company.com',
     phone: '+7 (902) 559-98-57',
@@ -1232,7 +1270,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0111',
     name: 'Pavel Tikhonov',
-    position: 'Functional Consultant',
+    position: 'Accountant',
     department: 'Finance',
     email: 'pavel.tikhonov566@company.com',
     phone: '+7 (913) 168-88-27',
@@ -1243,7 +1281,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0112',
     name: 'Zinaida Tretyakov',
-    position: 'System Administrator',
+    position: 'PR Manager',
     department: 'Marketing',
     email: 'zinaida.tretyakov924@company.com',
     phone: '+7 (930) 520-78-64',
@@ -1254,7 +1292,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0113',
     name: 'Zinaida Vishnyakov',
-    position: 'QA Engineer',
+    position: 'Financial Controller',
     department: 'Finance',
     email: 'zinaida.vishnyakov922@company.com',
     phone: '+7 (974) 429-77-14',
@@ -1265,7 +1303,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0114',
     name: 'Galina Mironov',
-    position: 'Marketer',
+    position: 'Backend Developer',
     department: 'Development',
     email: 'galina.mironov237@company.com',
     phone: '+7 (970) 936-80-66',
@@ -1276,7 +1314,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0115',
     name: 'Aleksandr Ilyin',
-    position: 'QA Engineer',
+    position: 'Office Manager',
     department: 'Administration',
     email: 'aleksandr.ilyin477@company.com',
     phone: '+7 (982) 677-81-99',
@@ -1287,7 +1325,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0116',
     name: 'Elena Mironov',
-    position: 'Functional Consultant',
+    position: 'Marketing Manager',
     department: 'Marketing',
     email: 'elena.mironov799@company.com',
     phone: '+7 (913) 848-46-47',
@@ -1298,7 +1336,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0117',
     name: 'Nadezhda Vishnyakov',
-    position: 'HR Manager',
+    position: 'Information Security Analyst',
     department: 'Security',
     email: 'nadezhda.vishnyakov527@company.com',
     phone: '+7 (968) 148-73-62',
@@ -1309,7 +1347,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0118',
     name: 'Oleg Mironov',
-    position: 'Designer',
+    position: 'Manual Tester',
     department: 'QA',
     email: 'oleg.mironov437@company.com',
     phone: '+7 (961) 628-62-10',
@@ -1320,7 +1358,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0119',
     name: 'Zinaida Kuznetsov',
-    position: 'Financial Analyst',
+    position: 'Architect',
     department: 'Architecture',
     email: 'zinaida.kuznetsov751@company.com',
     phone: '+7 (989) 386-98-82',
@@ -1331,7 +1369,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0120',
     name: 'Zinaida Vishnyakov',
-    position: 'QA Engineer',
+    position: 'Head of QC',
     department: 'Quality Control',
     email: 'zinaida.vishnyakov733@company.com',
     phone: '+7 (957) 366-87-42',
@@ -1342,7 +1380,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0121',
     name: 'Olga Tretyakov',
-    position: 'Senior Developer',
+    position: 'Head of QC',
     department: 'Quality Control',
     email: 'olga.tretyakov590@company.com',
     phone: '+7 (955) 275-82-91',
@@ -1353,7 +1391,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0122',
     name: 'Leonid Kozlov',
-    position: 'Manager',
+    position: 'Team Lead',
     department: 'Development',
     email: 'leonid.kozlov101@company.com',
     phone: '+7 (954) 539-51-81',
@@ -1364,7 +1402,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0123',
     name: 'Maria Dmitriev',
-    position: 'Middle Developer',
+    position: 'IT Support Engineer',
     department: 'IT',
     email: 'maria.dmitriev646@company.com',
     phone: '+7 (956) 667-63-25',
@@ -1375,7 +1413,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0124',
     name: 'Anatoly Matveev',
-    position: 'Architect',
+    position: 'Fullstack Developer',
     department: 'Development',
     email: 'anatoly.matveev540@company.com',
     phone: '+7 (954) 483-69-20',
@@ -1386,7 +1424,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0125',
     name: 'Viktor Morozov',
-    position: 'Marketer',
+    position: 'Data Analyst',
     department: 'Analytics',
     email: 'viktor.morozov767@company.com',
     phone: '+7 (947) 108-77-52',
@@ -1397,7 +1435,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0126',
     name: 'Oleg Rudakov',
-    position: 'System Administrator',
+    position: 'Junior Developer',
     department: 'Development',
     email: 'oleg.rudakov112@company.com',
     phone: '+7 (973) 202-26-63',
@@ -1408,7 +1446,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0127',
     name: 'Oleg Tikhonov',
-    position: 'Designer',
+    position: 'Recruiter',
     department: 'HR',
     email: 'oleg.tikhonov714@company.com',
     phone: '+7 (934) 766-61-23',
@@ -1419,7 +1457,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0128',
     name: 'Zinaida Vishnyakov',
-    position: 'Junior Developer',
+    position: 'Marketing Manager',
     department: 'Marketing',
     email: 'zinaida.vishnyakov442@company.com',
     phone: '+7 (953) 585-68-67',
@@ -1430,7 +1468,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0129',
     name: 'Oleg Kozlov',
-    position: 'QA Engineer',
+    position: 'Helpdesk Operator',
     department: 'Support',
     email: 'oleg.kozlov315@company.com',
     phone: '+7 (951) 722-23-76',
@@ -1441,7 +1479,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0130',
     name: 'Valery Petrov',
-    position: 'HR Manager',
+    position: 'PR Manager',
     department: 'Marketing',
     email: 'valery.petrov398@company.com',
     phone: '+7 (959) 245-80-33',
@@ -1452,7 +1490,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0131',
     name: 'Maksim Gavrilov',
-    position: 'Lead Developer',
+    position: 'QC Inspector',
     department: 'Quality Control',
     email: 'maksim.gavrilov446@company.com',
     phone: '+7 (905) 589-54-80',
@@ -1463,7 +1501,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0132',
     name: 'Anton Ilyin',
-    position: 'Copywriter',
+    position: 'Support Specialist',
     department: 'Support',
     email: 'anton.ilyin580@company.com',
     phone: '+7 (940) 270-82-55',
@@ -1474,7 +1512,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0133',
     name: 'Alexey Zabara',
-    position: 'System Administrator',
+    position: 'Site Reliability Engineer',
     department: 'DevOps',
     email: 'alexey.zabara66@company.com',
     phone: '+7 (934) 729-65-28',
@@ -1485,7 +1523,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0134',
     name: 'Boris Zabara',
-    position: 'Financial Analyst',
+    position: 'System Administrator',
     department: 'IT',
     email: 'boris.zabara847@company.com',
     phone: '+7 (963) 349-97-11',
@@ -1496,7 +1534,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0135',
     name: 'Viktor Lavrentiev',
-    position: 'Designer',
+    position: 'Architect',
     department: 'Architecture',
     email: 'viktor.lavrentiev50@company.com',
     phone: '+7 (908) 101-42-50',
@@ -1507,7 +1545,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0136',
     name: 'Viktor Chernov',
-    position: 'Analyst',
+    position: 'System Administrator',
     department: 'IT',
     email: 'viktor.chernov109@company.com',
     phone: '+7 (968) 735-79-57',
@@ -1518,7 +1556,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0137',
     name: 'Roman Ivanov',
-    position: 'QA Engineer',
+    position: 'Solution Architect',
     department: 'Architecture',
     email: 'roman.ivanov514@company.com',
     phone: '+7 (933) 565-78-82',
@@ -1529,7 +1567,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0138',
     name: 'Ekaterina Sidorov',
-    position: 'Product Manager',
+    position: 'Test Automation Engineer',
     department: 'QA',
     email: 'ekaterina.sidorov696@company.com',
     phone: '+7 (943) 287-94-94',
@@ -1540,7 +1578,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0139',
     name: 'Nadezhda Safonov',
-    position: 'Developer',
+    position: 'Customer Service Manager',
     department: 'Support',
     email: 'nadezhda.safonov810@company.com',
     phone: '+7 (980) 767-45-61',
@@ -1551,7 +1589,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0140',
     name: 'Leonid Sosnin',
-    position: 'Functional Consultant',
+    position: 'Fullstack Developer',
     department: 'Development',
     email: 'leonid.sosnin132@company.com',
     phone: '+7 (933) 131-22-76',
@@ -1562,7 +1600,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0141',
     name: 'Victoria Orlov',
-    position: 'CEO',
+    position: 'Network Engineer',
     department: 'IT',
     email: 'victoria.orlov690@company.com',
     phone: '+7 (950) 685-85-28',
@@ -1573,7 +1611,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0142',
     name: 'Dmitry Chernov',
-    position: 'Functional Consultant',
+    position: 'Information Security Analyst',
     department: 'Security',
     email: 'dmitry.chernov690@company.com',
     phone: '+7 (990) 489-35-88',
@@ -1584,7 +1622,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0143',
     name: 'Leonid Yakushev',
-    position: 'CFO',
+    position: 'CI/CD Specialist',
     department: 'DevOps',
     email: 'leonid.yakushev840@company.com',
     phone: '+7 (915) 682-84-92',
@@ -1595,7 +1633,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0144',
     name: 'Vitaly Yakushev',
-    position: 'QA Engineer',
+    position: 'Head of Sales',
     department: 'Sales',
     email: 'vitaly.yakushev444@company.com',
     phone: '+7 (960) 764-24-35',
@@ -1606,7 +1644,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0145',
     name: 'Denis Kozlovskiy',
-    position: 'Financial Analyst',
+    position: 'Head of Sales',
     department: 'Sales',
     email: 'denis.kozlovskiy859@company.com',
     phone: '+7 (905) 595-85-68',
@@ -1617,7 +1655,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0146',
     name: 'Nadezhda Tretyakov',
-    position: 'HR Manager',
+    position: 'Team Lead',
     department: 'Development',
     email: 'nadezhda.tretyakov346@company.com',
     phone: '+7 (905) 117-82-46',
@@ -1639,7 +1677,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0148',
     name: 'Vitaly Yakushev',
-    position: 'Middle Developer',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'vitaly.yakushev143@company.com',
     phone: '+7 (929) 470-25-30',
@@ -1650,7 +1688,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0149',
     name: 'Viktor Lavrentiev',
-    position: 'CEO',
+    position: 'Customer Service Manager',
     department: 'Support',
     email: 'viktor.lavrentiev946@company.com',
     phone: '+7 (978) 790-90-31',
@@ -1661,7 +1699,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0150',
     name: 'Victoria Orlov',
-    position: 'CFO',
+    position: 'QA Engineer',
     department: 'QA',
     email: 'victoria.orlov191@company.com',
     phone: '+7 (955) 809-27-22',
@@ -1672,7 +1710,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0151',
     name: 'Marina Lebedev',
-    position: 'Product Manager',
+    position: 'Account Executive',
     department: 'Sales',
     email: 'marina.lebedev101@company.com',
     phone: '+7 (980) 125-82-20',
@@ -1683,7 +1721,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0152',
     name: 'Marina Nesterov',
-    position: 'QA Engineer',
+    position: 'Program Manager',
     department: 'Management',
     email: 'marina.nesterov298@company.com',
     phone: '+7 (903) 492-98-16',
@@ -1694,7 +1732,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0153',
     name: 'Maksim Rudakov',
-    position: 'QA Engineer',
+    position: 'Receptionist',
     department: 'Administration',
     email: 'maksim.rudakov803@company.com',
     phone: '+7 (931) 206-95-21',
@@ -1705,7 +1743,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0154',
     name: 'Veronika Yakushev',
-    position: 'Financial Analyst',
+    position: 'Fullstack Developer',
     department: 'Development',
     email: 'veronika.yakushev56@company.com',
     phone: '+7 (911) 796-74-28',
@@ -1716,7 +1754,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0155',
     name: 'Maksim Fedorov',
-    position: 'Head of Department',
+    position: 'Security Engineer',
     department: 'Security',
     email: 'maksim.fedorov904@company.com',
     phone: '+7 (929) 904-55-22',
@@ -1727,7 +1765,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0156',
     name: 'Tatiana Dmitriev',
-    position: 'QA Engineer',
+    position: 'Site Reliability Engineer',
     department: 'DevOps',
     email: 'tatiana.dmitriev365@company.com',
     phone: '+7 (924) 465-71-64',
@@ -1738,7 +1776,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0157',
     name: 'Viktor Safonov',
-    position: 'QA Engineer',
+    position: 'Lead Generation Specialist',
     department: 'Sales',
     email: 'viktor.safonov614@company.com',
     phone: '+7 (935) 617-82-16',
@@ -1749,7 +1787,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0158',
     name: 'Vladislav Smolentsev',
-    position: 'CTO',
+    position: 'Marketing Manager',
     department: 'Marketing',
     email: 'vladislav.smolentsev890@company.com',
     phone: '+7 (996) 308-77-29',
@@ -1760,7 +1798,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0159',
     name: 'Boris Matveev',
-    position: 'Copywriter',
+    position: 'CFO',
     department: 'Finance',
     email: 'boris.matveev596@company.com',
     phone: '+7 (934) 882-78-90',
@@ -1771,7 +1809,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0160',
     name: 'Boris Orlov',
-    position: 'Junior Developer',
+    position: 'CI/CD Specialist',
     department: 'DevOps',
     email: 'boris.orlov747@company.com',
     phone: '+7 (977) 479-33-77',
@@ -1782,7 +1820,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0161',
     name: 'Pavel Tikhonov',
-    position: 'Analyst',
+    position: 'Manual Tester',
     department: 'QA',
     email: 'pavel.tikhonov402@company.com',
     phone: '+7 (940) 221-15-89',
@@ -1793,7 +1831,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0162',
     name: 'Veronika Vishnyakov',
-    position: 'Product Manager',
+    position: 'Business Analyst',
     department: 'Analytics',
     email: 'veronika.vishnyakov76@company.com',
     phone: '+7 (997) 433-76-43',
@@ -1804,7 +1842,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0163',
     name: 'Anna Tretyakov',
-    position: 'Manager',
+    position: 'SMM Specialist',
     department: 'Marketing',
     email: 'anna.tretyakov300@company.com',
     phone: '+7 (948) 963-88-78',
@@ -1815,7 +1853,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0164',
     name: 'Irina Kuznetsov',
-    position: 'Middle Developer',
+    position: 'Support Specialist',
     department: 'Support',
     email: 'irina.kuznetsov823@company.com',
     phone: '+7 (943) 722-19-82',
@@ -1826,7 +1864,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0165',
     name: 'Yury Ivanov',
-    position: 'Middle Developer',
+    position: 'SOC Analyst',
     department: 'Security',
     email: 'yury.ivanov378@company.com',
     phone: '+7 (959) 879-16-95',
@@ -1837,7 +1875,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0166',
     name: 'Liudmila Lebedev',
-    position: 'CFO',
+    position: 'Head of QC',
     department: 'Quality Control',
     email: 'liudmila.lebedev484@company.com',
     phone: '+7 (946) 248-25-55',
@@ -1859,7 +1897,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0168',
     name: 'Maksim Morozov',
-    position: 'Functional Consultant',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'maksim.morozov202@company.com',
     phone: '+7 (924) 920-48-74',
@@ -1870,7 +1908,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0169',
     name: 'Liudmila Orlov',
-    position: 'Analyst',
+    position: 'Architect',
     department: 'Architecture',
     email: 'liudmila.orlov312@company.com',
     phone: '+7 (987) 282-52-72',
@@ -1881,7 +1919,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0170',
     name: 'Victoria Mironov',
-    position: 'CEO',
+    position: 'Office Manager',
     department: 'Administration',
     email: 'victoria.mironov82@company.com',
     phone: '+7 (956) 167-84-49',
@@ -1892,7 +1930,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0171',
     name: 'Natalia Sonin',
-    position: 'QA Engineer',
+    position: 'Frontend Developer',
     department: 'Development',
     email: 'natalia.sonin309@company.com',
     phone: '+7 (905) 117-43-72',
@@ -1903,7 +1941,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0172',
     name: 'Galina Sosnin',
-    position: 'Middle Developer',
+    position: 'Lead Generation Specialist',
     department: 'Sales',
     email: 'galina.sosnin50@company.com',
     phone: '+7 (930) 801-98-33',
@@ -1914,7 +1952,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0173',
     name: 'Anton Smirnov',
-    position: 'Chief Architect',
+    position: 'Head of QC',
     department: 'Quality Control',
     email: 'anton.smirnov476@company.com',
     phone: '+7 (953) 727-11-39',
@@ -1925,7 +1963,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0174',
     name: 'Anatoly Chernov',
-    position: 'Lead Developer',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'anatoly.chernov334@company.com',
     phone: '+7 (991) 395-60-96',
@@ -1936,7 +1974,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0175',
     name: 'Vladimir Novikov',
-    position: 'Financial Analyst',
+    position: 'Sales Manager',
     department: 'Sales',
     email: 'vladimir.novikov420@company.com',
     phone: '+7 (916) 974-15-88',
@@ -1947,7 +1985,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0176',
     name: 'Roman Sosnin',
-    position: 'Functional Consultant',
+    position: 'Support Specialist',
     department: 'Support',
     email: 'roman.sosnin22@company.com',
     phone: '+7 (930) 227-44-51',
@@ -1958,7 +1996,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0177',
     name: 'Irina Leontiev',
-    position: 'Financial Analyst',
+    position: 'Lead Generation Specialist',
     department: 'Sales',
     email: 'irina.leontiev631@company.com',
     phone: '+7 (980) 957-80-19',
@@ -1969,7 +2007,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0178',
     name: 'Olga Tikhonov',
-    position: 'Chief Architect',
+    position: 'Project Manager',
     department: 'Management',
     email: 'olga.tikhonov890@company.com',
     phone: '+7 (983) 917-33-77',
@@ -1980,7 +2018,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0179',
     name: 'Nadezhda Orlov',
-    position: 'Architect',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'nadezhda.orlov392@company.com',
     phone: '+7 (986) 408-19-97',
@@ -1991,7 +2029,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0180',
     name: 'Oleg Matveev',
-    position: 'HR Manager',
+    position: 'IT Support Engineer',
     department: 'IT',
     email: 'oleg.matveev210@company.com',
     phone: '+7 (931) 857-20-80',
@@ -2013,7 +2051,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0182',
     name: 'Sophia Bakhtin',
-    position: 'CTO',
+    position: 'Support Specialist',
     department: 'Support',
     email: 'sophia.bakhtin754@company.com',
     phone: '+7 (945) 636-83-24',
@@ -2024,7 +2062,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0183',
     name: 'Veronika Matveev',
-    position: 'Head of Department',
+    position: 'Site Reliability Engineer',
     department: 'DevOps',
     email: 'veronika.matveev354@company.com',
     phone: '+7 (910) 649-65-64',
@@ -2035,7 +2073,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0184',
     name: 'Alisa Petrov',
-    position: 'Chief Architect',
+    position: 'IT Support Engineer',
     department: 'IT',
     email: 'alisa.petrov394@company.com',
     phone: '+7 (950) 181-74-48',
@@ -2046,7 +2084,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0185',
     name: 'Anton Orlov',
-    position: 'Head of Department',
+    position: 'Support Specialist',
     department: 'Support',
     email: 'anton.orlov921@company.com',
     phone: '+7 (917) 796-86-40',
@@ -2057,7 +2095,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0186',
     name: 'Igor Kuznetsov',
-    position: 'Developer',
+    position: 'QC Inspector',
     department: 'Quality Control',
     email: 'igor.kuznetsov612@company.com',
     phone: '+7 (918) 144-31-64',
@@ -2068,7 +2106,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0187',
     name: 'Victoria Chernov',
-    position: 'QA Engineer',
+    position: 'Support Specialist',
     department: 'Support',
     email: 'victoria.chernov906@company.com',
     phone: '+7 (964) 973-47-56',
@@ -2079,7 +2117,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0188',
     name: 'Vladimir Fedorov',
-    position: 'Lead Developer',
+    position: 'SMM Specialist',
     department: 'Marketing',
     email: 'vladimir.fedorov598@company.com',
     phone: '+7 (979) 761-99-83',
@@ -2090,7 +2128,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0189',
     name: 'Liudmila Yakushev',
-    position: 'Architect',
+    position: 'Network Engineer',
     department: 'IT',
     email: 'liudmila.yakushev678@company.com',
     phone: '+7 (905) 594-32-47',
@@ -2101,7 +2139,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0190',
     name: 'Viktor Smirnov',
-    position: 'Analyst',
+    position: 'Receptionist',
     department: 'Administration',
     email: 'viktor.smirnov802@company.com',
     phone: '+7 (987) 782-74-21',
@@ -2112,7 +2150,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0191',
     name: 'Anna Tikhonov',
-    position: 'Chief Architect',
+    position: 'Lead Generation Specialist',
     department: 'Sales',
     email: 'anna.tikhonov115@company.com',
     phone: '+7 (914) 914-98-52',
@@ -2123,7 +2161,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0192',
     name: 'Victoria Volkov',
-    position: 'Manager',
+    position: 'SMM Specialist',
     department: 'Marketing',
     email: 'victoria.volkov185@company.com',
     phone: '+7 (976) 318-83-41',
@@ -2134,7 +2172,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0193',
     name: 'Elena Chernov',
-    position: 'Developer',
+    position: 'Senior Developer',
     department: 'Development',
     email: 'elena.chernov478@company.com',
     phone: '+7 (908) 982-27-55',
@@ -2145,7 +2183,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0194',
     name: 'Valentina Lavrentiev',
-    position: 'Copywriter',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'valentina.lavrentiev293@company.com',
     phone: '+7 (927) 532-89-44',
@@ -2156,7 +2194,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0195',
     name: 'Elena Bakhtin',
-    position: 'QA Engineer',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'elena.bakhtin900@company.com',
     phone: '+7 (908) 511-36-72',
@@ -2167,7 +2205,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0196',
     name: 'Maksim Lavrentiev',
-    position: 'Functional Consultant',
+    position: 'Office Manager',
     department: 'Administration',
     email: 'maksim.lavrentiev881@company.com',
     phone: '+7 (997) 704-18-38',
@@ -2178,7 +2216,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0197',
     name: 'Yulia Egorov',
-    position: 'Middle Developer',
+    position: 'QC Inspector',
     department: 'Quality Control',
     email: 'yulia.egorov50@company.com',
     phone: '+7 (913) 402-97-51',
@@ -2200,7 +2238,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0199',
     name: 'Maksim Rudakov',
-    position: 'Middle Developer',
+    position: 'BI Developer',
     department: 'Analytics',
     email: 'maksim.rudakov868@company.com',
     phone: '+7 (930) 188-33-80',
@@ -2211,7 +2249,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0200',
     name: 'Valentina Mironov',
-    position: 'Analyst',
+    position: 'Lead Generation Specialist',
     department: 'Sales',
     email: 'valentina.mironov563@company.com',
     phone: '+7 (996) 842-14-76',
@@ -2222,7 +2260,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0201',
     name: 'Anatoly Chernov',
-    position: 'HR Manager',
+    position: 'COO',
     department: 'Management',
     email: 'anatoly.chernov462@company.com',
     phone: '+7 (978) 283-46-81',
@@ -2233,7 +2271,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0202',
     name: 'Aleksandr Mironov',
-    position: 'QA Engineer',
+    position: 'Solution Architect',
     department: 'Architecture',
     email: 'aleksandr.mironov545@company.com',
     phone: '+7 (923) 246-19-83',
@@ -2244,7 +2282,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0203',
     name: 'Olga Lavrentiev',
-    position: 'Analyst',
+    position: 'Architect',
     department: 'Architecture',
     email: 'olga.lavrentiev585@company.com',
     phone: '+7 (906) 964-50-69',
@@ -2255,7 +2293,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0204',
     name: 'Mikhail Volkov',
-    position: 'Senior Developer',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'mikhail.volkov432@company.com',
     phone: '+7 (983) 481-25-18',
@@ -2266,7 +2304,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0205',
     name: 'Oleg Novikov',
-    position: 'Financial Analyst',
+    position: 'Chief Accountant',
     department: 'Finance',
     email: 'oleg.novikov368@company.com',
     phone: '+7 (907) 467-45-15',
@@ -2277,7 +2315,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0206',
     name: 'Alisa Smirnov',
-    position: 'CEO',
+    position: 'Support Specialist',
     department: 'Support',
     email: 'alisa.smirnov358@company.com',
     phone: '+7 (911) 756-87-55',
@@ -2288,7 +2326,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0207',
     name: 'Olga Chernov',
-    position: 'Lead Developer',
+    position: 'Receptionist',
     department: 'Administration',
     email: 'olga.chernov856@company.com',
     phone: '+7 (999) 369-23-60',
@@ -2299,7 +2337,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0208',
     name: 'Gennady Volkov',
-    position: 'QA Engineer',
+    position: 'Recruiter',
     department: 'HR',
     email: 'gennady.volkov60@company.com',
     phone: '+7 (913) 799-51-29',
@@ -2310,7 +2348,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0209',
     name: 'Valentina Kozlov',
-    position: 'Developer',
+    position: 'CI/CD Specialist',
     department: 'DevOps',
     email: 'valentina.kozlov860@company.com',
     phone: '+7 (929) 730-94-86',
@@ -2321,7 +2359,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0210',
     name: 'Mikhail Matveev',
-    position: 'Chief Architect',
+    position: 'Security Engineer',
     department: 'Security',
     email: 'mikhail.matveev160@company.com',
     phone: '+7 (998) 164-40-65',
@@ -2332,7 +2370,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0211',
     name: 'Evgeny Smolentsev',
-    position: 'Functional Consultant',
+    position: 'Financial Controller',
     department: 'Finance',
     email: 'evgeny.smolentsev43@company.com',
     phone: '+7 (993) 590-96-66',
@@ -2343,7 +2381,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0212',
     name: 'Marina Lebedev',
-    position: 'Lead Developer',
+    position: 'IT Support Engineer',
     department: 'IT',
     email: 'marina.lebedev206@company.com',
     phone: '+7 (925) 780-68-61',
@@ -2354,7 +2392,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0213',
     name: 'Nadezhda Sosnin',
-    position: 'System Administrator',
+    position: 'Solution Architect',
     department: 'Architecture',
     email: 'nadezhda.sosnin875@company.com',
     phone: '+7 (987) 316-19-89',
@@ -2365,7 +2403,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0214',
     name: 'Sophia Smirnov',
-    position: 'Developer',
+    position: 'Security Officer',
     department: 'Security',
     email: 'sophia.smirnov590@company.com',
     phone: '+7 (904) 565-20-36',
@@ -2376,7 +2414,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0215',
     name: 'Nadezhda Lebedev',
-    position: 'Junior Developer',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'nadezhda.lebedev721@company.com',
     phone: '+7 (943) 211-59-83',
@@ -2387,7 +2425,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0216',
     name: 'Liudmila Tikhonov',
-    position: 'Copywriter',
+    position: 'Talent Acquisition Specialist',
     department: 'HR',
     email: 'liudmila.tikhonov39@company.com',
     phone: '+7 (993) 816-89-92',
@@ -2398,7 +2436,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0217',
     name: 'Vladislav Ivanov',
-    position: 'HR Manager',
+    position: 'SMM Specialist',
     department: 'Marketing',
     email: 'vladislav.ivanov96@company.com',
     phone: '+7 (926) 141-80-34',
@@ -2409,7 +2447,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0218',
     name: 'Mikhail Gavrilov',
-    position: 'Financial Analyst',
+    position: 'Solution Architect',
     department: 'Architecture',
     email: 'mikhail.gavrilov483@company.com',
     phone: '+7 (910) 375-66-41',
@@ -2420,7 +2458,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0219',
     name: 'Nikolay Ivanov',
-    position: 'Functional Consultant',
+    position: 'Head of Sales',
     department: 'Sales',
     email: 'nikolay.ivanov135@company.com',
     phone: '+7 (971) 856-37-78',
@@ -2431,7 +2469,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0220',
     name: 'Sergey Yakushev',
-    position: 'Lead Developer',
+    position: 'CFO',
     department: 'Finance',
     email: 'sergey.yakushev428@company.com',
     phone: '+7 (922) 976-61-83',
@@ -2442,7 +2480,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0221',
     name: 'Gennady Orlov',
-    position: 'Copywriter',
+    position: 'Account Executive',
     department: 'Sales',
     email: 'gennady.orlov900@company.com',
     phone: '+7 (983) 252-81-67',
@@ -2453,7 +2491,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0222',
     name: 'Yulia Kozlov',
-    position: 'Product Manager',
+    position: 'Financial Analyst',
     department: 'Analytics',
     email: 'yulia.kozlov290@company.com',
     phone: '+7 (904) 600-36-38',
@@ -2464,7 +2502,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0223',
     name: 'Kirill Smolentsev',
-    position: 'System Administrator',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'kirill.smolentsev473@company.com',
     phone: '+7 (955) 771-12-81',
@@ -2475,7 +2513,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0224',
     name: 'Irina Petrov',
-    position: 'Junior Developer',
+    position: 'Helpdesk Operator',
     department: 'Support',
     email: 'irina.petrov513@company.com',
     phone: '+7 (944) 312-91-60',
@@ -2486,7 +2524,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0225',
     name: 'Tatiana Fedorov',
-    position: 'Copywriter',
+    position: 'Financial Analyst',
     department: 'Analytics',
     email: 'tatiana.fedorov740@company.com',
     phone: '+7 (928) 524-57-74',
@@ -2497,7 +2535,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0226',
     name: 'Dmitry Novikov',
-    position: 'HR Manager',
+    position: 'Frontend Developer',
     department: 'Development',
     email: 'dmitry.novikov549@company.com',
     phone: '+7 (975) 583-41-37',
@@ -2508,7 +2546,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0227',
     name: 'Evgeny Nesterov',
-    position: 'Copywriter',
+    position: 'HR Manager',
     department: 'HR',
     email: 'evgeny.nesterov28@company.com',
     phone: '+7 (979) 175-62-15',
@@ -2519,7 +2557,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0228',
     name: 'Boris Bakhtin',
-    position: 'Lead Developer',
+    position: 'QA Team Lead',
     department: 'QA',
     email: 'boris.bakhtin248@company.com',
     phone: '+7 (989) 695-48-25',
@@ -2530,7 +2568,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0229',
     name: 'Kristina Sokolov',
-    position: 'Senior Developer',
+    position: 'Project Manager',
     department: 'Management',
     email: 'kristina.sokolov523@company.com',
     phone: '+7 (932) 408-44-96',
@@ -2541,7 +2579,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0230',
     name: 'Boris Kozlov',
-    position: 'HR Manager',
+    position: 'Customer Service Manager',
     department: 'Support',
     email: 'boris.kozlov209@company.com',
     phone: '+7 (933) 972-99-70',
@@ -2552,7 +2590,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0231',
     name: 'Sergey Yakushev',
-    position: 'HR Manager',
+    position: 'Security Officer',
     department: 'Security',
     email: 'sergey.yakushev47@company.com',
     phone: '+7 (900) 147-53-55',
@@ -2563,7 +2601,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0232',
     name: 'Dmitry Matveev',
-    position: 'QA Engineer',
+    position: 'Office Manager',
     department: 'Administration',
     email: 'dmitry.matveev817@company.com',
     phone: '+7 (986) 796-27-65',
@@ -2574,7 +2612,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0233',
     name: 'Pavel Smirnov',
-    position: 'HR Manager',
+    position: 'Frontend Developer',
     department: 'Development',
     email: 'pavel.smirnov279@company.com',
     phone: '+7 (930) 619-62-57',
@@ -2585,7 +2623,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0234',
     name: 'Liudmila Novikov',
-    position: 'Junior Developer',
+    position: 'QA Engineer',
     department: 'QA',
     email: 'liudmila.novikov620@company.com',
     phone: '+7 (998) 288-36-58',
@@ -2596,7 +2634,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0235',
     name: 'Evgeniya Leontiev',
-    position: 'Junior Developer',
+    position: 'Security Officer',
     department: 'Security',
     email: 'evgeniya.leontiev691@company.com',
     phone: '+7 (918) 501-49-61',
@@ -2607,7 +2645,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0236',
     name: 'Vladislav Fedorov',
-    position: 'Senior Developer',
+    position: 'IT Support Engineer',
     department: 'IT',
     email: 'vladislav.fedorov279@company.com',
     phone: '+7 (940) 217-91-32',
@@ -2618,7 +2656,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0237',
     name: 'Zinaida Kuznetsov',
-    position: 'QA Engineer',
+    position: 'Product Manager',
     department: 'Management',
     email: 'zinaida.kuznetsov341@company.com',
     phone: '+7 (961) 663-37-95',
@@ -2640,7 +2678,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0239',
     name: 'Yulia Morozov',
-    position: 'System Administrator',
+    position: 'Accountant',
     department: 'Finance',
     email: 'yulia.morozov77@company.com',
     phone: '+7 (971) 661-97-29',
@@ -2651,7 +2689,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0240',
     name: 'Irina Tretyakov',
-    position: 'HR Manager',
+    position: 'Helpdesk Operator',
     department: 'Support',
     email: 'irina.tretyakov550@company.com',
     phone: '+7 (984) 460-24-94',
@@ -2662,7 +2700,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0241',
     name: 'Andrey Sosnin',
-    position: 'Head of Department',
+    position: 'Head of Sales',
     department: 'Sales',
     email: 'andrey.sosnin100@company.com',
     phone: '+7 (930) 792-31-91',
@@ -2673,7 +2711,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0242',
     name: 'Nadezhda Smirnov',
-    position: 'QA Engineer',
+    position: 'Security Engineer',
     department: 'Security',
     email: 'nadezhda.smirnov53@company.com',
     phone: '+7 (974) 320-98-62',
@@ -2684,7 +2722,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0243',
     name: 'Denis Novikov',
-    position: 'Analyst',
+    position: 'CTO',
     department: 'Management',
     email: 'denis.novikov967@company.com',
     phone: '+7 (930) 408-45-51',
@@ -2695,7 +2733,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0244',
     name: 'Olga Sidorov',
-    position: 'HR Manager',
+    position: 'COO',
     department: 'Management',
     email: 'olga.sidorov29@company.com',
     phone: '+7 (933) 553-78-78',
@@ -2706,7 +2744,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0245',
     name: 'Marina Chernov',
-    position: 'QA Engineer',
+    position: 'Financial Controller',
     department: 'Finance',
     email: 'marina.chernov494@company.com',
     phone: '+7 (999) 338-84-39',
@@ -2717,7 +2755,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0246',
     name: 'Anna Sokolov',
-    position: 'Manager',
+    position: 'Backend Developer',
     department: 'Development',
     email: 'anna.sokolov624@company.com',
     phone: '+7 (905) 766-60-82',
@@ -2728,7 +2766,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0247',
     name: 'Viktor Sokolov',
-    position: 'QA Engineer',
+    position: 'Data Analyst',
     department: 'Analytics',
     email: 'viktor.sokolov693@company.com',
     phone: '+7 (954) 419-34-83',
@@ -2739,7 +2777,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0248',
     name: 'Tatiana Volkov',
-    position: 'CFO',
+    position: 'QA Team Lead',
     department: 'QA',
     email: 'tatiana.volkov201@company.com',
     phone: '+7 (950) 326-35-48',
@@ -2750,7 +2788,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0249',
     name: 'Petr Orlov',
-    position: 'Junior Developer',
+    position: 'Business Analyst',
     department: 'Analytics',
     email: 'petr.orlov616@company.com',
     phone: '+7 (901) 543-58-29',
@@ -2761,7 +2799,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0250',
     name: 'Vitaly Kozlovskiy',
-    position: 'HR Manager',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'vitaly.kozlovskiy456@company.com',
     phone: '+7 (967) 923-71-24',
@@ -2772,7 +2810,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0251',
     name: 'Evgeniya Sidorov',
-    position: 'Financial Analyst',
+    position: 'Financial Controller',
     department: 'Finance',
     email: 'evgeniya.sidorov458@company.com',
     phone: '+7 (964) 214-41-94',
@@ -2783,7 +2821,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0252',
     name: 'Sergey Fedorov',
-    position: 'Junior Developer',
+    position: 'CFO',
     department: 'Finance',
     email: 'sergey.fedorov229@company.com',
     phone: '+7 (930) 150-21-27',
@@ -2794,7 +2832,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0253',
     name: 'Aleksandr Ilyin',
-    position: 'Developer',
+    position: 'Manual Tester',
     department: 'QA',
     email: 'aleksandr.ilyin806@company.com',
     phone: '+7 (923) 306-74-23',
@@ -2805,7 +2843,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0254',
     name: 'Maria Egorov',
-    position: 'HR Manager',
+    position: 'Business Analyst',
     department: 'Analytics',
     email: 'maria.egorov205@company.com',
     phone: '+7 (985) 956-72-53',
@@ -2816,7 +2854,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0255',
     name: 'Evgeniya Kozlov',
-    position: 'Marketer',
+    position: 'SOC Analyst',
     department: 'Security',
     email: 'evgeniya.kozlov751@company.com',
     phone: '+7 (910) 106-44-86',
@@ -2827,7 +2865,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0256',
     name: 'Evgeny Volkov',
-    position: 'Lead Developer',
+    position: 'Sales Manager',
     department: 'Sales',
     email: 'evgeny.volkov393@company.com',
     phone: '+7 (974) 512-41-90',
@@ -2838,7 +2876,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0257',
     name: 'Kirill Sokolov',
-    position: 'Middle Developer',
+    position: 'PR Manager',
     department: 'Marketing',
     email: 'kirill.sokolov727@company.com',
     phone: '+7 (903) 487-23-15',
@@ -2849,7 +2887,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0258',
     name: 'Zinaida Zabara',
-    position: 'Designer',
+    position: 'Security Officer',
     department: 'Security',
     email: 'zinaida.zabara808@company.com',
     phone: '+7 (993) 133-47-98',
@@ -2882,7 +2920,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0261',
     name: 'Oleg Tretyakov',
-    position: 'Product Manager',
+    position: 'Lead Generation Specialist',
     department: 'Sales',
     email: 'oleg.tretyakov27@company.com',
     phone: '+7 (921) 401-65-20',
@@ -2893,7 +2931,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0262',
     name: 'Sergey Fedorov',
-    position: 'Lead Developer',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'sergey.fedorov829@company.com',
     phone: '+7 (922) 350-32-38',
@@ -2904,7 +2942,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0263',
     name: 'Sophia Smolentsev',
-    position: 'Architect',
+    position: 'Customer Service Manager',
     department: 'Support',
     email: 'sophia.smolentsev714@company.com',
     phone: '+7 (977) 920-42-61',
@@ -2926,7 +2964,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0265',
     name: 'Alexey Zabara',
-    position: 'System Administrator',
+    position: 'Quality Control Engineer',
     department: 'Quality Control',
     email: 'alexey.zabara714@company.com',
     phone: '+7 (964) 302-13-80',
@@ -2937,7 +2975,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0266',
     name: 'Sophia Egorov',
-    position: 'HR Manager',
+    position: 'Information Security Analyst',
     department: 'Security',
     email: 'sophia.egorov511@company.com',
     phone: '+7 (942) 386-48-83',
@@ -2948,7 +2986,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0267',
     name: 'Svetlana Vishnyakov',
-    position: 'Chief Architect',
+    position: 'Quality Control Engineer',
     department: 'Quality Control',
     email: 'svetlana.vishnyakov927@company.com',
     phone: '+7 (995) 997-73-71',
@@ -2959,7 +2997,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0268',
     name: 'Andrey Egorov',
-    position: 'QA Engineer',
+    position: 'Office Manager',
     department: 'Administration',
     email: 'andrey.egorov506@company.com',
     phone: '+7 (956) 969-21-46',
@@ -2970,7 +3008,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0269',
     name: 'Natalia Morozov',
-    position: 'Developer',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'natalia.morozov361@company.com',
     phone: '+7 (980) 231-11-23',
@@ -2981,7 +3019,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0270',
     name: 'Andrey Orlov',
-    position: 'CEO',
+    position: 'IT Project Manager',
     department: 'IT',
     email: 'andrey.orlov796@company.com',
     phone: '+7 (972) 236-34-21',
@@ -2992,7 +3030,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0271',
     name: 'Igor Sonin',
-    position: 'CEO',
+    position: 'Data Analyst',
     department: 'Analytics',
     email: 'igor.sonin186@company.com',
     phone: '+7 (941) 277-66-34',
@@ -3003,7 +3041,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0272',
     name: 'Igor Dmitriev',
-    position: 'Analyst',
+    position: 'Customer Service Manager',
     department: 'Support',
     email: 'igor.dmitriev421@company.com',
     phone: '+7 (932) 961-56-21',
@@ -3014,7 +3052,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0273',
     name: 'Pavel Lavrentiev',
-    position: 'Manager',
+    position: 'Financial Analyst',
     department: 'Analytics',
     email: 'pavel.lavrentiev435@company.com',
     phone: '+7 (904) 874-25-84',
@@ -3025,7 +3063,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0274',
     name: 'Mikhail Sidorov',
-    position: 'QA Engineer',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'mikhail.sidorov631@company.com',
     phone: '+7 (912) 343-88-21',
@@ -3036,7 +3074,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0275',
     name: 'Evgeniya Smirnov',
-    position: 'Financial Analyst',
+    position: 'Network Engineer',
     department: 'IT',
     email: 'evgeniya.smirnov44@company.com',
     phone: '+7 (978) 743-51-25',
@@ -3047,7 +3085,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0276',
     name: 'Leonid Kozlov',
-    position: 'DevOps Engineer',
+    position: 'Product Manager',
     department: 'Management',
     email: 'leonid.kozlov377@company.com',
     phone: '+7 (966) 716-19-60',
@@ -3058,7 +3096,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0277',
     name: 'Alexey Dmitriev',
-    position: 'Manager',
+    position: 'Helpdesk Operator',
     department: 'Support',
     email: 'alexey.dmitriev593@company.com',
     phone: '+7 (991) 483-80-23',
@@ -3069,7 +3107,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0278',
     name: 'Galina Mironov',
-    position: 'Head of Department',
+    position: 'Lead Generation Specialist',
     department: 'Sales',
     email: 'galina.mironov463@company.com',
     phone: '+7 (972) 134-63-42',
@@ -3080,7 +3118,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0279',
     name: 'Konstantin Sokolov',
-    position: 'Analyst',
+    position: 'Enterprise Architect',
     department: 'Architecture',
     email: 'konstantin.sokolov982@company.com',
     phone: '+7 (933) 760-66-35',
@@ -3091,7 +3129,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0280',
     name: 'Denis Yakushev',
-    position: 'Manager',
+    position: 'Network Engineer',
     department: 'IT',
     email: 'denis.yakushev41@company.com',
     phone: '+7 (964) 865-13-35',
@@ -3102,7 +3140,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0281',
     name: 'Ekaterina Safonov',
-    position: 'Chief Architect',
+    position: 'Digital Marketer',
     department: 'Marketing',
     email: 'ekaterina.safonov353@company.com',
     phone: '+7 (938) 262-44-94',
@@ -3113,7 +3151,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0282',
     name: 'Veronika Nesterov',
-    position: 'Senior Developer',
+    position: 'PR Manager',
     department: 'Marketing',
     email: 'veronika.nesterov955@company.com',
     phone: '+7 (967) 563-44-60',
@@ -3124,7 +3162,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0283',
     name: 'Valery Matveev',
-    position: 'DevOps Engineer',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'valery.matveev338@company.com',
     phone: '+7 (954) 932-59-22',
@@ -3135,7 +3173,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0284',
     name: 'Maksim Bakhtin',
-    position: 'Designer',
+    position: 'Manual Tester',
     department: 'QA',
     email: 'maksim.bakhtin34@company.com',
     phone: '+7 (907) 907-31-90',
@@ -3146,7 +3184,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0285',
     name: 'Yury Mironov',
-    position: 'QA Engineer',
+    position: 'Chief Accountant',
     department: 'Finance',
     email: 'yury.mironov79@company.com',
     phone: '+7 (926) 896-37-66',
@@ -3157,7 +3195,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0286',
     name: 'Tatiana Novikov',
-    position: 'System Administrator',
+    position: 'SMM Specialist',
     department: 'Marketing',
     email: 'tatiana.novikov92@company.com',
     phone: '+7 (992) 175-26-74',
@@ -3168,7 +3206,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0287',
     name: 'Roman Yakushev',
-    position: 'Middle Developer',
+    position: 'Sales Manager',
     department: 'Sales',
     email: 'roman.yakushev202@company.com',
     phone: '+7 (982) 601-69-41',
@@ -3179,7 +3217,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0288',
     name: 'Pavel Nesterov',
-    position: 'Financial Analyst',
+    position: 'Enterprise Architect',
     department: 'Architecture',
     email: 'pavel.nesterov287@company.com',
     phone: '+7 (926) 487-81-76',
@@ -3190,7 +3228,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0289',
     name: 'Marina Orlov',
-    position: 'System Administrator',
+    position: 'SMM Specialist',
     department: 'Marketing',
     email: 'marina.orlov667@company.com',
     phone: '+7 (912) 805-84-65',
@@ -3201,7 +3239,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0290',
     name: 'Gennady Bakhtin',
-    position: 'CTO',
+    position: 'Customer Service Manager',
     department: 'Support',
     email: 'gennady.bakhtin155@company.com',
     phone: '+7 (996) 279-57-96',
@@ -3212,7 +3250,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0291',
     name: 'Aleksandr Leontiev',
-    position: 'Middle Developer',
+    position: 'Solution Architect',
     department: 'Architecture',
     email: 'aleksandr.leontiev582@company.com',
     phone: '+7 (995) 243-94-68',
@@ -3223,7 +3261,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0292',
     name: 'Evgeny Tretyakov',
-    position: 'Developer',
+    position: 'CTO',
     department: 'Management',
     email: 'evgeny.tretyakov688@company.com',
     phone: '+7 (908) 374-62-31',
@@ -3234,7 +3272,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0293',
     name: 'Anna Gavrilov',
-    position: 'Analyst',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'anna.gavrilov938@company.com',
     phone: '+7 (970) 432-22-28',
@@ -3245,7 +3283,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0294',
     name: 'Yulia Petrov',
-    position: 'Lead Developer',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'yulia.petrov239@company.com',
     phone: '+7 (944) 348-44-99',
@@ -3256,7 +3294,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0295',
     name: 'Viktor Sonin',
-    position: 'Head of Department',
+    position: 'BI Developer',
     department: 'Analytics',
     email: 'viktor.sonin378@company.com',
     phone: '+7 (953) 835-87-85',
@@ -3267,7 +3305,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0296',
     name: 'Yury Tikhonov',
-    position: 'Junior Developer',
+    position: 'Enterprise Architect',
     department: 'Architecture',
     email: 'yury.tikhonov27@company.com',
     phone: '+7 (963) 844-32-67',
@@ -3278,7 +3316,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0297',
     name: 'Vladislav Dmitriev',
-    position: 'Analyst',
+    position: 'Account Executive',
     department: 'Sales',
     email: 'vladislav.dmitriev780@company.com',
     phone: '+7 (914) 282-94-49',
@@ -3289,7 +3327,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0298',
     name: 'Veronika Kozlovskiy',
-    position: 'Analyst',
+    position: 'Security Engineer',
     department: 'Security',
     email: 'veronika.kozlovskiy229@company.com',
     phone: '+7 (951) 696-32-17',
@@ -3300,7 +3338,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0299',
     name: 'Galina Morozov',
-    position: 'Designer',
+    position: 'Architect',
     department: 'Architecture',
     email: 'galina.morozov269@company.com',
     phone: '+7 (949) 789-75-41',
@@ -3311,7 +3349,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0300',
     name: 'Maria Volkov',
-    position: 'Designer',
+    position: 'Talent Acquisition Specialist',
     department: 'HR',
     email: 'maria.volkov689@company.com',
     phone: '+7 (962) 635-20-11',
@@ -3322,7 +3360,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0301',
     name: 'Maria Novikov',
-    position: 'Lead Developer',
+    position: 'QA Engineer',
     department: 'QA',
     email: 'maria.novikov34@company.com',
     phone: '+7 (918) 646-15-84',
@@ -3333,7 +3371,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0302',
     name: 'Mikhail Tretyakov',
-    position: 'Manager',
+    position: 'Helpdesk Operator',
     department: 'Support',
     email: 'mikhail.tretyakov279@company.com',
     phone: '+7 (971) 451-63-50',
@@ -3344,7 +3382,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0303',
     name: 'Gennady Kuznetsov',
-    position: 'Copywriter',
+    position: 'Project Manager',
     department: 'Management',
     email: 'gennady.kuznetsov447@company.com',
     phone: '+7 (933) 245-56-82',
@@ -3355,7 +3393,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0304',
     name: 'Nadezhda Smolentsev',
-    position: 'QA Engineer',
+    position: 'Customer Service Manager',
     department: 'Support',
     email: 'nadezhda.smolentsev250@company.com',
     phone: '+7 (982) 304-14-68',
@@ -3366,7 +3404,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0305',
     name: 'Nikolay Kozlovskiy',
-    position: 'Functional Consultant',
+    position: 'Head of Sales',
     department: 'Sales',
     email: 'nikolay.kozlovskiy838@company.com',
     phone: '+7 (955) 265-19-11',
@@ -3377,7 +3415,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0306',
     name: 'Valentina Rudakov',
-    position: 'Architect',
+    position: 'Security Officer',
     department: 'Security',
     email: 'valentina.rudakov254@company.com',
     phone: '+7 (943) 874-82-63',
@@ -3388,7 +3426,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0307',
     name: 'Igor Tikhonov',
-    position: 'Middle Developer',
+    position: 'BI Developer',
     department: 'Analytics',
     email: 'igor.tikhonov805@company.com',
     phone: '+7 (951) 385-72-13',
@@ -3399,7 +3437,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0308',
     name: 'Galina Gavrilov',
-    position: 'Middle Developer',
+    position: 'Product Manager',
     department: 'Management',
     email: 'galina.gavrilov216@company.com',
     phone: '+7 (919) 692-15-53',
@@ -3410,7 +3448,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0309',
     name: 'Vladimir Smolentsev',
-    position: 'QA Engineer',
+    position: 'Sales Manager',
     department: 'Sales',
     email: 'vladimir.smolentsev890@company.com',
     phone: '+7 (962) 605-63-77',
@@ -3421,7 +3459,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0310',
     name: 'Zinaida Gavrilov',
-    position: 'Manager',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'zinaida.gavrilov113@company.com',
     phone: '+7 (992) 194-89-40',
@@ -3432,7 +3470,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0311',
     name: 'Viktor Leontiev',
-    position: 'CFO',
+    position: 'IT Project Manager',
     department: 'IT',
     email: 'viktor.leontiev469@company.com',
     phone: '+7 (937) 837-79-98',
@@ -3443,7 +3481,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0312',
     name: 'Kirill Bakhtin',
-    position: 'Functional Consultant',
+    position: 'Junior Developer',
     department: 'Development',
     email: 'kirill.bakhtin724@company.com',
     phone: '+7 (987) 490-93-43',
@@ -3454,7 +3492,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0313',
     name: 'Alexey Fedorov',
-    position: 'CFO',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'alexey.fedorov29@company.com',
     phone: '+7 (969) 785-45-11',
@@ -3465,7 +3503,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0314',
     name: 'Marina Morozov',
-    position: 'CTO',
+    position: 'Financial Controller',
     department: 'Finance',
     email: 'marina.morozov797@company.com',
     phone: '+7 (965) 746-84-10',
@@ -3476,7 +3514,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0315',
     name: 'Ivan Ivanov',
-    position: 'Head of Department',
+    position: 'Content Manager',
     department: 'Marketing',
     email: 'ivan.ivanov316@company.com',
     phone: '+7 (999) 476-97-47',
@@ -3487,7 +3525,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0316',
     name: 'Nikolay Lavrentiev',
-    position: 'Financial Analyst',
+    position: 'IT Support Engineer',
     department: 'IT',
     email: 'nikolay.lavrentiev726@company.com',
     phone: '+7 (966) 604-31-71',
@@ -3498,7 +3536,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0317',
     name: 'Evgeny Petrov',
-    position: 'CTO',
+    position: 'SMM Specialist',
     department: 'Marketing',
     email: 'evgeny.petrov722@company.com',
     phone: '+7 (964) 646-46-66',
@@ -3509,7 +3547,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0318',
     name: 'Konstantin Dmitriev',
-    position: 'QA Engineer',
+    position: 'Program Manager',
     department: 'Management',
     email: 'konstantin.dmitriev603@company.com',
     phone: '+7 (912) 932-14-60',
@@ -3520,7 +3558,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0319',
     name: 'Kirill Sosnin',
-    position: 'Developer',
+    position: 'Head of Sales',
     department: 'Sales',
     email: 'kirill.sosnin439@company.com',
     phone: '+7 (902) 229-81-42',
@@ -3531,7 +3569,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0320',
     name: 'Svetlana Matveev',
-    position: 'Manager',
+    position: 'PR Manager',
     department: 'Marketing',
     email: 'svetlana.matveev600@company.com',
     phone: '+7 (955) 239-31-49',
@@ -3542,7 +3580,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0321',
     name: 'Anatoly Rudakov',
-    position: 'Architect',
+    position: 'Recruiter',
     department: 'HR',
     email: 'anatoly.rudakov988@company.com',
     phone: '+7 (942) 370-82-35',
@@ -3553,7 +3591,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0322',
     name: 'Evgeny Kozlov',
-    position: 'Architect',
+    position: 'IT Support Engineer',
     department: 'IT',
     email: 'evgeny.kozlov378@company.com',
     phone: '+7 (974) 437-34-82',
@@ -3564,7 +3602,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0323',
     name: 'Irina Leontiev',
-    position: 'Developer',
+    position: 'SMM Specialist',
     department: 'Marketing',
     email: 'irina.leontiev790@company.com',
     phone: '+7 (992) 589-61-74',
@@ -3575,7 +3613,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0324',
     name: 'Kristina Bakhtin',
-    position: 'Copywriter',
+    position: 'Enterprise Architect',
     department: 'Architecture',
     email: 'kristina.bakhtin566@company.com',
     phone: '+7 (913) 452-51-57',
@@ -3586,7 +3624,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0325',
     name: 'Zinaida Egorov',
-    position: 'CFO',
+    position: 'Talent Acquisition Specialist',
     department: 'HR',
     email: 'zinaida.egorov855@company.com',
     phone: '+7 (993) 519-79-40',
@@ -3597,7 +3635,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0326',
     name: 'Nikolay Zabara',
-    position: 'Marketer',
+    position: 'Financial Analyst',
     department: 'Analytics',
     email: 'nikolay.zabara532@company.com',
     phone: '+7 (918) 224-37-67',
@@ -3608,7 +3646,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0327',
     name: 'Gennady Petrov',
-    position: 'Chief Architect',
+    position: 'Backend Developer',
     department: 'Development',
     email: 'gennady.petrov393@company.com',
     phone: '+7 (924) 652-99-71',
@@ -3619,7 +3657,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0328',
     name: 'Aleksandr Lebedev',
-    position: 'CEO',
+    position: 'Account Executive',
     department: 'Sales',
     email: 'aleksandr.lebedev4@company.com',
     phone: '+7 (913) 443-94-27',
@@ -3630,7 +3668,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0329',
     name: 'Dmitry Lavrentiev',
-    position: 'Analyst',
+    position: 'Sales Manager',
     department: 'Sales',
     email: 'dmitry.lavrentiev446@company.com',
     phone: '+7 (990) 820-51-79',
@@ -3641,7 +3679,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0330',
     name: 'Roman Novikov',
-    position: 'Senior Developer',
+    position: 'CFO',
     department: 'Finance',
     email: 'roman.novikov414@company.com',
     phone: '+7 (902) 875-38-32',
@@ -3652,7 +3690,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0331',
     name: 'Leonid Kuznetsov',
-    position: 'Developer',
+    position: 'Test Automation Engineer',
     department: 'QA',
     email: 'leonid.kuznetsov295@company.com',
     phone: '+7 (975) 782-21-81',
@@ -3663,7 +3701,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0332',
     name: 'Dmitry Smirnov',
-    position: 'Analyst',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'dmitry.smirnov904@company.com',
     phone: '+7 (901) 720-36-98',
@@ -3674,7 +3712,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0333',
     name: 'Liudmila Egorov',
-    position: 'Head of Department',
+    position: 'Frontend Developer',
     department: 'Development',
     email: 'liudmila.egorov342@company.com',
     phone: '+7 (985) 436-99-26',
@@ -3685,7 +3723,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0334',
     name: 'Maria Smirnov',
-    position: 'Copywriter',
+    position: 'QA Engineer',
     department: 'QA',
     email: 'maria.smirnov530@company.com',
     phone: '+7 (937) 850-96-61',
@@ -3696,7 +3734,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0335',
     name: 'Anna Chernov',
-    position: 'Senior Developer',
+    position: 'QC Inspector',
     department: 'Quality Control',
     email: 'anna.chernov412@company.com',
     phone: '+7 (960) 806-26-58',
@@ -3707,7 +3745,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0336',
     name: 'Gennady Yakushev',
-    position: 'QA Engineer',
+    position: 'Data Analyst',
     department: 'Analytics',
     email: 'gennady.yakushev489@company.com',
     phone: '+7 (991) 270-38-47',
@@ -3718,7 +3756,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0337',
     name: 'Svetlana Gavrilov',
-    position: 'Analyst',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'svetlana.gavrilov428@company.com',
     phone: '+7 (956) 906-71-28',
@@ -3729,7 +3767,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0338',
     name: 'Anna Orlov',
-    position: 'CEO',
+    position: 'Content Manager',
     department: 'Marketing',
     email: 'anna.orlov749@company.com',
     phone: '+7 (938) 614-75-46',
@@ -3740,7 +3778,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0339',
     name: 'Liudmila Sokolov',
-    position: 'Chief Architect',
+    position: 'Customer Service Manager',
     department: 'Support',
     email: 'liudmila.sokolov348@company.com',
     phone: '+7 (932) 425-46-70',
@@ -3751,7 +3789,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0340',
     name: 'Dmitry Ilyin',
-    position: 'QA Engineer',
+    position: 'Account Executive',
     department: 'Sales',
     email: 'dmitry.ilyin549@company.com',
     phone: '+7 (968) 776-29-92',
@@ -3762,7 +3800,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0341',
     name: 'Valery Morozov',
-    position: 'Lead Developer',
+    position: 'CI/CD Specialist',
     department: 'DevOps',
     email: 'valery.morozov222@company.com',
     phone: '+7 (929) 741-75-12',
@@ -3773,7 +3811,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0342',
     name: 'Svetlana Matveev',
-    position: 'System Administrator',
+    position: 'Security Officer',
     department: 'Security',
     email: 'svetlana.matveev892@company.com',
     phone: '+7 (962) 305-75-43',
@@ -3784,7 +3822,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0343',
     name: 'Anna Ivanov',
-    position: 'Copywriter',
+    position: 'IT Project Manager',
     department: 'IT',
     email: 'anna.ivanov938@company.com',
     phone: '+7 (922) 525-64-60',
@@ -3795,7 +3833,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0344',
     name: 'Galina Lavrentiev',
-    position: 'Senior Developer',
+    position: 'Security Officer',
     department: 'Security',
     email: 'galina.lavrentiev324@company.com',
     phone: '+7 (963) 304-49-67',
@@ -3806,7 +3844,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0345',
     name: 'Maria Smolentsev',
-    position: 'Analyst',
+    position: 'Site Reliability Engineer',
     department: 'DevOps',
     email: 'maria.smolentsev759@company.com',
     phone: '+7 (940) 839-68-47',
@@ -3817,7 +3855,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0346',
     name: 'Nadezhda Bakhtin',
-    position: 'Architect',
+    position: 'Recruiter',
     department: 'HR',
     email: 'nadezhda.bakhtin845@company.com',
     phone: '+7 (997) 146-20-99',
@@ -3828,7 +3866,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0347',
     name: 'Valery Dmitriev',
-    position: 'Analyst',
+    position: 'Financial Controller',
     department: 'Finance',
     email: 'valery.dmitriev731@company.com',
     phone: '+7 (993) 564-78-98',
@@ -3839,7 +3877,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0348',
     name: 'Maksim Bakhtin',
-    position: 'Senior Developer',
+    position: 'Solution Architect',
     department: 'Architecture',
     email: 'maksim.bakhtin268@company.com',
     phone: '+7 (950) 451-66-37',
@@ -3850,7 +3888,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0349',
     name: 'Dmitry Gavrilov',
-    position: 'CEO',
+    position: 'Business Analyst',
     department: 'Analytics',
     email: 'dmitry.gavrilov246@company.com',
     phone: '+7 (967) 835-70-10',
@@ -3861,7 +3899,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0350',
     name: 'Gennady Sonin',
-    position: 'Designer',
+    position: 'Accountant',
     department: 'Finance',
     email: 'gennady.sonin267@company.com',
     phone: '+7 (962) 230-83-13',
@@ -3872,7 +3910,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0351',
     name: 'Denis Sonin',
-    position: 'Copywriter',
+    position: 'BI Developer',
     department: 'Analytics',
     email: 'denis.sonin440@company.com',
     phone: '+7 (971) 704-65-81',
@@ -3883,7 +3921,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0352',
     name: 'Alexey Vishnyakov',
-    position: 'Lead Developer',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'alexey.vishnyakov732@company.com',
     phone: '+7 (922) 595-49-15',
@@ -3894,7 +3932,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0353',
     name: 'Vitaly Tretyakov',
-    position: 'Head of Department',
+    position: 'CTO',
     department: 'Management',
     email: 'vitaly.tretyakov244@company.com',
     phone: '+7 (916) 142-49-67',
@@ -3905,7 +3943,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0354',
     name: 'Boris Lebedev',
-    position: 'Head of Department',
+    position: 'Lead Generation Specialist',
     department: 'Sales',
     email: 'boris.lebedev672@company.com',
     phone: '+7 (932) 551-27-11',
@@ -3916,7 +3954,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0355',
     name: 'Vladimir Nesterov',
-    position: 'CFO',
+    position: 'Account Executive',
     department: 'Sales',
     email: 'vladimir.nesterov33@company.com',
     phone: '+7 (989) 464-80-85',
@@ -3927,7 +3965,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0356',
     name: 'Nadezhda Fedorov',
-    position: 'Developer',
+    position: 'Frontend Developer',
     department: 'Development',
     email: 'nadezhda.fedorov984@company.com',
     phone: '+7 (902) 316-52-39',
@@ -3938,7 +3976,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0357',
     name: 'Alisa Sokolov',
-    position: 'Developer',
+    position: 'CEO',
     department: 'Management',
     email: 'alisa.sokolov195@company.com',
     phone: '+7 (964) 884-85-44',
@@ -3949,7 +3987,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0358',
     name: 'Petr Safonov',
-    position: 'System Administrator',
+    position: 'CI/CD Specialist',
     department: 'DevOps',
     email: 'petr.safonov945@company.com',
     phone: '+7 (962) 240-58-47',
@@ -3960,7 +3998,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0359',
     name: 'Natalia Safonov',
-    position: 'Marketer',
+    position: 'QC Inspector',
     department: 'Quality Control',
     email: 'natalia.safonov354@company.com',
     phone: '+7 (902) 101-36-60',
@@ -3971,7 +4009,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0360',
     name: 'Sophia Zabara',
-    position: 'System Administrator',
+    position: 'HR Business Partner',
     department: 'HR',
     email: 'sophia.zabara334@company.com',
     phone: '+7 (993) 130-56-45',
@@ -3982,7 +4020,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0361',
     name: 'Olga Rudakov',
-    position: 'Designer',
+    position: 'Backend Developer',
     department: 'Development',
     email: 'olga.rudakov960@company.com',
     phone: '+7 (999) 179-52-74',
@@ -3993,7 +4031,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0362',
     name: 'Denis Leontiev',
-    position: 'CTO',
+    position: 'IT Support Engineer',
     department: 'IT',
     email: 'denis.leontiev682@company.com',
     phone: '+7 (903) 112-24-10',
@@ -4004,7 +4042,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0363',
     name: 'Igor Leontiev',
-    position: 'Financial Analyst',
+    position: 'CI/CD Specialist',
     department: 'DevOps',
     email: 'igor.leontiev54@company.com',
     phone: '+7 (915) 840-43-70',
@@ -4015,7 +4053,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0364',
     name: 'Liudmila Ilyin',
-    position: 'Manager',
+    position: 'Sales Manager',
     department: 'Sales',
     email: 'liudmila.ilyin17@company.com',
     phone: '+7 (959) 844-63-45',
@@ -4026,7 +4064,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0365',
     name: 'Nikolay Novikov',
-    position: 'Marketer',
+    position: 'Digital Marketer',
     department: 'Marketing',
     email: 'nikolay.novikov180@company.com',
     phone: '+7 (929) 375-80-60',
@@ -4048,7 +4086,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0367',
     name: 'Marina Kozlov',
-    position: 'HR Manager',
+    position: 'Security Engineer',
     department: 'Security',
     email: 'marina.kozlov440@company.com',
     phone: '+7 (958) 929-33-19',
@@ -4059,7 +4097,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0368',
     name: 'Denis Safonov',
-    position: 'Designer',
+    position: 'Site Reliability Engineer',
     department: 'DevOps',
     email: 'denis.safonov655@company.com',
     phone: '+7 (945) 177-53-56',
@@ -4070,7 +4108,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0369',
     name: 'Vladimir Tretyakov',
-    position: 'CEO',
+    position: 'System Administrator',
     department: 'IT',
     email: 'vladimir.tretyakov604@company.com',
     phone: '+7 (966) 607-95-81',
@@ -4081,7 +4119,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0370',
     name: 'Zinaida Mironov',
-    position: 'Copywriter',
+    position: 'Recruiter',
     department: 'HR',
     email: 'zinaida.mironov579@company.com',
     phone: '+7 (910) 620-72-78',
@@ -4092,7 +4130,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0371',
     name: 'Marina Bakhtin',
-    position: 'QA Engineer',
+    position: 'Account Executive',
     department: 'Sales',
     email: 'marina.bakhtin919@company.com',
     phone: '+7 (998) 135-54-55',
@@ -4103,7 +4141,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0372',
     name: 'Alexey Kozlovskiy',
-    position: 'Junior Developer',
+    position: 'Lead Generation Specialist',
     department: 'Sales',
     email: 'alexey.kozlovskiy266@company.com',
     phone: '+7 (984) 607-10-91',
@@ -4114,7 +4152,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0373',
     name: 'Svetlana Sokolov',
-    position: 'Junior Developer',
+    position: 'BI Developer',
     department: 'Analytics',
     email: 'svetlana.sokolov621@company.com',
     phone: '+7 (996) 812-40-93',
@@ -4136,7 +4174,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0375',
     name: 'Anton Novikov',
-    position: 'Functional Consultant',
+    position: 'Information Security Analyst',
     department: 'Security',
     email: 'anton.novikov869@company.com',
     phone: '+7 (904) 959-76-87',
@@ -4147,7 +4185,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0376',
     name: 'Valentina Morozov',
-    position: 'DevOps Engineer',
+    position: 'Support Specialist',
     department: 'Support',
     email: 'valentina.morozov662@company.com',
     phone: '+7 (954) 589-48-87',
@@ -4158,7 +4196,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0377',
     name: 'Oleg Zabara',
-    position: 'Analyst',
+    position: 'SMM Specialist',
     department: 'Marketing',
     email: 'oleg.zabara631@company.com',
     phone: '+7 (956) 157-73-47',
@@ -4169,7 +4207,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0378',
     name: 'Viktor Leontiev',
-    position: 'Marketer',
+    position: 'COO',
     department: 'Management',
     email: 'viktor.leontiev127@company.com',
     phone: '+7 (907) 504-26-47',
@@ -4180,7 +4218,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0379',
     name: 'Victoria Safonov',
-    position: 'CEO',
+    position: 'System Administrator',
     department: 'IT',
     email: 'victoria.safonov888@company.com',
     phone: '+7 (926) 952-73-59',
@@ -4191,7 +4229,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0380',
     name: 'Vitaly Kuznetsov',
-    position: 'Functional Consultant',
+    position: 'Content Manager',
     department: 'Marketing',
     email: 'vitaly.kuznetsov692@company.com',
     phone: '+7 (963) 226-32-33',
@@ -4202,7 +4240,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0381',
     name: 'Tatiana Rudakov',
-    position: 'HR Manager',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'tatiana.rudakov721@company.com',
     phone: '+7 (967) 565-13-57',
@@ -4213,7 +4251,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0382',
     name: 'Olga Volkov',
-    position: 'Analyst',
+    position: 'Senior Developer',
     department: 'Development',
     email: 'olga.volkov670@company.com',
     phone: '+7 (964) 708-35-83',
@@ -4224,7 +4262,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0383',
     name: 'Oleg Safonov',
-    position: 'Lead Developer',
+    position: 'Security Officer',
     department: 'Security',
     email: 'oleg.safonov386@company.com',
     phone: '+7 (957) 998-57-20',
@@ -4235,7 +4273,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0384',
     name: 'Vladislav Yakushev',
-    position: 'Head of Department',
+    position: 'QA Engineer',
     department: 'QA',
     email: 'vladislav.yakushev426@company.com',
     phone: '+7 (938) 396-84-61',
@@ -4246,7 +4284,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0385',
     name: 'Oleg Smirnov',
-    position: 'Product Manager',
+    position: 'Support Specialist',
     department: 'Support',
     email: 'oleg.smirnov419@company.com',
     phone: '+7 (954) 403-49-95',
@@ -4257,7 +4295,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0386',
     name: 'Nikolay Novikov',
-    position: 'CTO',
+    position: 'Security Engineer',
     department: 'Security',
     email: 'nikolay.novikov776@company.com',
     phone: '+7 (928) 957-70-95',
@@ -4268,7 +4306,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0387',
     name: 'Alisa Leontiev',
-    position: 'Senior Developer',
+    position: 'Quality Control Engineer',
     department: 'Quality Control',
     email: 'alisa.leontiev166@company.com',
     phone: '+7 (947) 425-94-90',
@@ -4279,7 +4317,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0388',
     name: 'Nikolay Sokolov',
-    position: 'Lead Developer',
+    position: 'Talent Acquisition Specialist',
     department: 'HR',
     email: 'nikolay.sokolov847@company.com',
     phone: '+7 (970) 927-88-69',
@@ -4290,7 +4328,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0389',
     name: 'Olga Lebedev',
-    position: 'Functional Consultant',
+    position: 'Project Manager',
     department: 'Management',
     email: 'olga.lebedev255@company.com',
     phone: '+7 (943) 291-32-58',
@@ -4301,7 +4339,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0390',
     name: 'Gennady Sonin',
-    position: 'Middle Developer',
+    position: 'Accountant',
     department: 'Finance',
     email: 'gennady.sonin918@company.com',
     phone: '+7 (901) 523-74-95',
@@ -4312,7 +4350,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0391',
     name: 'Olga Ilyin',
-    position: 'HR Manager',
+    position: 'Sales Manager',
     department: 'Sales',
     email: 'olga.ilyin136@company.com',
     phone: '+7 (969) 462-80-56',
@@ -4323,7 +4361,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0392',
     name: 'Valentina Volkov',
-    position: 'Lead Developer',
+    position: 'Support Specialist',
     department: 'Support',
     email: 'valentina.volkov169@company.com',
     phone: '+7 (931) 959-12-69',
@@ -4334,7 +4372,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0393',
     name: 'Veronika Ilyin',
-    position: 'System Administrator',
+    position: 'Security Engineer',
     department: 'Security',
     email: 'veronika.ilyin223@company.com',
     phone: '+7 (980) 925-49-47',
@@ -4345,7 +4383,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0394',
     name: 'Tatiana Smirnov',
-    position: 'Product Manager',
+    position: 'Information Security Analyst',
     department: 'Security',
     email: 'tatiana.smirnov964@company.com',
     phone: '+7 (963) 784-88-59',
@@ -4356,7 +4394,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0395',
     name: 'Yury Nesterov',
-    position: 'Marketer',
+    position: 'QA Engineer',
     department: 'QA',
     email: 'yury.nesterov140@company.com',
     phone: '+7 (942) 783-10-33',
@@ -4367,7 +4405,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0396',
     name: 'Tatiana Safonov',
-    position: 'DevOps Engineer',
+    position: 'Office Manager',
     department: 'Administration',
     email: 'tatiana.safonov569@company.com',
     phone: '+7 (973) 145-30-39',
@@ -4389,7 +4427,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0398',
     name: 'Aleksandr Sokolov',
-    position: 'Architect',
+    position: 'QC Inspector',
     department: 'Quality Control',
     email: 'aleksandr.sokolov713@company.com',
     phone: '+7 (963) 238-50-57',
@@ -4400,7 +4438,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0399',
     name: 'Irina Orlov',
-    position: 'DevOps Engineer',
+    position: 'QA Team Lead',
     department: 'QA',
     email: 'irina.orlov563@company.com',
     phone: '+7 (987) 294-53-43',
@@ -4411,7 +4449,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0400',
     name: 'Pavel Tretyakov',
-    position: 'Lead Developer',
+    position: 'HR Business Partner',
     department: 'HR',
     email: 'pavel.tretyakov596@company.com',
     phone: '+7 (905) 338-74-69',
@@ -4422,7 +4460,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0401',
     name: 'Irina Smirnov',
-    position: 'CEO',
+    position: 'QA Engineer',
     department: 'QA',
     email: 'irina.smirnov987@company.com',
     phone: '+7 (940) 406-86-56',
@@ -4433,7 +4471,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0402',
     name: 'Nikolay Bakhtin',
-    position: 'Middle Developer',
+    position: 'Recruiter',
     department: 'HR',
     email: 'nikolay.bakhtin142@company.com',
     phone: '+7 (929) 194-93-58',
@@ -4444,7 +4482,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0403',
     name: 'Olga Nesterov',
-    position: 'Senior Developer',
+    position: 'QA Team Lead',
     department: 'QA',
     email: 'olga.nesterov705@company.com',
     phone: '+7 (926) 615-75-54',
@@ -4455,7 +4493,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0404',
     name: 'Evgeniya Sosnin',
-    position: 'Senior Developer',
+    position: 'QC Inspector',
     department: 'Quality Control',
     email: 'evgeniya.sosnin711@company.com',
     phone: '+7 (909) 827-67-76',
@@ -4466,7 +4504,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0405',
     name: 'Anatoly Chernov',
-    position: 'Marketer',
+    position: 'PR Manager',
     department: 'Marketing',
     email: 'anatoly.chernov228@company.com',
     phone: '+7 (932) 773-11-26',
@@ -4477,7 +4515,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0406',
     name: 'Yulia Mironov',
-    position: 'Junior Developer',
+    position: 'Financial Analyst',
     department: 'Analytics',
     email: 'yulia.mironov310@company.com',
     phone: '+7 (984) 990-14-95',
@@ -4488,7 +4526,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0407',
     name: 'Leonid Zabara',
-    position: 'CFO',
+    position: 'SOC Analyst',
     department: 'Security',
     email: 'leonid.zabara129@company.com',
     phone: '+7 (934) 560-65-87',
@@ -4499,7 +4537,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0408',
     name: 'Marina Gavrilov',
-    position: 'HR Manager',
+    position: 'Network Engineer',
     department: 'IT',
     email: 'marina.gavrilov656@company.com',
     phone: '+7 (998) 440-82-76',
@@ -4510,7 +4548,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0409',
     name: 'Viktor Kozlov',
-    position: 'Developer',
+    position: 'Data Analyst',
     department: 'Analytics',
     email: 'viktor.kozlov699@company.com',
     phone: '+7 (950) 620-49-50',
@@ -4521,7 +4559,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0410',
     name: 'Ekaterina Ivanov',
-    position: 'Functional Consultant',
+    position: 'Manual Tester',
     department: 'QA',
     email: 'ekaterina.ivanov178@company.com',
     phone: '+7 (979) 674-26-72',
@@ -4532,7 +4570,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0411',
     name: 'Veronika Sokolov',
-    position: 'Developer',
+    position: 'Network Engineer',
     department: 'IT',
     email: 'veronika.sokolov590@company.com',
     phone: '+7 (955) 298-35-76',
@@ -4543,7 +4581,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0412',
     name: 'Olga Mironov',
-    position: 'Middle Developer',
+    position: 'Architect',
     department: 'Architecture',
     email: 'olga.mironov91@company.com',
     phone: '+7 (934) 799-22-25',
@@ -4554,7 +4592,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0413',
     name: 'Vladimir Fedorov',
-    position: 'DevOps Engineer',
+    position: 'SMM Specialist',
     department: 'Marketing',
     email: 'vladimir.fedorov982@company.com',
     phone: '+7 (931) 486-94-34',
@@ -4565,7 +4603,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0414',
     name: 'Viktor Bakhtin',
-    position: 'Product Manager',
+    position: 'Security Officer',
     department: 'Security',
     email: 'viktor.bakhtin556@company.com',
     phone: '+7 (946) 411-10-87',
@@ -4576,7 +4614,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0415',
     name: 'Natalia Dmitriev',
-    position: 'QA Engineer',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'natalia.dmitriev196@company.com',
     phone: '+7 (918) 296-98-90',
@@ -4587,7 +4625,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0416',
     name: 'Gennady Lebedev',
-    position: 'Analyst',
+    position: 'Security Engineer',
     department: 'Security',
     email: 'gennady.lebedev467@company.com',
     phone: '+7 (920) 621-80-66',
@@ -4598,7 +4636,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0417',
     name: 'Anatoly Matveev',
-    position: 'Marketer',
+    position: 'Data Analyst',
     department: 'Analytics',
     email: 'anatoly.matveev884@company.com',
     phone: '+7 (957) 675-43-85',
@@ -4609,7 +4647,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0418',
     name: 'Maria Gavrilov',
-    position: 'Designer',
+    position: 'Solution Architect',
     department: 'Architecture',
     email: 'maria.gavrilov377@company.com',
     phone: '+7 (968) 851-64-14',
@@ -4631,7 +4669,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0420',
     name: 'Artem Leontiev',
-    position: 'QA Engineer',
+    position: 'Security Officer',
     department: 'Security',
     email: 'artem.leontiev475@company.com',
     phone: '+7 (949) 704-42-56',
@@ -4642,7 +4680,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0421',
     name: 'Kirill Lebedev',
-    position: 'HR Manager',
+    position: 'Program Manager',
     department: 'Management',
     email: 'kirill.lebedev648@company.com',
     phone: '+7 (959) 433-83-47',
@@ -4653,7 +4691,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0422',
     name: 'Leonid Smirnov',
-    position: 'Copywriter',
+    position: 'IT Project Manager',
     department: 'IT',
     email: 'leonid.smirnov344@company.com',
     phone: '+7 (975) 147-98-40',
@@ -4664,7 +4702,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0423',
     name: 'Ivan Tretyakov',
-    position: 'CEO',
+    position: 'IT Support Engineer',
     department: 'IT',
     email: 'ivan.tretyakov417@company.com',
     phone: '+7 (952) 983-90-76',
@@ -4675,7 +4713,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0424',
     name: 'Olga Sokolov',
-    position: 'Designer',
+    position: 'Receptionist',
     department: 'Administration',
     email: 'olga.sokolov536@company.com',
     phone: '+7 (973) 682-79-24',
@@ -4686,7 +4724,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0425',
     name: 'Sergey Dmitriev',
-    position: 'Lead Developer',
+    position: 'Team Lead',
     department: 'Development',
     email: 'sergey.dmitriev333@company.com',
     phone: '+7 (981) 137-55-32',
@@ -4697,7 +4735,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0426',
     name: 'Andrey Petrov',
-    position: 'HR Manager',
+    position: 'Information Security Analyst',
     department: 'Security',
     email: 'andrey.petrov415@company.com',
     phone: '+7 (992) 727-28-22',
@@ -4708,7 +4746,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0427',
     name: 'Petr Gavrilov',
-    position: 'Junior Developer',
+    position: 'Program Manager',
     department: 'Management',
     email: 'petr.gavrilov18@company.com',
     phone: '+7 (993) 472-77-85',
@@ -4719,7 +4757,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0428',
     name: 'Nadezhda Sonin',
-    position: 'Functional Consultant',
+    position: 'IT Support Engineer',
     department: 'IT',
     email: 'nadezhda.sonin118@company.com',
     phone: '+7 (946) 263-66-54',
@@ -4730,7 +4768,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0429',
     name: 'Nikolay Lebedev',
-    position: 'Product Manager',
+    position: 'Talent Acquisition Specialist',
     department: 'HR',
     email: 'nikolay.lebedev889@company.com',
     phone: '+7 (964) 466-78-14',
@@ -4741,7 +4779,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0430',
     name: 'Denis Nesterov',
-    position: 'DevOps Engineer',
+    position: 'Office Manager',
     department: 'Administration',
     email: 'denis.nesterov947@company.com',
     phone: '+7 (905) 926-93-90',
@@ -4752,7 +4790,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0431',
     name: 'Vitaly Leontiev',
-    position: 'Senior Developer',
+    position: 'CEO',
     department: 'Management',
     email: 'vitaly.leontiev987@company.com',
     phone: '+7 (900) 720-62-31',
@@ -4774,7 +4812,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0433',
     name: 'Kirill Sosnin',
-    position: 'DevOps Engineer',
+    position: 'System Administrator',
     department: 'IT',
     email: 'kirill.sosnin386@company.com',
     phone: '+7 (966) 716-24-86',
@@ -4785,7 +4823,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0434',
     name: 'Anton Morozov',
-    position: 'QA Engineer',
+    position: 'SOC Analyst',
     department: 'Security',
     email: 'anton.morozov28@company.com',
     phone: '+7 (946) 314-99-93',
@@ -4796,7 +4834,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0435',
     name: 'Marina Chernov',
-    position: 'QA Engineer',
+    position: 'SOC Analyst',
     department: 'Security',
     email: 'marina.chernov278@company.com',
     phone: '+7 (919) 928-35-83',
@@ -4807,7 +4845,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0436',
     name: 'Andrey Leontiev',
-    position: 'Architect',
+    position: 'Customer Service Manager',
     department: 'Support',
     email: 'andrey.leontiev323@company.com',
     phone: '+7 (990) 580-56-93',
@@ -4818,7 +4856,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0437',
     name: 'Anatoly Fedorov',
-    position: 'DevOps Engineer',
+    position: 'Customer Service Manager',
     department: 'Support',
     email: 'anatoly.fedorov784@company.com',
     phone: '+7 (948) 171-24-57',
@@ -4829,7 +4867,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0438',
     name: 'Pavel Novikov',
-    position: 'CTO',
+    position: 'HR Manager',
     department: 'HR',
     email: 'pavel.novikov603@company.com',
     phone: '+7 (935) 598-81-75',
@@ -4840,7 +4878,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0439',
     name: 'Vladislav Lavrentiev',
-    position: 'Architect',
+    position: 'QC Inspector',
     department: 'Quality Control',
     email: 'vladislav.lavrentiev183@company.com',
     phone: '+7 (981) 641-16-35',
@@ -4851,7 +4889,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0440',
     name: 'Natalia Safonov',
-    position: 'Chief Architect',
+    position: 'Financial Analyst',
     department: 'Analytics',
     email: 'natalia.safonov288@company.com',
     phone: '+7 (988) 858-98-38',
@@ -4862,7 +4900,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0441',
     name: 'Sophia Sidorov',
-    position: 'Head of Department',
+    position: 'QA Engineer',
     department: 'QA',
     email: 'sophia.sidorov294@company.com',
     phone: '+7 (902) 496-15-71',
@@ -4873,7 +4911,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0442',
     name: 'Igor Safonov',
-    position: 'Chief Architect',
+    position: 'Receptionist',
     department: 'Administration',
     email: 'igor.safonov298@company.com',
     phone: '+7 (970) 903-19-22',
@@ -4884,7 +4922,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0443',
     name: 'Kirill Nesterov',
-    position: 'Functional Consultant',
+    position: 'Security Officer',
     department: 'Security',
     email: 'kirill.nesterov490@company.com',
     phone: '+7 (993) 431-85-91',
@@ -4895,7 +4933,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0444',
     name: 'Viktor Kozlovskiy',
-    position: 'HR Manager',
+    position: 'Team Lead',
     department: 'Development',
     email: 'viktor.kozlovskiy697@company.com',
     phone: '+7 (993) 224-85-58',
@@ -4906,7 +4944,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0445',
     name: 'Vladimir Egorov',
-    position: 'Junior Developer',
+    position: 'CI/CD Specialist',
     department: 'DevOps',
     email: 'vladimir.egorov675@company.com',
     phone: '+7 (948) 749-72-87',
@@ -4917,7 +4955,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0446',
     name: 'Svetlana Sidorov',
-    position: 'Manager',
+    position: 'Architect',
     department: 'Architecture',
     email: 'svetlana.sidorov765@company.com',
     phone: '+7 (984) 615-55-22',
@@ -4928,7 +4966,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0447',
     name: 'Oleg Leontiev',
-    position: 'Junior Developer',
+    position: 'Site Reliability Engineer',
     department: 'DevOps',
     email: 'oleg.leontiev706@company.com',
     phone: '+7 (994) 186-35-23',
@@ -4939,7 +4977,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0448',
     name: 'Vitaly Lavrentiev',
-    position: 'Head of Department',
+    position: 'Security Officer',
     department: 'Security',
     email: 'vitaly.lavrentiev416@company.com',
     phone: '+7 (917) 548-90-78',
@@ -4950,7 +4988,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0449',
     name: 'Oleg Kozlov',
-    position: 'CEO',
+    position: 'Content Manager',
     department: 'Marketing',
     email: 'oleg.kozlov352@company.com',
     phone: '+7 (985) 604-49-67',
@@ -4961,7 +4999,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0450',
     name: 'Kirill Kuznetsov',
-    position: 'Developer',
+    position: 'SOC Analyst',
     department: 'Security',
     email: 'kirill.kuznetsov439@company.com',
     phone: '+7 (958) 658-63-57',
@@ -4972,7 +5010,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0451',
     name: 'Galina Matveev',
-    position: 'QA Engineer',
+    position: 'Head of QC',
     department: 'Quality Control',
     email: 'galina.matveev926@company.com',
     phone: '+7 (936) 480-37-39',
@@ -4983,7 +5021,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0452',
     name: 'Liudmila Lavrentiev',
-    position: 'Senior Developer',
+    position: 'Business Analyst',
     department: 'Analytics',
     email: 'liudmila.lavrentiev651@company.com',
     phone: '+7 (956) 578-29-85',
@@ -4994,7 +5032,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0453',
     name: 'Vladislav Orlov',
-    position: 'DevOps Engineer',
+    position: 'Receptionist',
     department: 'Administration',
     email: 'vladislav.orlov130@company.com',
     phone: '+7 (959) 298-87-72',
@@ -5005,7 +5043,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0454',
     name: 'Vladimir Morozov',
-    position: 'Lead Developer',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'vladimir.morozov938@company.com',
     phone: '+7 (955) 756-97-11',
@@ -5016,7 +5054,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0455',
     name: 'Victoria Safonov',
-    position: 'Designer',
+    position: 'Sales Manager',
     department: 'Sales',
     email: 'victoria.safonov532@company.com',
     phone: '+7 (928) 631-40-12',
@@ -5027,7 +5065,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0456',
     name: 'Olga Zabara',
-    position: 'Analyst',
+    position: 'Information Security Analyst',
     department: 'Security',
     email: 'olga.zabara568@company.com',
     phone: '+7 (954) 715-72-63',
@@ -5038,7 +5076,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0457',
     name: 'Olga Mironov',
-    position: 'CEO',
+    position: 'Information Security Analyst',
     department: 'Security',
     email: 'olga.mironov402@company.com',
     phone: '+7 (996) 175-85-99',
@@ -5049,7 +5087,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0458',
     name: 'Alisa Sokolov',
-    position: 'System Administrator',
+    position: 'Digital Marketer',
     department: 'Marketing',
     email: 'alisa.sokolov518@company.com',
     phone: '+7 (970) 953-70-15',
@@ -5060,7 +5098,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0459',
     name: 'Kristina Kuznetsov',
-    position: 'Copywriter',
+    position: 'Site Reliability Engineer',
     department: 'DevOps',
     email: 'kristina.kuznetsov137@company.com',
     phone: '+7 (959) 863-56-21',
@@ -5071,7 +5109,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0460',
     name: 'Maria Tretyakov',
-    position: 'Junior Developer',
+    position: 'Information Security Analyst',
     department: 'Security',
     email: 'maria.tretyakov675@company.com',
     phone: '+7 (970) 750-64-60',
@@ -5082,7 +5120,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0461',
     name: 'Natalia Petrov',
-    position: 'Middle Developer',
+    position: 'COO',
     department: 'Management',
     email: 'natalia.petrov604@company.com',
     phone: '+7 (926) 931-38-83',
@@ -5093,7 +5131,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0462',
     name: 'Valery Dmitriev',
-    position: 'Chief Architect',
+    position: 'Customer Service Manager',
     department: 'Support',
     email: 'valery.dmitriev711@company.com',
     phone: '+7 (953) 342-24-44',
@@ -5104,7 +5142,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0463',
     name: 'Roman Matveev',
-    position: 'Designer',
+    position: 'QC Inspector',
     department: 'Quality Control',
     email: 'roman.matveev641@company.com',
     phone: '+7 (953) 434-30-74',
@@ -5115,7 +5153,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0464',
     name: 'Anton Morozov',
-    position: 'Marketer',
+    position: 'Head of Sales',
     department: 'Sales',
     email: 'anton.morozov842@company.com',
     phone: '+7 (943) 835-51-41',
@@ -5126,7 +5164,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0465',
     name: 'Igor Orlov',
-    position: 'Manager',
+    position: 'Head of QC',
     department: 'Quality Control',
     email: 'igor.orlov84@company.com',
     phone: '+7 (941) 464-11-36',
@@ -5137,7 +5175,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0466',
     name: 'Gennady Tretyakov',
-    position: 'Manager',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'gennady.tretyakov30@company.com',
     phone: '+7 (967) 259-84-32',
@@ -5148,7 +5186,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0467',
     name: 'Viktor Sosnin',
-    position: 'Senior Developer',
+    position: 'BI Developer',
     department: 'Analytics',
     email: 'viktor.sosnin559@company.com',
     phone: '+7 (954) 737-28-88',
@@ -5159,7 +5197,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0468',
     name: 'Svetlana Kuznetsov',
-    position: 'Middle Developer',
+    position: 'Head of Sales',
     department: 'Sales',
     email: 'svetlana.kuznetsov698@company.com',
     phone: '+7 (937) 179-31-50',
@@ -5170,7 +5208,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0469',
     name: 'Andrey Petrov',
-    position: 'Copywriter',
+    position: 'COO',
     department: 'Management',
     email: 'andrey.petrov327@company.com',
     phone: '+7 (969) 986-65-35',
@@ -5181,7 +5219,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0470',
     name: 'Liudmila Lavrentiev',
-    position: 'Developer',
+    position: 'CFO',
     department: 'Finance',
     email: 'liudmila.lavrentiev976@company.com',
     phone: '+7 (996) 138-96-83',
@@ -5192,7 +5230,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0471',
     name: 'Sophia Ilyin',
-    position: 'CEO',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'sophia.ilyin287@company.com',
     phone: '+7 (999) 344-32-66',
@@ -5203,7 +5241,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0472',
     name: 'Petr Safonov',
-    position: 'Senior Developer',
+    position: 'HR Business Partner',
     department: 'HR',
     email: 'petr.safonov442@company.com',
     phone: '+7 (975) 273-59-81',
@@ -5214,7 +5252,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0473',
     name: 'Vladislav Bakhtin',
-    position: 'Developer',
+    position: 'Team Lead',
     department: 'Development',
     email: 'vladislav.bakhtin198@company.com',
     phone: '+7 (951) 915-11-14',
@@ -5225,7 +5263,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0474',
     name: 'Andrey Nesterov',
-    position: 'Functional Consultant',
+    position: 'Marketing Manager',
     department: 'Marketing',
     email: 'andrey.nesterov247@company.com',
     phone: '+7 (930) 317-39-57',
@@ -5236,7 +5274,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0475',
     name: 'Liudmila Fedorov',
-    position: 'Chief Architect',
+    position: 'QC Inspector',
     department: 'Quality Control',
     email: 'liudmila.fedorov950@company.com',
     phone: '+7 (913) 320-61-80',
@@ -5247,7 +5285,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0476',
     name: 'Nadezhda Ilyin',
-    position: 'QA Engineer',
+    position: 'Architect',
     department: 'Architecture',
     email: 'nadezhda.ilyin399@company.com',
     phone: '+7 (966) 575-84-56',
@@ -5258,7 +5296,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0477',
     name: 'Evgeny Sokolov',
-    position: 'System Administrator',
+    position: 'Product Manager',
     department: 'Management',
     email: 'evgeny.sokolov791@company.com',
     phone: '+7 (936) 247-82-47',
@@ -5269,7 +5307,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0478',
     name: 'Anton Novikov',
-    position: 'Copywriter',
+    position: 'Support Specialist',
     department: 'Support',
     email: 'anton.novikov646@company.com',
     phone: '+7 (933) 918-75-55',
@@ -5280,7 +5318,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0479',
     name: 'Vladislav Smolentsev',
-    position: 'Junior Developer',
+    position: 'Security Engineer',
     department: 'Security',
     email: 'vladislav.smolentsev391@company.com',
     phone: '+7 (905) 694-75-25',
@@ -5291,7 +5329,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0480',
     name: 'Artem Fedorov',
-    position: 'Head of Department',
+    position: 'Test Automation Engineer',
     department: 'QA',
     email: 'artem.fedorov994@company.com',
     phone: '+7 (926) 373-89-17',
@@ -5302,7 +5340,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0481',
     name: 'Denis Safonov',
-    position: 'Copywriter',
+    position: 'Lead Generation Specialist',
     department: 'Sales',
     email: 'denis.safonov440@company.com',
     phone: '+7 (951) 440-20-75',
@@ -5313,7 +5351,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0482',
     name: 'Kirill Sosnin',
-    position: 'DevOps Engineer',
+    position: 'Program Manager',
     department: 'Management',
     email: 'kirill.sosnin752@company.com',
     phone: '+7 (973) 506-76-32',
@@ -5324,7 +5362,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0483',
     name: 'Boris Matveev',
-    position: 'CEO',
+    position: 'Financial Analyst',
     department: 'Analytics',
     email: 'boris.matveev217@company.com',
     phone: '+7 (936) 827-58-61',
@@ -5335,7 +5373,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0484',
     name: 'Sergey Morozov',
-    position: 'Architect',
+    position: 'Quality Control Engineer',
     department: 'Quality Control',
     email: 'sergey.morozov410@company.com',
     phone: '+7 (956) 663-56-54',
@@ -5346,7 +5384,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0485',
     name: 'Maria Rudakov',
-    position: 'Designer',
+    position: 'Financial Analyst',
     department: 'Analytics',
     email: 'maria.rudakov97@company.com',
     phone: '+7 (911) 532-98-52',
@@ -5357,7 +5395,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0486',
     name: 'Nadezhda Ilyin',
-    position: 'Chief Architect',
+    position: 'CTO',
     department: 'Management',
     email: 'nadezhda.ilyin917@company.com',
     phone: '+7 (993) 547-82-58',
@@ -5368,7 +5406,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0487',
     name: 'Ekaterina Sidorov',
-    position: 'System Administrator',
+    position: 'Information Security Analyst',
     department: 'Security',
     email: 'ekaterina.sidorov59@company.com',
     phone: '+7 (915) 740-16-90',
@@ -5379,7 +5417,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0488',
     name: 'Kristina Yakushev',
-    position: 'DevOps Engineer',
+    position: 'Information Security Analyst',
     department: 'Security',
     email: 'kristina.yakushev708@company.com',
     phone: '+7 (967) 172-40-51',
@@ -5390,7 +5428,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0489',
     name: 'Valery Volkov',
-    position: 'Functional Consultant',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'valery.volkov898@company.com',
     phone: '+7 (972) 388-97-89',
@@ -5401,7 +5439,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0490',
     name: 'Liudmila Ilyin',
-    position: 'CTO',
+    position: 'Sales Manager',
     department: 'Sales',
     email: 'liudmila.ilyin261@company.com',
     phone: '+7 (944) 665-60-70',
@@ -5412,7 +5450,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0491',
     name: 'Boris Kozlovskiy',
-    position: 'Middle Developer',
+    position: 'System Administrator',
     department: 'IT',
     email: 'boris.kozlovskiy829@company.com',
     phone: '+7 (916) 848-21-97',
@@ -5423,7 +5461,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0492',
     name: 'Olga Kozlov',
-    position: 'Head of Department',
+    position: 'Quality Control Engineer',
     department: 'Quality Control',
     email: 'olga.kozlov113@company.com',
     phone: '+7 (984) 985-18-51',
@@ -5434,7 +5472,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0493',
     name: 'Ivan Smolentsev',
-    position: 'QA Engineer',
+    position: 'Talent Acquisition Specialist',
     department: 'HR',
     email: 'ivan.smolentsev718@company.com',
     phone: '+7 (929) 539-84-73',
@@ -5445,7 +5483,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0494',
     name: 'Marina Sosnin',
-    position: 'DevOps Engineer',
+    position: 'Program Manager',
     department: 'Management',
     email: 'marina.sosnin208@company.com',
     phone: '+7 (914) 816-12-67',
@@ -5456,7 +5494,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0495',
     name: 'Roman Dmitriev',
-    position: 'Functional Consultant',
+    position: 'Account Executive',
     department: 'Sales',
     email: 'roman.dmitriev904@company.com',
     phone: '+7 (978) 298-81-79',
@@ -5467,7 +5505,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0496',
     name: 'Ekaterina Bakhtin',
-    position: 'QA Engineer',
+    position: 'System Administrator',
     department: 'IT',
     email: 'ekaterina.bakhtin418@company.com',
     phone: '+7 (974) 903-95-35',
@@ -5478,7 +5516,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0497',
     name: 'Tatiana Smolentsev',
-    position: 'Copywriter',
+    position: 'Quality Control Engineer',
     department: 'Quality Control',
     email: 'tatiana.smolentsev974@company.com',
     phone: '+7 (957) 304-69-37',
@@ -5489,7 +5527,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0498',
     name: 'Anatoly Sosnin',
-    position: 'Senior Developer',
+    position: 'Manual Tester',
     department: 'QA',
     email: 'anatoly.sosnin418@company.com',
     phone: '+7 (913) 216-69-62',
@@ -5500,7 +5538,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0499',
     name: 'Anton Lebedev',
-    position: 'Middle Developer',
+    position: 'CI/CD Specialist',
     department: 'DevOps',
     email: 'anton.lebedev994@company.com',
     phone: '+7 (909) 568-76-43',
@@ -5511,7 +5549,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0500',
     name: 'Roman Kozlovskiy',
-    position: 'Architect',
+    position: 'Site Reliability Engineer',
     department: 'DevOps',
     email: 'roman.kozlovskiy729@company.com',
     phone: '+7 (958) 699-41-63',
@@ -5522,7 +5560,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0501',
     name: 'Roman Dmitriev',
-    position: 'Senior Developer',
+    position: 'Sales Manager',
     department: 'Sales',
     email: 'roman.dmitriev102@company.com',
     phone: '+7 (995) 526-95-38',
@@ -5533,7 +5571,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0502',
     name: 'Petr Safonov',
-    position: 'Developer',
+    position: 'Support Specialist',
     department: 'Support',
     email: 'petr.safonov23@company.com',
     phone: '+7 (921) 296-47-86',
@@ -5544,7 +5582,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0503',
     name: 'Irina Vishnyakov',
-    position: 'CFO',
+    position: 'QA Engineer',
     department: 'QA',
     email: 'irina.vishnyakov179@company.com',
     phone: '+7 (922) 657-52-50',
@@ -5555,7 +5593,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0504',
     name: 'Veronika Petrov',
-    position: 'HR Manager',
+    position: 'SOC Analyst',
     department: 'Security',
     email: 'veronika.petrov719@company.com',
     phone: '+7 (924) 434-24-48',
@@ -5566,7 +5604,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0505',
     name: 'Artem Ivanov',
-    position: 'CFO',
+    position: 'QC Inspector',
     department: 'Quality Control',
     email: 'artem.ivanov996@company.com',
     phone: '+7 (937) 974-32-85',
@@ -5577,7 +5615,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0506',
     name: 'Anna Vishnyakov',
-    position: 'Product Manager',
+    position: 'PR Manager',
     department: 'Marketing',
     email: 'anna.vishnyakov388@company.com',
     phone: '+7 (917) 924-82-82',
@@ -5588,7 +5626,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0507',
     name: 'Elena Sokolov',
-    position: 'Analyst',
+    position: 'Financial Controller',
     department: 'Finance',
     email: 'elena.sokolov962@company.com',
     phone: '+7 (924) 735-62-74',
@@ -5599,7 +5637,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0508',
     name: 'Petr Volkov',
-    position: 'Lead Developer',
+    position: 'QA Engineer',
     department: 'QA',
     email: 'petr.volkov118@company.com',
     phone: '+7 (985) 937-84-25',
@@ -5610,7 +5648,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0509',
     name: 'Evgeny Lebedev',
-    position: 'QA Engineer',
+    position: 'Recruiter',
     department: 'HR',
     email: 'evgeny.lebedev324@company.com',
     phone: '+7 (992) 899-15-40',
@@ -5621,7 +5659,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0510',
     name: 'Liudmila Petrov',
-    position: 'Developer',
+    position: 'Backend Developer',
     department: 'Development',
     email: 'liudmila.petrov563@company.com',
     phone: '+7 (946) 520-58-39',
@@ -5632,7 +5670,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0511',
     name: 'Konstantin Leontiev',
-    position: 'HR Manager',
+    position: 'Manual Tester',
     department: 'QA',
     email: 'konstantin.leontiev296@company.com',
     phone: '+7 (971) 434-55-15',
@@ -5643,7 +5681,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0512',
     name: 'Maria Egorov',
-    position: 'CFO',
+    position: 'Content Manager',
     department: 'Marketing',
     email: 'maria.egorov127@company.com',
     phone: '+7 (955) 785-65-80',
@@ -5654,7 +5692,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0513',
     name: 'Valentina Safonov',
-    position: 'CEO',
+    position: 'Financial Controller',
     department: 'Finance',
     email: 'valentina.safonov947@company.com',
     phone: '+7 (965) 741-25-47',
@@ -5665,7 +5703,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0514',
     name: 'Anton Vishnyakov',
-    position: 'Functional Consultant',
+    position: 'CI/CD Specialist',
     department: 'DevOps',
     email: 'anton.vishnyakov404@company.com',
     phone: '+7 (910) 565-15-86',
@@ -5676,7 +5714,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0515',
     name: 'Ekaterina Safonov',
-    position: 'Product Manager',
+    position: 'Receptionist',
     department: 'Administration',
     email: 'ekaterina.safonov157@company.com',
     phone: '+7 (944) 781-47-27',
@@ -5687,7 +5725,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0516',
     name: 'Tatiana Sokolov',
-    position: 'Designer',
+    position: 'Senior Developer',
     department: 'Development',
     email: 'tatiana.sokolov39@company.com',
     phone: '+7 (971) 241-63-79',
@@ -5698,7 +5736,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0517',
     name: 'Victoria Ilyin',
-    position: 'Junior Developer',
+    position: 'QA Engineer',
     department: 'QA',
     email: 'victoria.ilyin934@company.com',
     phone: '+7 (942) 288-10-47',
@@ -5709,7 +5747,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0518',
     name: 'Evgeny Rudakov',
-    position: 'QA Engineer',
+    position: 'Digital Marketer',
     department: 'Marketing',
     email: 'evgeny.rudakov772@company.com',
     phone: '+7 (967) 177-56-25',
@@ -5720,7 +5758,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0519',
     name: 'Marina Morozov',
-    position: 'HR Manager',
+    position: 'Sales Manager',
     department: 'Sales',
     email: 'marina.morozov415@company.com',
     phone: '+7 (997) 481-15-91',
@@ -5742,7 +5780,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0521',
     name: 'Artem Rudakov',
-    position: 'DevOps Engineer',
+    position: 'SOC Analyst',
     department: 'Security',
     email: 'artem.rudakov981@company.com',
     phone: '+7 (987) 661-54-50',
@@ -5753,7 +5791,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0522',
     name: 'Kirill Safonov',
-    position: 'Architect',
+    position: 'CEO',
     department: 'Management',
     email: 'kirill.safonov375@company.com',
     phone: '+7 (979) 222-83-87',
@@ -5764,7 +5802,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0523',
     name: 'Pavel Dmitriev',
-    position: 'System Administrator',
+    position: 'Helpdesk Operator',
     department: 'Support',
     email: 'pavel.dmitriev727@company.com',
     phone: '+7 (955) 495-83-73',
@@ -5775,7 +5813,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0524',
     name: 'Veronika Egorov',
-    position: 'DevOps Engineer',
+    position: 'Network Engineer',
     department: 'IT',
     email: 'veronika.egorov387@company.com',
     phone: '+7 (937) 346-70-85',
@@ -5786,7 +5824,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0525',
     name: 'Kirill Sosnin',
-    position: 'HR Manager',
+    position: 'Security Engineer',
     department: 'Security',
     email: 'kirill.sosnin438@company.com',
     phone: '+7 (989) 850-59-62',
@@ -5808,7 +5846,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0527',
     name: 'Pavel Dmitriev',
-    position: 'Senior Developer',
+    position: 'Test Automation Engineer',
     department: 'QA',
     email: 'pavel.dmitriev246@company.com',
     phone: '+7 (900) 560-29-77',
@@ -5819,7 +5857,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0528',
     name: 'Vladimir Ivanov',
-    position: 'Chief Architect',
+    position: 'CI/CD Specialist',
     department: 'DevOps',
     email: 'vladimir.ivanov360@company.com',
     phone: '+7 (914) 906-51-61',
@@ -5830,7 +5868,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0529',
     name: 'Alexey Zabara',
-    position: 'Analyst',
+    position: 'Information Security Analyst',
     department: 'Security',
     email: 'alexey.zabara202@company.com',
     phone: '+7 (908) 403-32-91',
@@ -5841,7 +5879,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0530',
     name: 'Ivan Tretyakov',
-    position: 'Financial Analyst',
+    position: 'Customer Service Manager',
     department: 'Support',
     email: 'ivan.tretyakov668@company.com',
     phone: '+7 (913) 199-40-28',
@@ -5852,7 +5890,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0531',
     name: 'Denis Smirnov',
-    position: 'CEO',
+    position: 'Data Analyst',
     department: 'Analytics',
     email: 'denis.smirnov406@company.com',
     phone: '+7 (927) 434-55-88',
@@ -5863,7 +5901,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0532',
     name: 'Natalia Rudakov',
-    position: 'Financial Analyst',
+    position: 'Senior Developer',
     department: 'Development',
     email: 'natalia.rudakov939@company.com',
     phone: '+7 (937) 913-26-31',
@@ -5874,7 +5912,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0533',
     name: 'Natalia Kozlov',
-    position: 'Middle Developer',
+    position: 'Site Reliability Engineer',
     department: 'DevOps',
     email: 'natalia.kozlov960@company.com',
     phone: '+7 (980) 646-21-84',
@@ -5885,7 +5923,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0534',
     name: 'Alexey Ivanov',
-    position: 'Developer',
+    position: 'Information Security Analyst',
     department: 'Security',
     email: 'alexey.ivanov725@company.com',
     phone: '+7 (960) 256-38-32',
@@ -5896,7 +5934,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0535',
     name: 'Maria Bakhtin',
-    position: 'Analyst',
+    position: 'Security Officer',
     department: 'Security',
     email: 'maria.bakhtin549@company.com',
     phone: '+7 (987) 976-17-21',
@@ -5907,7 +5945,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0536',
     name: 'Valery Kuznetsov',
-    position: 'CTO',
+    position: 'Recruiter',
     department: 'HR',
     email: 'valery.kuznetsov812@company.com',
     phone: '+7 (922) 526-53-65',
@@ -5918,7 +5956,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0537',
     name: 'Aleksandr Volkov',
-    position: 'Developer',
+    position: 'Architect',
     department: 'Architecture',
     email: 'aleksandr.volkov625@company.com',
     phone: '+7 (918) 424-29-40',
@@ -5929,7 +5967,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0538',
     name: 'Anna Dmitriev',
-    position: 'CEO',
+    position: 'Accountant',
     department: 'Finance',
     email: 'anna.dmitriev61@company.com',
     phone: '+7 (957) 646-91-54',
@@ -5940,7 +5978,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0539',
     name: 'Gennady Ilyin',
-    position: 'CTO',
+    position: 'SOC Analyst',
     department: 'Security',
     email: 'gennady.ilyin643@company.com',
     phone: '+7 (929) 960-69-17',
@@ -5951,7 +5989,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0540',
     name: 'Alisa Chernov',
-    position: 'Developer',
+    position: 'Quality Control Engineer',
     department: 'Quality Control',
     email: 'alisa.chernov787@company.com',
     phone: '+7 (989) 162-47-42',
@@ -5962,7 +6000,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0541',
     name: 'Evgeniya Morozov',
-    position: 'QA Engineer',
+    position: 'HR Manager',
     department: 'HR',
     email: 'evgeniya.morozov545@company.com',
     phone: '+7 (920) 857-31-79',
@@ -5973,7 +6011,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0542',
     name: 'Mikhail Kuznetsov',
-    position: 'Copywriter',
+    position: 'Team Lead',
     department: 'Development',
     email: 'mikhail.kuznetsov129@company.com',
     phone: '+7 (994) 441-23-43',
@@ -5984,7 +6022,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0543',
     name: 'Oleg Volkov',
-    position: 'Manager',
+    position: 'Business Analyst',
     department: 'Analytics',
     email: 'oleg.volkov865@company.com',
     phone: '+7 (958) 834-12-83',
@@ -5995,7 +6033,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0544',
     name: 'Victoria Mironov',
-    position: 'Middle Developer',
+    position: 'Network Engineer',
     department: 'IT',
     email: 'victoria.mironov379@company.com',
     phone: '+7 (907) 986-81-29',
@@ -6006,7 +6044,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0545',
     name: 'Yulia Tikhonov',
-    position: 'Junior Developer',
+    position: 'QA Engineer',
     department: 'QA',
     email: 'yulia.tikhonov7@company.com',
     phone: '+7 (907) 475-67-71',
@@ -6017,7 +6055,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0546',
     name: 'Galina Gavrilov',
-    position: 'Analyst',
+    position: 'SOC Analyst',
     department: 'Security',
     email: 'galina.gavrilov521@company.com',
     phone: '+7 (983) 515-56-86',
@@ -6028,7 +6066,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0547',
     name: 'Anatoly Gavrilov',
-    position: 'Developer',
+    position: 'Network Engineer',
     department: 'IT',
     email: 'anatoly.gavrilov313@company.com',
     phone: '+7 (945) 936-82-91',
@@ -6039,7 +6077,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0548',
     name: 'Marina Safonov',
-    position: 'Lead Developer',
+    position: 'Data Analyst',
     department: 'Analytics',
     email: 'marina.safonov765@company.com',
     phone: '+7 (959) 348-40-26',
@@ -6050,7 +6088,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0549',
     name: 'Evgeny Mironov',
-    position: 'Chief Architect',
+    position: 'Helpdesk Operator',
     department: 'Support',
     email: 'evgeny.mironov515@company.com',
     phone: '+7 (908) 359-58-29',
@@ -6061,7 +6099,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0550',
     name: 'Andrey Novikov',
-    position: 'Chief Architect',
+    position: 'Test Automation Engineer',
     department: 'QA',
     email: 'andrey.novikov599@company.com',
     phone: '+7 (967) 473-54-16',
@@ -6072,7 +6110,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0551',
     name: 'Ivan Ilyin',
-    position: 'Lead Developer',
+    position: 'Content Manager',
     department: 'Marketing',
     email: 'ivan.ilyin774@company.com',
     phone: '+7 (946) 277-26-37',
@@ -6083,7 +6121,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0552',
     name: 'Nadezhda Orlov',
-    position: 'System Administrator',
+    position: 'CI/CD Specialist',
     department: 'DevOps',
     email: 'nadezhda.orlov806@company.com',
     phone: '+7 (905) 633-74-19',
@@ -6094,7 +6132,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0553',
     name: 'Ivan Fedorov',
-    position: 'DevOps Engineer',
+    position: 'Solution Architect',
     department: 'Architecture',
     email: 'ivan.fedorov556@company.com',
     phone: '+7 (943) 109-57-32',
@@ -6105,7 +6143,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0554',
     name: 'Zinaida Sokolov',
-    position: 'HR Manager',
+    position: 'Helpdesk Operator',
     department: 'Support',
     email: 'zinaida.sokolov252@company.com',
     phone: '+7 (913) 180-75-97',
@@ -6116,7 +6154,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0555',
     name: 'Olga Bakhtin',
-    position: 'QA Engineer',
+    position: 'Enterprise Architect',
     department: 'Architecture',
     email: 'olga.bakhtin13@company.com',
     phone: '+7 (908) 153-98-87',
@@ -6127,7 +6165,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0556',
     name: 'Galina Kozlovskiy',
-    position: 'Financial Analyst',
+    position: 'SOC Analyst',
     department: 'Security',
     email: 'galina.kozlovskiy860@company.com',
     phone: '+7 (940) 841-80-28',
@@ -6138,7 +6176,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0557',
     name: 'Galina Sosnin',
-    position: 'CFO',
+    position: 'Support Specialist',
     department: 'Support',
     email: 'galina.sosnin945@company.com',
     phone: '+7 (988) 906-88-79',
@@ -6149,7 +6187,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0558',
     name: 'Anna Ivanov',
-    position: 'Middle Developer',
+    position: 'SMM Specialist',
     department: 'Marketing',
     email: 'anna.ivanov604@company.com',
     phone: '+7 (949) 682-84-97',
@@ -6160,7 +6198,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0559',
     name: 'Leonid Kuznetsov',
-    position: 'Functional Consultant',
+    position: 'Account Executive',
     department: 'Sales',
     email: 'leonid.kuznetsov922@company.com',
     phone: '+7 (992) 151-89-86',
@@ -6171,7 +6209,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0560',
     name: 'Marina Kozlov',
-    position: 'HR Manager',
+    position: 'Architect',
     department: 'Architecture',
     email: 'marina.kozlov764@company.com',
     phone: '+7 (953) 458-52-54',
@@ -6182,7 +6220,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0561',
     name: 'Sophia Gavrilov',
-    position: 'Lead Developer',
+    position: 'Architect',
     department: 'Architecture',
     email: 'sophia.gavrilov193@company.com',
     phone: '+7 (903) 372-44-94',
@@ -6193,7 +6231,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0562',
     name: 'Vladimir Sokolov',
-    position: 'DevOps Engineer',
+    position: 'QA Engineer',
     department: 'QA',
     email: 'vladimir.sokolov652@company.com',
     phone: '+7 (950) 380-58-53',
@@ -6204,7 +6242,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0563',
     name: 'Galina Ilyin',
-    position: 'Junior Developer',
+    position: 'Receptionist',
     department: 'Administration',
     email: 'galina.ilyin165@company.com',
     phone: '+7 (936) 399-28-86',
@@ -6215,7 +6253,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0564',
     name: 'Ivan Safonov',
-    position: 'Analyst',
+    position: 'QA Team Lead',
     department: 'QA',
     email: 'ivan.safonov955@company.com',
     phone: '+7 (998) 181-55-26',
@@ -6226,7 +6264,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0565',
     name: 'Kirill Gavrilov',
-    position: 'Middle Developer',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'kirill.gavrilov252@company.com',
     phone: '+7 (919) 889-31-53',
@@ -6237,7 +6275,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0566',
     name: 'Elena Novikov',
-    position: 'Middle Developer',
+    position: 'QA Engineer',
     department: 'QA',
     email: 'elena.novikov232@company.com',
     phone: '+7 (989) 666-24-25',
@@ -6248,7 +6286,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0567',
     name: 'Andrey Ilyin',
-    position: 'CEO',
+    position: 'Helpdesk Operator',
     department: 'Support',
     email: 'andrey.ilyin317@company.com',
     phone: '+7 (900) 525-95-87',
@@ -6259,7 +6297,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0568',
     name: 'Alisa Sokolov',
-    position: 'Designer',
+    position: 'Office Manager',
     department: 'Administration',
     email: 'alisa.sokolov178@company.com',
     phone: '+7 (968) 277-94-74',
@@ -6270,7 +6308,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0569',
     name: 'Viktor Egorov',
-    position: 'Functional Consultant',
+    position: 'Financial Analyst',
     department: 'Analytics',
     email: 'viktor.egorov335@company.com',
     phone: '+7 (919) 345-24-96',
@@ -6281,7 +6319,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0570',
     name: 'Sergey Sokolov',
-    position: 'HR Manager',
+    position: 'Sales Manager',
     department: 'Sales',
     email: 'sergey.sokolov200@company.com',
     phone: '+7 (974) 831-89-25',
@@ -6292,7 +6330,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0571',
     name: 'Alisa Egorov',
-    position: 'Product Manager',
+    position: 'Solution Architect',
     department: 'Architecture',
     email: 'alisa.egorov734@company.com',
     phone: '+7 (977) 776-32-21',
@@ -6303,7 +6341,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0572',
     name: 'Maria Sidorov',
-    position: 'Developer',
+    position: 'Network Engineer',
     department: 'IT',
     email: 'maria.sidorov917@company.com',
     phone: '+7 (942) 128-11-27',
@@ -6314,7 +6352,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0573',
     name: 'Yulia Tikhonov',
-    position: 'DevOps Engineer',
+    position: 'Project Manager',
     department: 'Management',
     email: 'yulia.tikhonov141@company.com',
     phone: '+7 (905) 601-98-55',
@@ -6325,7 +6363,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0574',
     name: 'Andrey Rudakov',
-    position: 'Product Manager',
+    position: 'Business Analyst',
     department: 'Analytics',
     email: 'andrey.rudakov140@company.com',
     phone: '+7 (921) 482-31-10',
@@ -6336,7 +6374,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0575',
     name: 'Valentina Lebedev',
-    position: 'Copywriter',
+    position: 'Quality Control Engineer',
     department: 'Quality Control',
     email: 'valentina.lebedev892@company.com',
     phone: '+7 (969) 740-79-45',
@@ -6347,7 +6385,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0576',
     name: 'Sergey Vishnyakov',
-    position: 'Financial Analyst',
+    position: 'CTO',
     department: 'Management',
     email: 'sergey.vishnyakov663@company.com',
     phone: '+7 (974) 758-80-59',
@@ -6358,7 +6396,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0577',
     name: 'Victoria Sokolov',
-    position: 'Product Manager',
+    position: 'QA Engineer',
     department: 'QA',
     email: 'victoria.sokolov283@company.com',
     phone: '+7 (902) 797-71-56',
@@ -6369,7 +6407,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0578',
     name: 'Victoria Matveev',
-    position: 'Analyst',
+    position: 'HR Manager',
     department: 'HR',
     email: 'victoria.matveev449@company.com',
     phone: '+7 (968) 902-37-25',
@@ -6380,7 +6418,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0579',
     name: 'Gennady Smolentsev',
-    position: 'Product Manager',
+    position: 'Fullstack Developer',
     department: 'Development',
     email: 'gennady.smolentsev347@company.com',
     phone: '+7 (923) 166-70-45',
@@ -6391,7 +6429,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0580',
     name: 'Ekaterina Matveev',
-    position: 'Manager',
+    position: 'Backend Developer',
     department: 'Development',
     email: 'ekaterina.matveev368@company.com',
     phone: '+7 (919) 621-17-79',
@@ -6402,7 +6440,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0581',
     name: 'Kirill Ilyin',
-    position: 'Junior Developer',
+    position: 'Project Manager',
     department: 'Management',
     email: 'kirill.ilyin702@company.com',
     phone: '+7 (913) 303-82-75',
@@ -6413,7 +6451,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0582',
     name: 'Gennady Petrov',
-    position: 'HR Manager',
+    position: 'Site Reliability Engineer',
     department: 'DevOps',
     email: 'gennady.petrov8@company.com',
     phone: '+7 (909) 147-81-42',
@@ -6424,7 +6462,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0583',
     name: 'Marina Dmitriev',
-    position: 'CTO',
+    position: 'Sales Manager',
     department: 'Sales',
     email: 'marina.dmitriev350@company.com',
     phone: '+7 (935) 438-79-30',
@@ -6435,7 +6473,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0584',
     name: 'Viktor Nesterov',
-    position: 'Junior Developer',
+    position: 'Enterprise Architect',
     department: 'Architecture',
     email: 'viktor.nesterov594@company.com',
     phone: '+7 (950) 437-90-87',
@@ -6446,7 +6484,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0585',
     name: 'Valentina Ilyin',
-    position: 'System Administrator',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'valentina.ilyin605@company.com',
     phone: '+7 (966) 494-21-66',
@@ -6457,7 +6495,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0586',
     name: 'Veronika Bakhtin',
-    position: 'CTO',
+    position: 'BI Developer',
     department: 'Analytics',
     email: 'veronika.bakhtin14@company.com',
     phone: '+7 (997) 224-44-44',
@@ -6468,7 +6506,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0587',
     name: 'Yulia Matveev',
-    position: 'Copywriter',
+    position: 'Enterprise Architect',
     department: 'Architecture',
     email: 'yulia.matveev712@company.com',
     phone: '+7 (961) 437-68-70',
@@ -6479,7 +6517,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0588',
     name: 'Valery Tikhonov',
-    position: 'QA Engineer',
+    position: 'Accountant',
     department: 'Finance',
     email: 'valery.tikhonov998@company.com',
     phone: '+7 (930) 155-46-67',
@@ -6490,7 +6528,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0589',
     name: 'Vladislav Sidorov',
-    position: 'System Administrator',
+    position: 'HR Business Partner',
     department: 'HR',
     email: 'vladislav.sidorov132@company.com',
     phone: '+7 (957) 377-27-40',
@@ -6501,7 +6539,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0590',
     name: 'Denis Orlov',
-    position: 'Junior Developer',
+    position: 'HR Business Partner',
     department: 'HR',
     email: 'denis.orlov55@company.com',
     phone: '+7 (914) 468-87-76',
@@ -6512,7 +6550,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0591',
     name: 'Andrey Kozlovskiy',
-    position: 'Head of Department',
+    position: 'Architect',
     department: 'Architecture',
     email: 'andrey.kozlovskiy335@company.com',
     phone: '+7 (978) 198-72-77',
@@ -6534,7 +6572,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0593',
     name: 'Maksim Safonov',
-    position: 'Senior Developer',
+    position: 'Network Engineer',
     department: 'IT',
     email: 'maksim.safonov462@company.com',
     phone: '+7 (914) 421-57-79',
@@ -6545,7 +6583,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0594',
     name: 'Artem Lavrentiev',
-    position: 'HR Manager',
+    position: 'Senior Developer',
     department: 'Development',
     email: 'artem.lavrentiev606@company.com',
     phone: '+7 (943) 574-27-56',
@@ -6556,7 +6594,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0595',
     name: 'Ivan Gavrilov',
-    position: 'CTO',
+    position: 'Frontend Developer',
     department: 'Development',
     email: 'ivan.gavrilov502@company.com',
     phone: '+7 (932) 454-33-64',
@@ -6567,7 +6605,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0596',
     name: 'Sergey Petrov',
-    position: 'Designer',
+    position: 'Fullstack Developer',
     department: 'Development',
     email: 'sergey.petrov60@company.com',
     phone: '+7 (950) 127-61-87',
@@ -6578,7 +6616,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0597',
     name: 'Evgeny Zabara',
-    position: 'Head of Department',
+    position: 'BI Developer',
     department: 'Analytics',
     email: 'evgeny.zabara158@company.com',
     phone: '+7 (992) 156-86-64',
@@ -6589,7 +6627,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0598',
     name: 'Elena Gavrilov',
-    position: 'Marketer',
+    position: 'Information Security Analyst',
     department: 'Security',
     email: 'elena.gavrilov882@company.com',
     phone: '+7 (963) 397-53-27',
@@ -6600,7 +6638,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0599',
     name: 'Elena Tretyakov',
-    position: 'Lead Developer',
+    position: 'Support Specialist',
     department: 'Support',
     email: 'elena.tretyakov116@company.com',
     phone: '+7 (961) 764-15-59',
@@ -6611,7 +6649,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0600',
     name: 'Gennady Kuznetsov',
-    position: 'QA Engineer',
+    position: 'Office Manager',
     department: 'Administration',
     email: 'gennady.kuznetsov843@company.com',
     phone: '+7 (966) 104-14-12',
@@ -6633,7 +6671,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0602',
     name: 'Gennady Kozlov',
-    position: 'QA Engineer',
+    position: 'QC Inspector',
     department: 'Quality Control',
     email: 'gennady.kozlov138@company.com',
     phone: '+7 (900) 655-64-45',
@@ -6644,7 +6682,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0603',
     name: 'Mikhail Leontiev',
-    position: 'CTO',
+    position: 'System Administrator',
     department: 'IT',
     email: 'mikhail.leontiev517@company.com',
     phone: '+7 (917) 848-81-38',
@@ -6655,7 +6693,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0604',
     name: 'Ivan Mironov',
-    position: 'System Administrator',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'ivan.mironov367@company.com',
     phone: '+7 (981) 342-76-15',
@@ -6666,7 +6704,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0605',
     name: 'Denis Vishnyakov',
-    position: 'HR Manager',
+    position: 'SOC Analyst',
     department: 'Security',
     email: 'denis.vishnyakov690@company.com',
     phone: '+7 (940) 210-79-12',
@@ -6677,7 +6715,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0606',
     name: 'Kirill Tikhonov',
-    position: 'Chief Architect',
+    position: 'Solution Architect',
     department: 'Architecture',
     email: 'kirill.tikhonov258@company.com',
     phone: '+7 (994) 876-48-86',
@@ -6688,7 +6726,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0607',
     name: 'Evgeny Bakhtin',
-    position: 'Manager',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'evgeny.bakhtin609@company.com',
     phone: '+7 (997) 420-60-78',
@@ -6699,7 +6737,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0608',
     name: 'Natalia Dmitriev',
-    position: 'Chief Architect',
+    position: 'IT Support Engineer',
     department: 'IT',
     email: 'natalia.dmitriev73@company.com',
     phone: '+7 (958) 113-14-21',
@@ -6710,7 +6748,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0609',
     name: 'Maksim Gavrilov',
-    position: 'Head of Department',
+    position: 'Accountant',
     department: 'Finance',
     email: 'maksim.gavrilov772@company.com',
     phone: '+7 (951) 801-26-43',
@@ -6721,7 +6759,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0610',
     name: 'Artem Safonov',
-    position: 'CTO',
+    position: 'IT Support Engineer',
     department: 'IT',
     email: 'artem.safonov855@company.com',
     phone: '+7 (944) 938-95-46',
@@ -6732,7 +6770,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0611',
     name: 'Andrey Kozlov',
-    position: 'DevOps Engineer',
+    position: 'Information Security Analyst',
     department: 'Security',
     email: 'andrey.kozlov912@company.com',
     phone: '+7 (975) 390-66-99',
@@ -6743,7 +6781,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0612',
     name: 'Igor Bakhtin',
-    position: 'Functional Consultant',
+    position: 'BI Developer',
     department: 'Analytics',
     email: 'igor.bakhtin776@company.com',
     phone: '+7 (949) 311-87-21',
@@ -6754,7 +6792,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0613',
     name: 'Aleksandr Matveev',
-    position: 'Middle Developer',
+    position: 'SMM Specialist',
     department: 'Marketing',
     email: 'aleksandr.matveev235@company.com',
     phone: '+7 (944) 688-49-24',
@@ -6765,7 +6803,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0614',
     name: 'Liudmila Tikhonov',
-    position: 'DevOps Engineer',
+    position: 'SOC Analyst',
     department: 'Security',
     email: 'liudmila.tikhonov326@company.com',
     phone: '+7 (998) 105-81-43',
@@ -6776,7 +6814,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0615',
     name: 'Denis Rudakov',
-    position: 'Chief Architect',
+    position: 'Program Manager',
     department: 'Management',
     email: 'denis.rudakov749@company.com',
     phone: '+7 (928) 695-39-25',
@@ -6787,7 +6825,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0616',
     name: 'Maria Tikhonov',
-    position: 'Lead Developer',
+    position: 'Quality Control Engineer',
     department: 'Quality Control',
     email: 'maria.tikhonov314@company.com',
     phone: '+7 (927) 700-89-36',
@@ -6798,7 +6836,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0617',
     name: 'Alexey Tretyakov',
-    position: 'Junior Developer',
+    position: 'QA Team Lead',
     department: 'QA',
     email: 'alexey.tretyakov7@company.com',
     phone: '+7 (967) 733-99-12',
@@ -6809,7 +6847,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0618',
     name: 'Valentina Yakushev',
-    position: 'Lead Developer',
+    position: 'COO',
     department: 'Management',
     email: 'valentina.yakushev347@company.com',
     phone: '+7 (922) 382-50-16',
@@ -6820,7 +6858,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0619',
     name: 'Pavel Kozlovskiy',
-    position: 'Junior Developer',
+    position: 'HR Manager',
     department: 'HR',
     email: 'pavel.kozlovskiy212@company.com',
     phone: '+7 (909) 953-69-11',
@@ -6831,7 +6869,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0620',
     name: 'Denis Petrov',
-    position: 'Junior Developer',
+    position: 'Marketing Manager',
     department: 'Marketing',
     email: 'denis.petrov901@company.com',
     phone: '+7 (903) 476-82-77',
@@ -6842,7 +6880,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0621',
     name: 'Victoria Nesterov',
-    position: 'Analyst',
+    position: 'Accountant',
     department: 'Finance',
     email: 'victoria.nesterov208@company.com',
     phone: '+7 (952) 741-57-18',
@@ -6853,7 +6891,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0622',
     name: 'Aleksandr Gavrilov',
-    position: 'Lead Developer',
+    position: 'Network Engineer',
     department: 'IT',
     email: 'aleksandr.gavrilov683@company.com',
     phone: '+7 (996) 352-61-90',
@@ -6864,7 +6902,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0623',
     name: 'Andrey Bakhtin',
-    position: 'Financial Analyst',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'andrey.bakhtin711@company.com',
     phone: '+7 (965) 215-87-54',
@@ -6875,7 +6913,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0624',
     name: 'Ivan Sidorov',
-    position: 'Developer',
+    position: 'System Administrator',
     department: 'IT',
     email: 'ivan.sidorov342@company.com',
     phone: '+7 (956) 838-42-53',
@@ -6886,7 +6924,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0625',
     name: 'Mikhail Smirnov',
-    position: 'Functional Consultant',
+    position: 'Data Analyst',
     department: 'Analytics',
     email: 'mikhail.smirnov22@company.com',
     phone: '+7 (961) 743-95-17',
@@ -6897,7 +6935,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0626',
     name: 'Evgeniya Sosnin',
-    position: 'Developer',
+    position: 'Support Specialist',
     department: 'Support',
     email: 'evgeniya.sosnin433@company.com',
     phone: '+7 (934) 825-22-46',
@@ -6908,7 +6946,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0627',
     name: 'Olga Volkov',
-    position: 'Senior Developer',
+    position: 'Network Engineer',
     department: 'IT',
     email: 'olga.volkov699@company.com',
     phone: '+7 (907) 357-37-85',
@@ -6919,7 +6957,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0628',
     name: 'Pavel Tretyakov',
-    position: 'Financial Analyst',
+    position: 'Support Specialist',
     department: 'Support',
     email: 'pavel.tretyakov598@company.com',
     phone: '+7 (929) 123-93-86',
@@ -6930,7 +6968,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0629',
     name: 'Tatiana Matveev',
-    position: 'Head of Department',
+    position: 'BI Developer',
     department: 'Analytics',
     email: 'tatiana.matveev506@company.com',
     phone: '+7 (956) 300-63-29',
@@ -6941,7 +6979,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0630',
     name: 'Liudmila Yakushev',
-    position: 'Financial Analyst',
+    position: 'Manual Tester',
     department: 'QA',
     email: 'liudmila.yakushev101@company.com',
     phone: '+7 (944) 763-57-27',
@@ -6952,7 +6990,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0631',
     name: 'Olga Dmitriev',
-    position: 'Head of Department',
+    position: 'Content Manager',
     department: 'Marketing',
     email: 'olga.dmitriev675@company.com',
     phone: '+7 (989) 456-39-33',
@@ -6963,7 +7001,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0632',
     name: 'Vladimir Rudakov',
-    position: 'Functional Consultant',
+    position: 'CFO',
     department: 'Finance',
     email: 'vladimir.rudakov200@company.com',
     phone: '+7 (902) 707-45-51',
@@ -6974,7 +7012,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0633',
     name: 'Mikhail Smirnov',
-    position: 'Chief Architect',
+    position: 'SOC Analyst',
     department: 'Security',
     email: 'mikhail.smirnov605@company.com',
     phone: '+7 (992) 144-12-63',
@@ -6985,7 +7023,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0634',
     name: 'Sergey Dmitriev',
-    position: 'Senior Developer',
+    position: 'Lead Generation Specialist',
     department: 'Sales',
     email: 'sergey.dmitriev803@company.com',
     phone: '+7 (981) 697-21-44',
@@ -6996,7 +7034,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0635',
     name: 'Victoria Novikov',
-    position: 'QA Engineer',
+    position: 'IT Support Engineer',
     department: 'IT',
     email: 'victoria.novikov952@company.com',
     phone: '+7 (987) 461-62-76',
@@ -7007,7 +7045,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0636',
     name: 'Galina Tretyakov',
-    position: 'Architect',
+    position: 'Data Analyst',
     department: 'Analytics',
     email: 'galina.tretyakov443@company.com',
     phone: '+7 (921) 969-98-53',
@@ -7018,7 +7056,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0637',
     name: 'Galina Sosnin',
-    position: 'Architect',
+    position: 'Office Manager',
     department: 'Administration',
     email: 'galina.sosnin804@company.com',
     phone: '+7 (918) 598-78-75',
@@ -7029,7 +7067,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0638',
     name: 'Kirill Nesterov',
-    position: 'Junior Developer',
+    position: 'Security Engineer',
     department: 'Security',
     email: 'kirill.nesterov875@company.com',
     phone: '+7 (932) 319-58-30',
@@ -7040,7 +7078,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0639',
     name: 'Yury Safonov',
-    position: 'CTO',
+    position: 'Network Engineer',
     department: 'IT',
     email: 'yury.safonov784@company.com',
     phone: '+7 (973) 188-82-61',
@@ -7051,7 +7089,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0640',
     name: 'Zinaida Kozlov',
-    position: 'Product Manager',
+    position: 'Test Automation Engineer',
     department: 'QA',
     email: 'zinaida.kozlov562@company.com',
     phone: '+7 (917) 522-15-97',
@@ -7073,7 +7111,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0642',
     name: 'Pavel Sidorov',
-    position: 'Functional Consultant',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'pavel.sidorov297@company.com',
     phone: '+7 (985) 361-88-71',
@@ -7095,7 +7133,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0644',
     name: 'Vladimir Kuznetsov',
-    position: 'Financial Analyst',
+    position: 'Quality Control Engineer',
     department: 'Quality Control',
     email: 'vladimir.kuznetsov369@company.com',
     phone: '+7 (939) 299-13-55',
@@ -7106,7 +7144,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0645',
     name: 'Victoria Smirnov',
-    position: 'Junior Developer',
+    position: 'Enterprise Architect',
     department: 'Architecture',
     email: 'victoria.smirnov169@company.com',
     phone: '+7 (990) 676-98-51',
@@ -7117,7 +7155,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0646',
     name: 'Igor Petrov',
-    position: 'QA Engineer',
+    position: 'Financial Analyst',
     department: 'Analytics',
     email: 'igor.petrov63@company.com',
     phone: '+7 (955) 802-19-34',
@@ -7128,7 +7166,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0647',
     name: 'Maria Bakhtin',
-    position: 'DevOps Engineer',
+    position: 'Program Manager',
     department: 'Management',
     email: 'maria.bakhtin69@company.com',
     phone: '+7 (965) 774-84-71',
@@ -7139,7 +7177,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0648',
     name: 'Pavel Smirnov',
-    position: 'Product Manager',
+    position: 'Security Engineer',
     department: 'Security',
     email: 'pavel.smirnov57@company.com',
     phone: '+7 (943) 893-32-32',
@@ -7150,7 +7188,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0649',
     name: 'Petr Vishnyakov',
-    position: 'DevOps Engineer',
+    position: 'Recruiter',
     department: 'HR',
     email: 'petr.vishnyakov258@company.com',
     phone: '+7 (917) 562-70-90',
@@ -7161,7 +7199,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0650',
     name: 'Svetlana Lebedev',
-    position: 'DevOps Engineer',
+    position: 'Recruiter',
     department: 'HR',
     email: 'svetlana.lebedev720@company.com',
     phone: '+7 (908) 323-12-45',
@@ -7172,7 +7210,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0651',
     name: 'Alisa Safonov',
-    position: 'Analyst',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'alisa.safonov759@company.com',
     phone: '+7 (963) 368-63-35',
@@ -7183,7 +7221,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0652',
     name: 'Sergey Yakushev',
-    position: 'CFO',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'sergey.yakushev709@company.com',
     phone: '+7 (925) 953-70-98',
@@ -7194,7 +7232,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0653',
     name: 'Zinaida Volkov',
-    position: 'QA Engineer',
+    position: 'SOC Analyst',
     department: 'Security',
     email: 'zinaida.volkov474@company.com',
     phone: '+7 (934) 970-63-77',
@@ -7205,7 +7243,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0654',
     name: 'Irina Yakushev',
-    position: 'Financial Analyst',
+    position: 'QC Inspector',
     department: 'Quality Control',
     email: 'irina.yakushev962@company.com',
     phone: '+7 (908) 486-63-51',
@@ -7216,7 +7254,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0655',
     name: 'Tatiana Tikhonov',
-    position: 'Developer',
+    position: 'Helpdesk Operator',
     department: 'Support',
     email: 'tatiana.tikhonov998@company.com',
     phone: '+7 (960) 566-65-52',
@@ -7227,7 +7265,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0656',
     name: 'Alisa Dmitriev',
-    position: 'System Administrator',
+    position: 'Program Manager',
     department: 'Management',
     email: 'alisa.dmitriev50@company.com',
     phone: '+7 (981) 367-14-36',
@@ -7238,7 +7276,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0657',
     name: 'Anna Sonin',
-    position: 'Designer',
+    position: 'Solution Architect',
     department: 'Architecture',
     email: 'anna.sonin53@company.com',
     phone: '+7 (978) 491-37-69',
@@ -7249,7 +7287,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0658',
     name: 'Maksim Gavrilov',
-    position: 'CEO',
+    position: 'CFO',
     department: 'Finance',
     email: 'maksim.gavrilov282@company.com',
     phone: '+7 (994) 375-36-10',
@@ -7260,7 +7298,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0659',
     name: 'Tatiana Novikov',
-    position: 'Functional Consultant',
+    position: 'Office Manager',
     department: 'Administration',
     email: 'tatiana.novikov778@company.com',
     phone: '+7 (941) 295-79-19',
@@ -7271,7 +7309,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0660',
     name: 'Mikhail Matveev',
-    position: 'DevOps Engineer',
+    position: 'CTO',
     department: 'Management',
     email: 'mikhail.matveev28@company.com',
     phone: '+7 (913) 139-69-47',
@@ -7282,7 +7320,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0661',
     name: 'Oleg Fedorov',
-    position: 'Manager',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'oleg.fedorov880@company.com',
     phone: '+7 (911) 890-56-28',
@@ -7293,7 +7331,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0662',
     name: 'Elena Safonov',
-    position: 'CEO',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'elena.safonov909@company.com',
     phone: '+7 (904) 440-37-83',
@@ -7304,7 +7342,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0663',
     name: 'Tatiana Gavrilov',
-    position: 'Product Manager',
+    position: 'CFO',
     department: 'Finance',
     email: 'tatiana.gavrilov295@company.com',
     phone: '+7 (920) 783-98-89',
@@ -7315,7 +7353,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0664',
     name: 'Aleksandr Kuznetsov',
-    position: 'Middle Developer',
+    position: 'IT Support Engineer',
     department: 'IT',
     email: 'aleksandr.kuznetsov799@company.com',
     phone: '+7 (944) 467-20-67',
@@ -7337,7 +7375,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0666',
     name: 'Evgeniya Smirnov',
-    position: 'QA Engineer',
+    position: 'Solution Architect',
     department: 'Architecture',
     email: 'evgeniya.smirnov376@company.com',
     phone: '+7 (916) 961-37-90',
@@ -7348,7 +7386,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0667',
     name: 'Marina Lebedev',
-    position: 'CTO',
+    position: 'Fullstack Developer',
     department: 'Development',
     email: 'marina.lebedev459@company.com',
     phone: '+7 (961) 466-74-63',
@@ -7359,7 +7397,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0668',
     name: 'Roman Morozov',
-    position: 'CFO',
+    position: 'CEO',
     department: 'Management',
     email: 'roman.morozov654@company.com',
     phone: '+7 (963) 897-84-23',
@@ -7370,7 +7408,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0669',
     name: 'Veronika Fedorov',
-    position: 'HR Manager',
+    position: 'Office Manager',
     department: 'Administration',
     email: 'veronika.fedorov98@company.com',
     phone: '+7 (991) 395-21-13',
@@ -7381,7 +7419,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0670',
     name: 'Marina Smolentsev',
-    position: 'Developer',
+    position: 'Quality Control Engineer',
     department: 'Quality Control',
     email: 'marina.smolentsev274@company.com',
     phone: '+7 (987) 367-35-79',
@@ -7392,7 +7430,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0671',
     name: 'Galina Zabara',
-    position: 'Junior Developer',
+    position: 'Office Manager',
     department: 'Administration',
     email: 'galina.zabara37@company.com',
     phone: '+7 (970) 650-94-96',
@@ -7403,7 +7441,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0672',
     name: 'Denis Sokolov',
-    position: 'Chief Architect',
+    position: 'System Administrator',
     department: 'IT',
     email: 'denis.sokolov624@company.com',
     phone: '+7 (912) 478-59-13',
@@ -7414,7 +7452,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0673',
     name: 'Mikhail Volkov',
-    position: 'CEO',
+    position: 'Customer Service Manager',
     department: 'Support',
     email: 'mikhail.volkov36@company.com',
     phone: '+7 (999) 129-94-24',
@@ -7425,7 +7463,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0674',
     name: 'Natalia Mironov',
-    position: 'Product Manager',
+    position: 'Data Analyst',
     department: 'Analytics',
     email: 'natalia.mironov638@company.com',
     phone: '+7 (903) 314-23-63',
@@ -7436,7 +7474,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0675',
     name: 'Zinaida Safonov',
-    position: 'Analyst',
+    position: 'Security Engineer',
     department: 'Security',
     email: 'zinaida.safonov104@company.com',
     phone: '+7 (927) 228-31-64',
@@ -7447,7 +7485,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0676',
     name: 'Galina Leontiev',
-    position: 'Manager',
+    position: 'Talent Acquisition Specialist',
     department: 'HR',
     email: 'galina.leontiev823@company.com',
     phone: '+7 (957) 119-77-79',
@@ -7458,7 +7496,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0677',
     name: 'Andrey Matveev',
-    position: 'CFO',
+    position: 'Architect',
     department: 'Architecture',
     email: 'andrey.matveev939@company.com',
     phone: '+7 (958) 681-99-81',
@@ -7469,7 +7507,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0678',
     name: 'Petr Gavrilov',
-    position: 'QA Engineer',
+    position: 'System Administrator',
     department: 'IT',
     email: 'petr.gavrilov142@company.com',
     phone: '+7 (929) 523-65-99',
@@ -7480,7 +7518,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0679',
     name: 'Alexey Leontiev',
-    position: 'Architect',
+    position: 'Information Security Analyst',
     department: 'Security',
     email: 'alexey.leontiev600@company.com',
     phone: '+7 (920) 637-40-26',
@@ -7491,7 +7529,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0680',
     name: 'Pavel Rudakov',
-    position: 'Marketer',
+    position: 'Program Manager',
     department: 'Management',
     email: 'pavel.rudakov421@company.com',
     phone: '+7 (933) 217-21-25',
@@ -7502,7 +7540,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0681',
     name: 'Yulia Ivanov',
-    position: 'Product Manager',
+    position: 'Chief Accountant',
     department: 'Finance',
     email: 'yulia.ivanov170@company.com',
     phone: '+7 (931) 585-24-12',
@@ -7513,7 +7551,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0682',
     name: 'Pavel Kozlov',
-    position: 'HR Manager',
+    position: 'Security Engineer',
     department: 'Security',
     email: 'pavel.kozlov654@company.com',
     phone: '+7 (939) 383-58-48',
@@ -7524,7 +7562,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0683',
     name: 'Liudmila Vishnyakov',
-    position: 'QA Engineer',
+    position: 'Recruiter',
     department: 'HR',
     email: 'liudmila.vishnyakov364@company.com',
     phone: '+7 (912) 280-75-79',
@@ -7535,7 +7573,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0684',
     name: 'Liudmila Lebedev',
-    position: 'Chief Architect',
+    position: 'Senior Developer',
     department: 'Development',
     email: 'liudmila.lebedev663@company.com',
     phone: '+7 (958) 224-61-22',
@@ -7546,7 +7584,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0685',
     name: 'Vitaly Sosnin',
-    position: 'System Administrator',
+    position: 'Program Manager',
     department: 'Management',
     email: 'vitaly.sosnin141@company.com',
     phone: '+7 (967) 770-56-20',
@@ -7557,7 +7595,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0686',
     name: 'Irina Lebedev',
-    position: 'Architect',
+    position: 'Customer Service Manager',
     department: 'Support',
     email: 'irina.lebedev785@company.com',
     phone: '+7 (980) 822-48-45',
@@ -7568,7 +7606,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0687',
     name: 'Marina Mironov',
-    position: 'Financial Analyst',
+    position: 'Test Automation Engineer',
     department: 'QA',
     email: 'marina.mironov836@company.com',
     phone: '+7 (903) 240-39-99',
@@ -7579,7 +7617,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0688',
     name: 'Boris Leontiev',
-    position: 'Designer',
+    position: 'IT Support Engineer',
     department: 'IT',
     email: 'boris.leontiev562@company.com',
     phone: '+7 (920) 856-74-72',
@@ -7590,7 +7628,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0689',
     name: 'Marina Rudakov',
-    position: 'Lead Developer',
+    position: 'SMM Specialist',
     department: 'Marketing',
     email: 'marina.rudakov427@company.com',
     phone: '+7 (908) 392-32-10',
@@ -7601,7 +7639,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0690',
     name: 'Yury Petrov',
-    position: 'Head of Department',
+    position: 'Marketing Manager',
     department: 'Marketing',
     email: 'yury.petrov236@company.com',
     phone: '+7 (904) 786-46-79',
@@ -7612,7 +7650,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0691',
     name: 'Maksim Ivanov',
-    position: 'Head of Department',
+    position: 'Accountant',
     department: 'Finance',
     email: 'maksim.ivanov368@company.com',
     phone: '+7 (960) 829-20-65',
@@ -7623,7 +7661,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0692',
     name: 'Liudmila Dmitriev',
-    position: 'Financial Analyst',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'liudmila.dmitriev416@company.com',
     phone: '+7 (961) 695-39-34',
@@ -7634,7 +7672,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0693',
     name: 'Valentina Yakushev',
-    position: 'Architect',
+    position: 'Customer Service Manager',
     department: 'Support',
     email: 'valentina.yakushev551@company.com',
     phone: '+7 (902) 787-76-19',
@@ -7645,7 +7683,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0694',
     name: 'Natalia Sidorov',
-    position: 'QA Engineer',
+    position: 'Program Manager',
     department: 'Management',
     email: 'natalia.sidorov256@company.com',
     phone: '+7 (955) 810-84-99',
@@ -7656,7 +7694,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0695',
     name: 'Kirill Tretyakov',
-    position: 'Lead Developer',
+    position: 'Architect',
     department: 'Architecture',
     email: 'kirill.tretyakov559@company.com',
     phone: '+7 (982) 658-84-30',
@@ -7667,7 +7705,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0696',
     name: 'Sergey Safonov',
-    position: 'Senior Developer',
+    position: 'Head of Sales',
     department: 'Sales',
     email: 'sergey.safonov201@company.com',
     phone: '+7 (905) 909-36-36',
@@ -7678,7 +7716,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0697',
     name: 'Konstantin Volkov',
-    position: 'Designer',
+    position: 'Security Officer',
     department: 'Security',
     email: 'konstantin.volkov645@company.com',
     phone: '+7 (929) 410-19-91',
@@ -7689,7 +7727,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0698',
     name: 'Roman Fedorov',
-    position: 'DevOps Engineer',
+    position: 'Architect',
     department: 'Architecture',
     email: 'roman.fedorov359@company.com',
     phone: '+7 (911) 453-12-26',
@@ -7700,7 +7738,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0699',
     name: 'Sergey Chernov',
-    position: 'Copywriter',
+    position: 'Head of QC',
     department: 'Quality Control',
     email: 'sergey.chernov278@company.com',
     phone: '+7 (954) 738-45-99',
@@ -7711,7 +7749,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0700',
     name: 'Nadezhda Novikov',
-    position: 'Lead Developer',
+    position: 'Talent Acquisition Specialist',
     department: 'HR',
     email: 'nadezhda.novikov319@company.com',
     phone: '+7 (993) 924-17-94',
@@ -7722,7 +7760,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0701',
     name: 'Yulia Vishnyakov',
-    position: 'Chief Architect',
+    position: 'Solution Architect',
     department: 'Architecture',
     email: 'yulia.vishnyakov722@company.com',
     phone: '+7 (954) 735-30-22',
@@ -7733,7 +7771,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0702',
     name: 'Anatoly Morozov',
-    position: 'Chief Architect',
+    position: 'Quality Control Engineer',
     department: 'Quality Control',
     email: 'anatoly.morozov882@company.com',
     phone: '+7 (982) 727-17-67',
@@ -7744,7 +7782,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0703',
     name: 'Anatoly Chernov',
-    position: 'CFO',
+    position: 'Office Manager',
     department: 'Administration',
     email: 'anatoly.chernov461@company.com',
     phone: '+7 (908) 828-61-62',
@@ -7755,7 +7793,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0704',
     name: 'Maksim Sosnin',
-    position: 'Copywriter',
+    position: 'Business Analyst',
     department: 'Analytics',
     email: 'maksim.sosnin509@company.com',
     phone: '+7 (963) 312-20-28',
@@ -7766,7 +7804,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0705',
     name: 'Denis Morozov',
-    position: 'QA Engineer',
+    position: 'Project Manager',
     department: 'Management',
     email: 'denis.morozov8@company.com',
     phone: '+7 (947) 686-39-74',
@@ -7777,7 +7815,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0706',
     name: 'Zinaida Chernov',
-    position: 'Developer',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'zinaida.chernov766@company.com',
     phone: '+7 (932) 767-75-41',
@@ -7788,7 +7826,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0707',
     name: 'Vitaly Orlov',
-    position: 'Architect',
+    position: 'Content Manager',
     department: 'Marketing',
     email: 'vitaly.orlov585@company.com',
     phone: '+7 (953) 672-31-67',
@@ -7799,7 +7837,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0708',
     name: 'Ivan Chernov',
-    position: 'CEO',
+    position: 'Enterprise Architect',
     department: 'Architecture',
     email: 'ivan.chernov124@company.com',
     phone: '+7 (981) 196-96-27',
@@ -7810,7 +7848,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0709',
     name: 'Nadezhda Lebedev',
-    position: 'HR Manager',
+    position: 'Information Security Analyst',
     department: 'Security',
     email: 'nadezhda.lebedev502@company.com',
     phone: '+7 (993) 410-62-57',
@@ -7821,7 +7859,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0710',
     name: 'Svetlana Nesterov',
-    position: 'Developer',
+    position: 'Financial Analyst',
     department: 'Analytics',
     email: 'svetlana.nesterov537@company.com',
     phone: '+7 (939) 503-78-54',
@@ -7832,7 +7870,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0711',
     name: 'Liudmila Novikov',
-    position: 'Developer',
+    position: 'Accountant',
     department: 'Finance',
     email: 'liudmila.novikov943@company.com',
     phone: '+7 (922) 630-13-92',
@@ -7843,7 +7881,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0712',
     name: 'Nadezhda Tretyakov',
-    position: 'Head of Department',
+    position: 'HR Business Partner',
     department: 'HR',
     email: 'nadezhda.tretyakov672@company.com',
     phone: '+7 (984) 991-92-17',
@@ -7854,7 +7892,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0713',
     name: 'Valentina Yakushev',
-    position: 'Financial Analyst',
+    position: 'Information Security Analyst',
     department: 'Security',
     email: 'valentina.yakushev307@company.com',
     phone: '+7 (921) 489-37-45',
@@ -7865,7 +7903,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0714',
     name: 'Roman Novikov',
-    position: 'Product Manager',
+    position: 'Network Engineer',
     department: 'IT',
     email: 'roman.novikov398@company.com',
     phone: '+7 (960) 934-94-51',
@@ -7876,7 +7914,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0715',
     name: 'Valery Nesterov',
-    position: 'QA Engineer',
+    position: 'Quality Control Engineer',
     department: 'Quality Control',
     email: 'valery.nesterov952@company.com',
     phone: '+7 (932) 843-38-52',
@@ -7887,7 +7925,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0716',
     name: 'Pavel Yakushev',
-    position: 'QA Engineer',
+    position: 'Digital Marketer',
     department: 'Marketing',
     email: 'pavel.yakushev960@company.com',
     phone: '+7 (945) 211-75-48',
@@ -7898,7 +7936,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0717',
     name: 'Oleg Sokolov',
-    position: 'System Administrator',
+    position: 'Head of QC',
     department: 'Quality Control',
     email: 'oleg.sokolov429@company.com',
     phone: '+7 (931) 492-57-23',
@@ -7909,7 +7947,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0718',
     name: 'Anton Safonov',
-    position: 'System Administrator',
+    position: 'Site Reliability Engineer',
     department: 'DevOps',
     email: 'anton.safonov171@company.com',
     phone: '+7 (981) 796-77-50',
@@ -7920,7 +7958,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0719',
     name: 'Valery Rudakov',
-    position: 'Functional Consultant',
+    position: 'Security Officer',
     department: 'Security',
     email: 'valery.rudakov794@company.com',
     phone: '+7 (906) 661-58-28',
@@ -7931,7 +7969,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0720',
     name: 'Galina Sonin',
-    position: 'Developer',
+    position: 'COO',
     department: 'Management',
     email: 'galina.sonin988@company.com',
     phone: '+7 (970) 593-33-95',
@@ -7942,7 +7980,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0721',
     name: 'Anatoly Kuznetsov',
-    position: 'QA Engineer',
+    position: 'Digital Marketer',
     department: 'Marketing',
     email: 'anatoly.kuznetsov421@company.com',
     phone: '+7 (910) 745-29-16',
@@ -7953,7 +7991,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0722',
     name: 'Vladislav Matveev',
-    position: 'Copywriter',
+    position: 'System Administrator',
     department: 'IT',
     email: 'vladislav.matveev631@company.com',
     phone: '+7 (945) 913-47-15',
@@ -7964,7 +8002,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0723',
     name: 'Oleg Kozlov',
-    position: 'Analyst',
+    position: 'Team Lead',
     department: 'Development',
     email: 'oleg.kozlov867@company.com',
     phone: '+7 (981) 960-11-41',
@@ -7975,7 +8013,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0724',
     name: 'Dmitry Ilyin',
-    position: 'CFO',
+    position: 'HR Business Partner',
     department: 'HR',
     email: 'dmitry.ilyin323@company.com',
     phone: '+7 (971) 601-95-62',
@@ -7986,7 +8024,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0725',
     name: 'Elena Gavrilov',
-    position: 'Marketer',
+    position: 'Content Manager',
     department: 'Marketing',
     email: 'elena.gavrilov242@company.com',
     phone: '+7 (930) 351-40-99',
@@ -7997,7 +8035,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0726',
     name: 'Kristina Sidorov',
-    position: 'Lead Developer',
+    position: 'Security Engineer',
     department: 'Security',
     email: 'kristina.sidorov50@company.com',
     phone: '+7 (907) 721-44-18',
@@ -8008,7 +8046,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0727',
     name: 'Valery Bakhtin',
-    position: 'Lead Developer',
+    position: 'Support Specialist',
     department: 'Support',
     email: 'valery.bakhtin926@company.com',
     phone: '+7 (996) 163-85-86',
@@ -8019,7 +8057,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0728',
     name: 'Dmitry Matveev',
-    position: 'Analyst',
+    position: 'Head of QC',
     department: 'Quality Control',
     email: 'dmitry.matveev307@company.com',
     phone: '+7 (926) 542-67-40',
@@ -8030,7 +8068,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0729',
     name: 'Vladimir Kozlov',
-    position: 'Architect',
+    position: 'Receptionist',
     department: 'Administration',
     email: 'vladimir.kozlov426@company.com',
     phone: '+7 (970) 351-78-95',
@@ -8041,7 +8079,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0730',
     name: 'Gennady Volkov',
-    position: 'Marketer',
+    position: 'Manual Tester',
     department: 'QA',
     email: 'gennady.volkov253@company.com',
     phone: '+7 (908) 779-99-69',
@@ -8052,7 +8090,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0731',
     name: 'Alexey Smirnov',
-    position: 'HR Manager',
+    position: 'Digital Marketer',
     department: 'Marketing',
     email: 'alexey.smirnov845@company.com',
     phone: '+7 (982) 988-81-78',
@@ -8063,7 +8101,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0732',
     name: 'Igor Dmitriev',
-    position: 'Product Manager',
+    position: 'QC Inspector',
     department: 'Quality Control',
     email: 'igor.dmitriev608@company.com',
     phone: '+7 (979) 565-85-25',
@@ -8074,7 +8112,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0733',
     name: 'Yulia Rudakov',
-    position: 'Developer',
+    position: 'Office Manager',
     department: 'Administration',
     email: 'yulia.rudakov164@company.com',
     phone: '+7 (970) 495-93-13',
@@ -8085,7 +8123,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0734',
     name: 'Oleg Fedorov',
-    position: 'Developer',
+    position: 'Digital Marketer',
     department: 'Marketing',
     email: 'oleg.fedorov421@company.com',
     phone: '+7 (956) 848-83-88',
@@ -8096,7 +8134,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0735',
     name: 'Alexey Lebedev',
-    position: 'Functional Consultant',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'alexey.lebedev952@company.com',
     phone: '+7 (983) 689-50-54',
@@ -8107,7 +8145,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0736',
     name: 'Leonid Chernov',
-    position: 'Junior Developer',
+    position: 'COO',
     department: 'Management',
     email: 'leonid.chernov126@company.com',
     phone: '+7 (935) 893-15-79',
@@ -8118,7 +8156,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0737',
     name: 'Maksim Kuznetsov',
-    position: 'Developer',
+    position: 'CI/CD Specialist',
     department: 'DevOps',
     email: 'maksim.kuznetsov472@company.com',
     phone: '+7 (973) 456-74-76',
@@ -8129,7 +8167,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0738',
     name: 'Evgeniya Kozlov',
-    position: 'Manager',
+    position: 'Support Specialist',
     department: 'Support',
     email: 'evgeniya.kozlov558@company.com',
     phone: '+7 (903) 618-46-44',
@@ -8140,7 +8178,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0739',
     name: 'Irina Kuznetsov',
-    position: 'Architect',
+    position: 'Business Analyst',
     department: 'Analytics',
     email: 'irina.kuznetsov325@company.com',
     phone: '+7 (912) 966-47-75',
@@ -8151,7 +8189,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0740',
     name: 'Kristina Volkov',
-    position: 'CFO',
+    position: 'Financial Analyst',
     department: 'Analytics',
     email: 'kristina.volkov424@company.com',
     phone: '+7 (983) 360-88-80',
@@ -8162,7 +8200,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0741',
     name: 'Alexey Yakushev',
-    position: 'QA Engineer',
+    position: 'Content Manager',
     department: 'Marketing',
     email: 'alexey.yakushev55@company.com',
     phone: '+7 (999) 497-71-83',
@@ -8173,7 +8211,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0742',
     name: 'Nikolay Sonin',
-    position: 'System Administrator',
+    position: 'Architect',
     department: 'Architecture',
     email: 'nikolay.sonin179@company.com',
     phone: '+7 (966) 577-56-26',
@@ -8184,7 +8222,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0743',
     name: 'Leonid Sonin',
-    position: 'Chief Architect',
+    position: 'Product Manager',
     department: 'Management',
     email: 'leonid.sonin131@company.com',
     phone: '+7 (975) 764-65-51',
@@ -8195,7 +8233,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0744',
     name: 'Liudmila Smirnov',
-    position: 'Senior Developer',
+    position: 'Sales Manager',
     department: 'Sales',
     email: 'liudmila.smirnov438@company.com',
     phone: '+7 (984) 903-24-72',
@@ -8206,7 +8244,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0745',
     name: 'Artem Chernov',
-    position: 'Architect',
+    position: 'Accountant',
     department: 'Finance',
     email: 'artem.chernov489@company.com',
     phone: '+7 (912) 150-80-72',
@@ -8217,7 +8255,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0746',
     name: 'Roman Dmitriev',
-    position: 'Analyst',
+    position: 'PR Manager',
     department: 'Marketing',
     email: 'roman.dmitriev781@company.com',
     phone: '+7 (902) 974-16-56',
@@ -8228,7 +8266,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0747',
     name: 'Galina Fedorov',
-    position: 'Copywriter',
+    position: 'Head of QC',
     department: 'Quality Control',
     email: 'galina.fedorov80@company.com',
     phone: '+7 (919) 787-80-86',
@@ -8250,7 +8288,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0749',
     name: 'Elena Kozlovskiy',
-    position: 'Product Manager',
+    position: 'Test Automation Engineer',
     department: 'QA',
     email: 'elena.kozlovskiy63@company.com',
     phone: '+7 (911) 643-74-29',
@@ -8261,7 +8299,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0750',
     name: 'Yulia Bakhtin',
-    position: 'Developer',
+    position: 'BI Developer',
     department: 'Analytics',
     email: 'yulia.bakhtin863@company.com',
     phone: '+7 (908) 900-30-26',
@@ -8272,7 +8310,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0751',
     name: 'Elena Novikov',
-    position: 'DevOps Engineer',
+    position: 'Customer Service Manager',
     department: 'Support',
     email: 'elena.novikov27@company.com',
     phone: '+7 (908) 676-18-95',
@@ -8283,7 +8321,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0752',
     name: 'Valery Vishnyakov',
-    position: 'Chief Architect',
+    position: 'Security Officer',
     department: 'Security',
     email: 'valery.vishnyakov638@company.com',
     phone: '+7 (923) 507-65-38',
@@ -8294,7 +8332,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0753',
     name: 'Maksim Vishnyakov',
-    position: 'System Administrator',
+    position: 'QA Engineer',
     department: 'QA',
     email: 'maksim.vishnyakov873@company.com',
     phone: '+7 (992) 268-58-81',
@@ -8305,7 +8343,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0754',
     name: 'Yury Orlov',
-    position: 'Middle Developer',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'yury.orlov717@company.com',
     phone: '+7 (908) 434-29-92',
@@ -8316,7 +8354,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0755',
     name: 'Vitaly Matveev',
-    position: 'Manager',
+    position: 'Junior Developer',
     department: 'Development',
     email: 'vitaly.matveev186@company.com',
     phone: '+7 (952) 750-14-68',
@@ -8327,7 +8365,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0756',
     name: 'Sergey Tikhonov',
-    position: 'Analyst',
+    position: 'Quality Control Engineer',
     department: 'Quality Control',
     email: 'sergey.tikhonov85@company.com',
     phone: '+7 (969) 266-92-30',
@@ -8338,7 +8376,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0757',
     name: 'Sergey Leontiev',
-    position: 'Junior Developer',
+    position: 'Business Analyst',
     department: 'Analytics',
     email: 'sergey.leontiev93@company.com',
     phone: '+7 (901) 208-57-73',
@@ -8349,7 +8387,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0758',
     name: 'Valery Vishnyakov',
-    position: 'Middle Developer',
+    position: 'Architect',
     department: 'Architecture',
     email: 'valery.vishnyakov571@company.com',
     phone: '+7 (944) 141-89-46',
@@ -8360,7 +8398,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0759',
     name: 'Svetlana Bakhtin',
-    position: 'Middle Developer',
+    position: 'Junior Developer',
     department: 'Development',
     email: 'svetlana.bakhtin278@company.com',
     phone: '+7 (942) 164-24-48',
@@ -8371,7 +8409,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0760',
     name: 'Alisa Mironov',
-    position: 'Designer',
+    position: 'QC Inspector',
     department: 'Quality Control',
     email: 'alisa.mironov534@company.com',
     phone: '+7 (973) 662-81-94',
@@ -8382,7 +8420,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0761',
     name: 'Victoria Volkov',
-    position: 'Functional Consultant',
+    position: 'Chief Accountant',
     department: 'Finance',
     email: 'victoria.volkov891@company.com',
     phone: '+7 (936) 783-29-27',
@@ -8393,7 +8431,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0762',
     name: 'Marina Sosnin',
-    position: 'CFO',
+    position: 'Architect',
     department: 'Architecture',
     email: 'marina.sosnin811@company.com',
     phone: '+7 (907) 750-69-13',
@@ -8404,7 +8442,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0763',
     name: 'Leonid Safonov',
-    position: 'Product Manager',
+    position: 'Head of Sales',
     department: 'Sales',
     email: 'leonid.safonov834@company.com',
     phone: '+7 (947) 972-95-39',
@@ -8415,7 +8453,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0764',
     name: 'Vitaly Lavrentiev',
-    position: 'Functional Consultant',
+    position: 'System Administrator',
     department: 'IT',
     email: 'vitaly.lavrentiev487@company.com',
     phone: '+7 (957) 508-12-46',
@@ -8426,7 +8464,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0765',
     name: 'Petr Egorov',
-    position: 'Junior Developer',
+    position: 'Information Security Analyst',
     department: 'Security',
     email: 'petr.egorov97@company.com',
     phone: '+7 (926) 361-41-25',
@@ -8437,7 +8475,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0766',
     name: 'Valery Sonin',
-    position: 'Middle Developer',
+    position: 'CTO',
     department: 'Management',
     email: 'valery.sonin897@company.com',
     phone: '+7 (916) 270-20-66',
@@ -8448,7 +8486,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0767',
     name: 'Marina Mironov',
-    position: 'Head of Department',
+    position: 'Content Manager',
     department: 'Marketing',
     email: 'marina.mironov146@company.com',
     phone: '+7 (990) 203-65-62',
@@ -8459,7 +8497,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0768',
     name: 'Evgeny Yakushev',
-    position: 'Functional Consultant',
+    position: 'Customer Service Manager',
     department: 'Support',
     email: 'evgeny.yakushev438@company.com',
     phone: '+7 (975) 925-47-58',
@@ -8470,7 +8508,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0769',
     name: 'Konstantin Leontiev',
-    position: 'Product Manager',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'konstantin.leontiev817@company.com',
     phone: '+7 (957) 574-29-10',
@@ -8481,7 +8519,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0770',
     name: 'Dmitry Novikov',
-    position: 'Junior Developer',
+    position: 'Head of Sales',
     department: 'Sales',
     email: 'dmitry.novikov194@company.com',
     phone: '+7 (907) 136-59-86',
@@ -8492,7 +8530,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0771',
     name: 'Valentina Fedorov',
-    position: 'Junior Developer',
+    position: 'Test Automation Engineer',
     department: 'QA',
     email: 'valentina.fedorov235@company.com',
     phone: '+7 (954) 430-20-94',
@@ -8503,7 +8541,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0772',
     name: 'Artem Orlov',
-    position: 'CFO',
+    position: 'QC Inspector',
     department: 'Quality Control',
     email: 'artem.orlov260@company.com',
     phone: '+7 (947) 193-26-43',
@@ -8514,7 +8552,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0773',
     name: 'Kirill Fedorov',
-    position: 'Architect',
+    position: 'Security Engineer',
     department: 'Security',
     email: 'kirill.fedorov752@company.com',
     phone: '+7 (932) 934-29-24',
@@ -8536,7 +8574,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0775',
     name: 'Igor Sonin',
-    position: 'Copywriter',
+    position: 'Office Manager',
     department: 'Administration',
     email: 'igor.sonin819@company.com',
     phone: '+7 (959) 759-72-13',
@@ -8547,7 +8585,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0776',
     name: 'Yulia Kuznetsov',
-    position: 'Copywriter',
+    position: 'Site Reliability Engineer',
     department: 'DevOps',
     email: 'yulia.kuznetsov409@company.com',
     phone: '+7 (993) 359-28-32',
@@ -8558,7 +8596,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0777',
     name: 'Svetlana Volkov',
-    position: 'QA Engineer',
+    position: 'Information Security Analyst',
     department: 'Security',
     email: 'svetlana.volkov627@company.com',
     phone: '+7 (973) 694-13-67',
@@ -8569,7 +8607,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0778',
     name: 'Roman Kuznetsov',
-    position: 'Middle Developer',
+    position: 'Security Officer',
     department: 'Security',
     email: 'roman.kuznetsov254@company.com',
     phone: '+7 (928) 175-73-89',
@@ -8580,7 +8618,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0779',
     name: 'Nikolay Ilyin',
-    position: 'Chief Architect',
+    position: 'Office Manager',
     department: 'Administration',
     email: 'nikolay.ilyin675@company.com',
     phone: '+7 (912) 330-37-68',
@@ -8591,7 +8629,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0780',
     name: 'Vitaly Morozov',
-    position: 'CTO',
+    position: 'Talent Acquisition Specialist',
     department: 'HR',
     email: 'vitaly.morozov542@company.com',
     phone: '+7 (967) 222-64-76',
@@ -8602,7 +8640,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0781',
     name: 'Ivan Fedorov',
-    position: 'DevOps Engineer',
+    position: 'Talent Acquisition Specialist',
     department: 'HR',
     email: 'ivan.fedorov411@company.com',
     phone: '+7 (971) 749-40-97',
@@ -8613,7 +8651,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0782',
     name: 'Artem Lebedev',
-    position: 'Developer',
+    position: 'Account Executive',
     department: 'Sales',
     email: 'artem.lebedev486@company.com',
     phone: '+7 (941) 591-72-93',
@@ -8624,7 +8662,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0783',
     name: 'Oleg Chernov',
-    position: 'Chief Architect',
+    position: 'Data Analyst',
     department: 'Analytics',
     email: 'oleg.chernov766@company.com',
     phone: '+7 (980) 675-60-79',
@@ -8635,7 +8673,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0784',
     name: 'Artem Bakhtin',
-    position: 'DevOps Engineer',
+    position: 'Security Officer',
     department: 'Security',
     email: 'artem.bakhtin946@company.com',
     phone: '+7 (932) 820-89-97',
@@ -8646,7 +8684,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0785',
     name: 'Ekaterina Mironov',
-    position: 'HR Manager',
+    position: 'Quality Control Engineer',
     department: 'Quality Control',
     email: 'ekaterina.mironov242@company.com',
     phone: '+7 (953) 926-75-22',
@@ -8657,7 +8695,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0786',
     name: 'Gennady Bakhtin',
-    position: 'CFO',
+    position: 'PR Manager',
     department: 'Marketing',
     email: 'gennady.bakhtin425@company.com',
     phone: '+7 (999) 755-86-63',
@@ -8668,7 +8706,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0787',
     name: 'Vladimir Petrov',
-    position: 'Designer',
+    position: 'CFO',
     department: 'Finance',
     email: 'vladimir.petrov161@company.com',
     phone: '+7 (960) 553-36-52',
@@ -8679,7 +8717,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0788',
     name: 'Vladimir Sokolov',
-    position: 'CFO',
+    position: 'Architect',
     department: 'Architecture',
     email: 'vladimir.sokolov352@company.com',
     phone: '+7 (980) 329-22-40',
@@ -8690,7 +8728,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0789',
     name: 'Vladimir Yakushev',
-    position: 'HR Manager',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'vladimir.yakushev195@company.com',
     phone: '+7 (918) 449-79-51',
@@ -8701,7 +8739,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0790',
     name: 'Pavel Gavrilov',
-    position: 'Developer',
+    position: 'Office Manager',
     department: 'Administration',
     email: 'pavel.gavrilov84@company.com',
     phone: '+7 (976) 542-54-29',
@@ -8712,7 +8750,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0791',
     name: 'Alexey Vishnyakov',
-    position: 'System Administrator',
+    position: 'SOC Analyst',
     department: 'Security',
     email: 'alexey.vishnyakov677@company.com',
     phone: '+7 (963) 137-53-51',
@@ -8723,7 +8761,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0792',
     name: 'Valery Fedorov',
-    position: 'Head of Department',
+    position: 'CI/CD Specialist',
     department: 'DevOps',
     email: 'valery.fedorov893@company.com',
     phone: '+7 (960) 872-97-82',
@@ -8734,7 +8772,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0793',
     name: 'Artem Safonov',
-    position: 'Marketer',
+    position: 'Quality Control Engineer',
     department: 'Quality Control',
     email: 'artem.safonov177@company.com',
     phone: '+7 (952) 681-74-23',
@@ -8745,7 +8783,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0794',
     name: 'Alisa Vishnyakov',
-    position: 'CEO',
+    position: 'Support Specialist',
     department: 'Support',
     email: 'alisa.vishnyakov295@company.com',
     phone: '+7 (905) 395-70-19',
@@ -8756,7 +8794,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0795',
     name: 'Denis Ivanov',
-    position: 'Designer',
+    position: 'Backend Developer',
     department: 'Development',
     email: 'denis.ivanov612@company.com',
     phone: '+7 (977) 306-45-74',
@@ -8767,7 +8805,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0796',
     name: 'Evgeniya Mironov',
-    position: 'CTO',
+    position: 'Support Specialist',
     department: 'Support',
     email: 'evgeniya.mironov572@company.com',
     phone: '+7 (948) 644-67-84',
@@ -8778,7 +8816,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0797',
     name: 'Ivan Kozlov',
-    position: 'Financial Analyst',
+    position: 'Chief Accountant',
     department: 'Finance',
     email: 'ivan.kozlov537@company.com',
     phone: '+7 (926) 618-58-24',
@@ -8789,7 +8827,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0798',
     name: 'Oleg Ivanov',
-    position: 'DevOps Engineer',
+    position: 'CFO',
     department: 'Finance',
     email: 'oleg.ivanov185@company.com',
     phone: '+7 (956) 244-33-26',
@@ -8800,7 +8838,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0799',
     name: 'Igor Smirnov',
-    position: 'HR Manager',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'igor.smirnov57@company.com',
     phone: '+7 (904) 135-61-47',
@@ -8811,7 +8849,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0800',
     name: 'Konstantin Sidorov',
-    position: 'Functional Consultant',
+    position: 'Solution Architect',
     department: 'Architecture',
     email: 'konstantin.sidorov74@company.com',
     phone: '+7 (963) 192-96-52',
@@ -8822,7 +8860,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0801',
     name: 'Veronika Nesterov',
-    position: 'QA Engineer',
+    position: 'CFO',
     department: 'Finance',
     email: 'veronika.nesterov992@company.com',
     phone: '+7 (932) 887-72-60',
@@ -8833,7 +8871,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0802',
     name: 'Valery Kuznetsov',
-    position: 'Lead Developer',
+    position: 'Financial Controller',
     department: 'Finance',
     email: 'valery.kuznetsov373@company.com',
     phone: '+7 (939) 238-85-22',
@@ -8844,7 +8882,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0803',
     name: 'Igor Chernov',
-    position: 'Copywriter',
+    position: 'SMM Specialist',
     department: 'Marketing',
     email: 'igor.chernov19@company.com',
     phone: '+7 (923) 420-19-17',
@@ -8855,7 +8893,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0804',
     name: 'Victoria Vishnyakov',
-    position: 'CTO',
+    position: 'Quality Control Engineer',
     department: 'Quality Control',
     email: 'victoria.vishnyakov135@company.com',
     phone: '+7 (955) 591-64-60',
@@ -8866,7 +8904,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0805',
     name: 'Maksim Sosnin',
-    position: 'Head of Department',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'maksim.sosnin878@company.com',
     phone: '+7 (928) 337-77-28',
@@ -8877,7 +8915,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0806',
     name: 'Sophia Sokolov',
-    position: 'Architect',
+    position: 'HR Business Partner',
     department: 'HR',
     email: 'sophia.sokolov273@company.com',
     phone: '+7 (980) 267-33-37',
@@ -8888,7 +8926,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0807',
     name: 'Boris Ilyin',
-    position: 'Copywriter',
+    position: 'Manual Tester',
     department: 'QA',
     email: 'boris.ilyin908@company.com',
     phone: '+7 (982) 150-51-66',
@@ -8899,7 +8937,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0808',
     name: 'Veronika Matveev',
-    position: 'CFO',
+    position: 'QC Inspector',
     department: 'Quality Control',
     email: 'veronika.matveev20@company.com',
     phone: '+7 (940) 428-69-74',
@@ -8910,7 +8948,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0809',
     name: 'Vladislav Sosnin',
-    position: 'Architect',
+    position: 'Recruiter',
     department: 'HR',
     email: 'vladislav.sosnin944@company.com',
     phone: '+7 (963) 214-45-35',
@@ -8921,7 +8959,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0810',
     name: 'Ivan Rudakov',
-    position: 'Marketer',
+    position: 'Account Executive',
     department: 'Sales',
     email: 'ivan.rudakov130@company.com',
     phone: '+7 (913) 833-95-47',
@@ -8932,7 +8970,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0811',
     name: 'Petr Chernov',
-    position: 'Lead Developer',
+    position: 'Receptionist',
     department: 'Administration',
     email: 'petr.chernov526@company.com',
     phone: '+7 (938) 485-65-76',
@@ -8943,7 +8981,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0812',
     name: 'Maksim Lavrentiev',
-    position: 'CTO',
+    position: 'Marketing Manager',
     department: 'Marketing',
     email: 'maksim.lavrentiev685@company.com',
     phone: '+7 (972) 652-22-25',
@@ -8954,7 +8992,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0813',
     name: 'Anton Yakushev',
-    position: 'Middle Developer',
+    position: 'Solution Architect',
     department: 'Architecture',
     email: 'anton.yakushev150@company.com',
     phone: '+7 (970) 692-94-62',
@@ -8965,7 +9003,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0814',
     name: 'Evgeny Safonov',
-    position: 'System Administrator',
+    position: 'Frontend Developer',
     department: 'Development',
     email: 'evgeny.safonov523@company.com',
     phone: '+7 (971) 616-17-51',
@@ -8976,7 +9014,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0815',
     name: 'Evgeniya Ilyin',
-    position: 'Senior Developer',
+    position: 'BI Developer',
     department: 'Analytics',
     email: 'evgeniya.ilyin910@company.com',
     phone: '+7 (943) 198-46-56',
@@ -8987,7 +9025,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0816',
     name: 'Valery Morozov',
-    position: 'Head of Department',
+    position: 'Team Lead',
     department: 'Development',
     email: 'valery.morozov580@company.com',
     phone: '+7 (918) 915-60-19',
@@ -8998,7 +9036,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0817',
     name: 'Zinaida Ilyin',
-    position: 'Financial Analyst',
+    position: 'HR Manager',
     department: 'HR',
     email: 'zinaida.ilyin29@company.com',
     phone: '+7 (982) 430-74-71',
@@ -9009,7 +9047,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0818',
     name: 'Kristina Sidorov',
-    position: 'Chief Architect',
+    position: 'Financial Controller',
     department: 'Finance',
     email: 'kristina.sidorov381@company.com',
     phone: '+7 (917) 656-84-30',
@@ -9020,7 +9058,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0819',
     name: 'Svetlana Rudakov',
-    position: 'Functional Consultant',
+    position: 'CI/CD Specialist',
     department: 'DevOps',
     email: 'svetlana.rudakov18@company.com',
     phone: '+7 (913) 190-39-91',
@@ -9031,7 +9069,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0820',
     name: 'Olga Safonov',
-    position: 'Developer',
+    position: 'Product Manager',
     department: 'Management',
     email: 'olga.safonov355@company.com',
     phone: '+7 (904) 502-26-71',
@@ -9042,7 +9080,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0821',
     name: 'Vitaly Orlov',
-    position: 'CEO',
+    position: 'Test Automation Engineer',
     department: 'QA',
     email: 'vitaly.orlov639@company.com',
     phone: '+7 (998) 242-30-54',
@@ -9053,7 +9091,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0822',
     name: 'Igor Kuznetsov',
-    position: 'Lead Developer',
+    position: 'Sales Manager',
     department: 'Sales',
     email: 'igor.kuznetsov412@company.com',
     phone: '+7 (931) 887-95-93',
@@ -9064,7 +9102,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0823',
     name: 'Viktor Nesterov',
-    position: 'Developer',
+    position: 'Backend Developer',
     department: 'Development',
     email: 'viktor.nesterov831@company.com',
     phone: '+7 (996) 806-39-81',
@@ -9075,7 +9113,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0824',
     name: 'Oleg Rudakov',
-    position: 'Senior Developer',
+    position: 'BI Developer',
     department: 'Analytics',
     email: 'oleg.rudakov115@company.com',
     phone: '+7 (910) 794-40-93',
@@ -9086,7 +9124,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0825',
     name: 'Galina Sonin',
-    position: 'CEO',
+    position: 'Site Reliability Engineer',
     department: 'DevOps',
     email: 'galina.sonin140@company.com',
     phone: '+7 (939) 406-56-22',
@@ -9097,7 +9135,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0826',
     name: 'Kristina Lebedev',
-    position: 'Senior Developer',
+    position: 'QC Inspector',
     department: 'Quality Control',
     email: 'kristina.lebedev288@company.com',
     phone: '+7 (962) 233-77-73',
@@ -9108,7 +9146,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0827',
     name: 'Liudmila Smirnov',
-    position: 'Senior Developer',
+    position: 'Site Reliability Engineer',
     department: 'DevOps',
     email: 'liudmila.smirnov499@company.com',
     phone: '+7 (963) 570-59-78',
@@ -9130,7 +9168,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0829',
     name: 'Viktor Yakushev',
-    position: 'Junior Developer',
+    position: 'Head of QC',
     department: 'Quality Control',
     email: 'viktor.yakushev155@company.com',
     phone: '+7 (998) 983-24-72',
@@ -9141,7 +9179,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0830',
     name: 'Konstantin Sokolov',
-    position: 'Junior Developer',
+    position: 'SOC Analyst',
     department: 'Security',
     email: 'konstantin.sokolov866@company.com',
     phone: '+7 (963) 263-40-74',
@@ -9152,7 +9190,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0831',
     name: 'Denis Kuznetsov',
-    position: 'Junior Developer',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'denis.kuznetsov718@company.com',
     phone: '+7 (904) 212-53-76',
@@ -9174,7 +9212,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0833',
     name: 'Irina Ilyin',
-    position: 'Financial Analyst',
+    position: 'Quality Control Engineer',
     department: 'Quality Control',
     email: 'irina.ilyin817@company.com',
     phone: '+7 (972) 951-66-60',
@@ -9185,7 +9223,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0834',
     name: 'Viktor Tretyakov',
-    position: 'Developer',
+    position: 'Lead Generation Specialist',
     department: 'Sales',
     email: 'viktor.tretyakov486@company.com',
     phone: '+7 (984) 195-73-54',
@@ -9196,7 +9234,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0835',
     name: 'Veronika Tretyakov',
-    position: 'Junior Developer',
+    position: 'Content Manager',
     department: 'Marketing',
     email: 'veronika.tretyakov813@company.com',
     phone: '+7 (919) 302-81-15',
@@ -9207,7 +9245,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0836',
     name: 'Valery Egorov',
-    position: 'DevOps Engineer',
+    position: 'Enterprise Architect',
     department: 'Architecture',
     email: 'valery.egorov566@company.com',
     phone: '+7 (942) 291-91-32',
@@ -9218,7 +9256,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0837',
     name: 'Konstantin Tikhonov',
-    position: 'CFO',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'konstantin.tikhonov888@company.com',
     phone: '+7 (976) 603-32-92',
@@ -9229,7 +9267,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0838',
     name: 'Igor Zabara',
-    position: 'Analyst',
+    position: 'Quality Control Engineer',
     department: 'Quality Control',
     email: 'igor.zabara329@company.com',
     phone: '+7 (972) 827-86-38',
@@ -9240,7 +9278,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0839',
     name: 'Dmitry Sonin',
-    position: 'CTO',
+    position: 'Accountant',
     department: 'Finance',
     email: 'dmitry.sonin96@company.com',
     phone: '+7 (980) 623-53-30',
@@ -9251,7 +9289,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0840',
     name: 'Boris Ivanov',
-    position: 'Head of Department',
+    position: 'CTO',
     department: 'Management',
     email: 'boris.ivanov621@company.com',
     phone: '+7 (973) 432-64-97',
@@ -9262,7 +9300,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0841',
     name: 'Svetlana Chernov',
-    position: 'Architect',
+    position: 'Information Security Analyst',
     department: 'Security',
     email: 'svetlana.chernov637@company.com',
     phone: '+7 (964) 852-10-61',
@@ -9273,7 +9311,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0842',
     name: 'Evgeniya Ilyin',
-    position: 'CEO',
+    position: 'QC Inspector',
     department: 'Quality Control',
     email: 'evgeniya.ilyin534@company.com',
     phone: '+7 (939) 249-10-76',
@@ -9284,7 +9322,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0843',
     name: 'Gennady Orlov',
-    position: 'CEO',
+    position: 'Customer Service Manager',
     department: 'Support',
     email: 'gennady.orlov683@company.com',
     phone: '+7 (933) 955-16-68',
@@ -9295,7 +9333,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0844',
     name: 'Pavel Ilyin',
-    position: 'Financial Analyst',
+    position: 'PR Manager',
     department: 'Marketing',
     email: 'pavel.ilyin281@company.com',
     phone: '+7 (922) 215-86-77',
@@ -9306,7 +9344,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0845',
     name: 'Gennady Yakushev',
-    position: 'Developer',
+    position: 'PR Manager',
     department: 'Marketing',
     email: 'gennady.yakushev271@company.com',
     phone: '+7 (956) 369-46-82',
@@ -9317,7 +9355,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0846',
     name: 'Roman Lebedev',
-    position: 'Marketer',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'roman.lebedev308@company.com',
     phone: '+7 (994) 120-81-69',
@@ -9328,7 +9366,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0847',
     name: 'Galina Morozov',
-    position: 'Developer',
+    position: 'IT Project Manager',
     department: 'IT',
     email: 'galina.morozov565@company.com',
     phone: '+7 (940) 467-70-97',
@@ -9339,7 +9377,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0848',
     name: 'Nadezhda Bakhtin',
-    position: 'Financial Analyst',
+    position: 'IT Support Engineer',
     department: 'IT',
     email: 'nadezhda.bakhtin203@company.com',
     phone: '+7 (952) 882-95-27',
@@ -9350,7 +9388,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0849',
     name: 'Igor Tikhonov',
-    position: 'Marketer',
+    position: 'Manual Tester',
     department: 'QA',
     email: 'igor.tikhonov983@company.com',
     phone: '+7 (955) 328-49-80',
@@ -9361,7 +9399,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0850',
     name: 'Nikolay Smolentsev',
-    position: 'Lead Developer',
+    position: 'BI Developer',
     department: 'Analytics',
     email: 'nikolay.smolentsev308@company.com',
     phone: '+7 (912) 111-77-77',
@@ -9372,7 +9410,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0851',
     name: 'Oleg Yakushev',
-    position: 'Lead Developer',
+    position: 'Accountant',
     department: 'Finance',
     email: 'oleg.yakushev981@company.com',
     phone: '+7 (958) 111-29-38',
@@ -9383,7 +9421,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0852',
     name: 'Igor Petrov',
-    position: 'Developer',
+    position: 'Marketing Manager',
     department: 'Marketing',
     email: 'igor.petrov769@company.com',
     phone: '+7 (963) 531-54-77',
@@ -9394,7 +9432,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0853',
     name: 'Pavel Rudakov',
-    position: 'Junior Developer',
+    position: 'IT Project Manager',
     department: 'IT',
     email: 'pavel.rudakov202@company.com',
     phone: '+7 (902) 149-55-72',
@@ -9405,7 +9443,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0854',
     name: 'Yury Gavrilov',
-    position: 'Product Manager',
+    position: 'BI Developer',
     department: 'Analytics',
     email: 'yury.gavrilov762@company.com',
     phone: '+7 (917) 844-54-15',
@@ -9416,7 +9454,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0855',
     name: 'Denis Safonov',
-    position: 'Chief Architect',
+    position: 'Accountant',
     department: 'Finance',
     email: 'denis.safonov408@company.com',
     phone: '+7 (966) 804-71-66',
@@ -9427,7 +9465,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0856',
     name: 'Gennady Egorov',
-    position: 'Developer',
+    position: 'Architect',
     department: 'Architecture',
     email: 'gennady.egorov242@company.com',
     phone: '+7 (965) 201-25-34',
@@ -9438,7 +9476,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0857',
     name: 'Vitaly Tikhonov',
-    position: 'Product Manager',
+    position: 'Data Analyst',
     department: 'Analytics',
     email: 'vitaly.tikhonov237@company.com',
     phone: '+7 (946) 318-92-81',
@@ -9449,7 +9487,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0858',
     name: 'Victoria Sonin',
-    position: 'Architect',
+    position: 'BI Developer',
     department: 'Analytics',
     email: 'victoria.sonin30@company.com',
     phone: '+7 (969) 108-97-97',
@@ -9460,7 +9498,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0859',
     name: 'Nadezhda Smirnov',
-    position: 'Marketer',
+    position: 'Security Officer',
     department: 'Security',
     email: 'nadezhda.smirnov370@company.com',
     phone: '+7 (928) 950-63-51',
@@ -9471,7 +9509,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0860',
     name: 'Elena Ilyin',
-    position: 'QA Engineer',
+    position: 'Financial Controller',
     department: 'Finance',
     email: 'elena.ilyin424@company.com',
     phone: '+7 (941) 272-31-96',
@@ -9482,7 +9520,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0861',
     name: 'Kristina Vishnyakov',
-    position: 'System Administrator',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'kristina.vishnyakov370@company.com',
     phone: '+7 (920) 337-22-38',
@@ -9493,7 +9531,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0862',
     name: 'Svetlana Sosnin',
-    position: 'Marketer',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'svetlana.sosnin193@company.com',
     phone: '+7 (901) 629-77-17',
@@ -9504,7 +9542,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0863',
     name: 'Yulia Chernov',
-    position: 'Middle Developer',
+    position: 'CEO',
     department: 'Management',
     email: 'yulia.chernov351@company.com',
     phone: '+7 (958) 789-98-65',
@@ -9515,7 +9553,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0864',
     name: 'Aleksandr Matveev',
-    position: 'Analyst',
+    position: 'QA Team Lead',
     department: 'QA',
     email: 'aleksandr.matveev691@company.com',
     phone: '+7 (944) 672-65-19',
@@ -9526,7 +9564,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0865',
     name: 'Aleksandr Petrov',
-    position: 'Developer',
+    position: 'Site Reliability Engineer',
     department: 'DevOps',
     email: 'aleksandr.petrov799@company.com',
     phone: '+7 (971) 889-13-25',
@@ -9537,7 +9575,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0866',
     name: 'Evgeny Vishnyakov',
-    position: 'Analyst',
+    position: 'Financial Analyst',
     department: 'Analytics',
     email: 'evgeny.vishnyakov693@company.com',
     phone: '+7 (920) 840-86-49',
@@ -9548,7 +9586,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0867',
     name: 'Svetlana Kozlov',
-    position: 'Manager',
+    position: 'Sales Manager',
     department: 'Sales',
     email: 'svetlana.kozlov490@company.com',
     phone: '+7 (928) 901-82-45',
@@ -9559,7 +9597,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0868',
     name: 'Liudmila Leontiev',
-    position: 'Architect',
+    position: 'Accountant',
     department: 'Finance',
     email: 'liudmila.leontiev18@company.com',
     phone: '+7 (914) 656-96-42',
@@ -9570,7 +9608,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0869',
     name: 'Irina Gavrilov',
-    position: 'CEO',
+    position: 'QA Engineer',
     department: 'QA',
     email: 'irina.gavrilov703@company.com',
     phone: '+7 (933) 135-62-72',
@@ -9581,7 +9619,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0870',
     name: 'Tatiana Rudakov',
-    position: 'QA Engineer',
+    position: 'Security Officer',
     department: 'Security',
     email: 'tatiana.rudakov181@company.com',
     phone: '+7 (914) 945-27-80',
@@ -9592,7 +9630,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0871',
     name: 'Boris Safonov',
-    position: 'Manager',
+    position: 'Office Manager',
     department: 'Administration',
     email: 'boris.safonov999@company.com',
     phone: '+7 (961) 838-42-17',
@@ -9603,7 +9641,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0872',
     name: 'Valery Sosnin',
-    position: 'Head of Department',
+    position: 'Test Automation Engineer',
     department: 'QA',
     email: 'valery.sosnin639@company.com',
     phone: '+7 (931) 185-82-13',
@@ -9614,7 +9652,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0873',
     name: 'Anton Morozov',
-    position: 'DevOps Engineer',
+    position: 'Digital Marketer',
     department: 'Marketing',
     email: 'anton.morozov364@company.com',
     phone: '+7 (929) 576-80-71',
@@ -9625,7 +9663,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0874',
     name: 'Nikolay Bakhtin',
-    position: 'Lead Developer',
+    position: 'Project Manager',
     department: 'Management',
     email: 'nikolay.bakhtin338@company.com',
     phone: '+7 (980) 390-53-77',
@@ -9636,7 +9674,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0875',
     name: 'Konstantin Gavrilov',
-    position: 'Marketer',
+    position: 'Junior Developer',
     department: 'Development',
     email: 'konstantin.gavrilov759@company.com',
     phone: '+7 (903) 856-99-52',
@@ -9658,7 +9696,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0877',
     name: 'Alisa Sokolov',
-    position: 'Manager',
+    position: 'Architect',
     department: 'Architecture',
     email: 'alisa.sokolov504@company.com',
     phone: '+7 (996) 633-81-43',
@@ -9669,7 +9707,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0878',
     name: 'Evgeniya Yakushev',
-    position: 'CTO',
+    position: 'Sales Manager',
     department: 'Sales',
     email: 'evgeniya.yakushev417@company.com',
     phone: '+7 (934) 624-71-15',
@@ -9680,7 +9718,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0879',
     name: 'Nadezhda Lavrentiev',
-    position: 'Product Manager',
+    position: 'System Administrator',
     department: 'IT',
     email: 'nadezhda.lavrentiev127@company.com',
     phone: '+7 (999) 446-21-81',
@@ -9702,7 +9740,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0881',
     name: 'Aleksandr Lebedev',
-    position: 'Product Manager',
+    position: 'Test Automation Engineer',
     department: 'QA',
     email: 'aleksandr.lebedev566@company.com',
     phone: '+7 (945) 222-88-12',
@@ -9713,7 +9751,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0882',
     name: 'Roman Mironov',
-    position: 'Junior Developer',
+    position: 'Receptionist',
     department: 'Administration',
     email: 'roman.mironov285@company.com',
     phone: '+7 (905) 991-76-51',
@@ -9724,7 +9762,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0883',
     name: 'Irina Smolentsev',
-    position: 'Middle Developer',
+    position: 'Head of QC',
     department: 'Quality Control',
     email: 'irina.smolentsev718@company.com',
     phone: '+7 (985) 271-12-51',
@@ -9735,7 +9773,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0884',
     name: 'Galina Ilyin',
-    position: 'HR Manager',
+    position: 'Content Manager',
     department: 'Marketing',
     email: 'galina.ilyin282@company.com',
     phone: '+7 (953) 284-24-69',
@@ -9746,7 +9784,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0885',
     name: 'Gennady Morozov',
-    position: 'Middle Developer',
+    position: 'Content Manager',
     department: 'Marketing',
     email: 'gennady.morozov234@company.com',
     phone: '+7 (942) 169-27-49',
@@ -9757,7 +9795,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0886',
     name: 'Vladislav Yakushev',
-    position: 'Functional Consultant',
+    position: 'IT Support Engineer',
     department: 'IT',
     email: 'vladislav.yakushev366@company.com',
     phone: '+7 (900) 792-35-49',
@@ -9768,7 +9806,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0887',
     name: 'Victoria Morozov',
-    position: 'CFO',
+    position: 'Architect',
     department: 'Architecture',
     email: 'victoria.morozov721@company.com',
     phone: '+7 (989) 701-10-59',
@@ -9779,7 +9817,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0888',
     name: 'Andrey Vishnyakov',
-    position: 'Manager',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'andrey.vishnyakov53@company.com',
     phone: '+7 (913) 248-75-17',
@@ -9790,7 +9828,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0889',
     name: 'Vitaly Sokolov',
-    position: 'Developer',
+    position: 'HR Business Partner',
     department: 'HR',
     email: 'vitaly.sokolov621@company.com',
     phone: '+7 (944) 166-38-36',
@@ -9801,7 +9839,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0890',
     name: 'Oleg Yakushev',
-    position: 'Middle Developer',
+    position: 'Receptionist',
     department: 'Administration',
     email: 'oleg.yakushev767@company.com',
     phone: '+7 (968) 295-37-67',
@@ -9812,7 +9850,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0891',
     name: 'Veronika Nesterov',
-    position: 'System Administrator',
+    position: 'DevOps Engineer',
     department: 'DevOps',
     email: 'veronika.nesterov620@company.com',
     phone: '+7 (914) 432-85-24',
@@ -9823,7 +9861,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0892',
     name: 'Vitaly Petrov',
-    position: 'Financial Analyst',
+    position: 'Helpdesk Operator',
     department: 'Support',
     email: 'vitaly.petrov217@company.com',
     phone: '+7 (994) 360-26-51',
@@ -9834,7 +9872,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0893',
     name: 'Vladislav Tretyakov',
-    position: 'Product Manager',
+    position: 'Manual Tester',
     department: 'QA',
     email: 'vladislav.tretyakov665@company.com',
     phone: '+7 (992) 245-21-65',
@@ -9845,7 +9883,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0894',
     name: 'Nadezhda Yakushev',
-    position: 'CFO',
+    position: 'Content Manager',
     department: 'Marketing',
     email: 'nadezhda.yakushev326@company.com',
     phone: '+7 (934) 947-68-93',
@@ -9856,7 +9894,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0895',
     name: 'Roman Gavrilov',
-    position: 'Copywriter',
+    position: 'Architect',
     department: 'Architecture',
     email: 'roman.gavrilov974@company.com',
     phone: '+7 (926) 564-32-30',
@@ -9867,7 +9905,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0896',
     name: 'Nikolay Smirnov',
-    position: 'Marketer',
+    position: 'Accountant',
     department: 'Finance',
     email: 'nikolay.smirnov898@company.com',
     phone: '+7 (956) 860-84-79',
@@ -9878,7 +9916,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0897',
     name: 'Veronika Sokolov',
-    position: 'Product Manager',
+    position: 'Lead Generation Specialist',
     department: 'Sales',
     email: 'veronika.sokolov112@company.com',
     phone: '+7 (917) 503-61-11',
@@ -9889,7 +9927,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0898',
     name: 'Maksim Morozov',
-    position: 'Junior Developer',
+    position: 'Sales Manager',
     department: 'Sales',
     email: 'maksim.morozov850@company.com',
     phone: '+7 (905) 392-65-30',
@@ -9900,7 +9938,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0899',
     name: 'Boris Vishnyakov',
-    position: 'CTO',
+    position: 'Enterprise Architect',
     department: 'Architecture',
     email: 'boris.vishnyakov780@company.com',
     phone: '+7 (960) 951-23-17',
@@ -9911,7 +9949,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0900',
     name: 'Alisa Tikhonov',
-    position: 'Functional Consultant',
+    position: 'IT Support Engineer',
     department: 'IT',
     email: 'alisa.tikhonov153@company.com',
     phone: '+7 (902) 786-96-46',
@@ -9922,7 +9960,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0901',
     name: 'Yulia Chernov',
-    position: 'QA Engineer',
+    position: 'Support Specialist',
     department: 'Support',
     email: 'yulia.chernov822@company.com',
     phone: '+7 (978) 472-53-96',
@@ -9933,7 +9971,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0902',
     name: 'Mikhail Dmitriev',
-    position: 'QA Engineer',
+    position: 'Account Executive',
     department: 'Sales',
     email: 'mikhail.dmitriev647@company.com',
     phone: '+7 (949) 732-95-51',
@@ -9944,7 +9982,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0903',
     name: 'Boris Sidorov',
-    position: 'Head of Department',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'boris.sidorov14@company.com',
     phone: '+7 (951) 568-24-42',
@@ -9955,7 +9993,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0904',
     name: 'Evgeny Ivanov',
-    position: 'Developer',
+    position: 'Data Analyst',
     department: 'Analytics',
     email: 'evgeny.ivanov678@company.com',
     phone: '+7 (910) 883-17-35',
@@ -9966,7 +10004,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0905',
     name: 'Valery Nesterov',
-    position: 'QA Engineer',
+    position: 'COO',
     department: 'Management',
     email: 'valery.nesterov891@company.com',
     phone: '+7 (943) 529-32-26',
@@ -9977,7 +10015,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0906',
     name: 'Petr Gavrilov',
-    position: 'Head of Department',
+    position: 'Talent Acquisition Specialist',
     department: 'HR',
     email: 'petr.gavrilov10@company.com',
     phone: '+7 (991) 340-10-44',
@@ -9988,7 +10026,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0907',
     name: 'Roman Lebedev',
-    position: 'Chief Architect',
+    position: 'Financial Analyst',
     department: 'Analytics',
     email: 'roman.lebedev410@company.com',
     phone: '+7 (993) 240-38-79',
@@ -9999,7 +10037,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0908',
     name: 'Elena Smolentsev',
-    position: 'CFO',
+    position: 'Head of Sales',
     department: 'Sales',
     email: 'elena.smolentsev838@company.com',
     phone: '+7 (980) 410-17-83',
@@ -10010,7 +10048,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0909',
     name: 'Artem Zabara',
-    position: 'Junior Developer',
+    position: 'Solution Architect',
     department: 'Architecture',
     email: 'artem.zabara963@company.com',
     phone: '+7 (938) 866-86-62',
@@ -10021,7 +10059,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0910',
     name: 'Denis Kozlov',
-    position: 'Financial Analyst',
+    position: 'QA Engineer',
     department: 'QA',
     email: 'denis.kozlov609@company.com',
     phone: '+7 (900) 781-57-84',
@@ -10032,7 +10070,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0911',
     name: 'Vitaly Matveev',
-    position: 'Chief Architect',
+    position: 'CEO',
     department: 'Management',
     email: 'vitaly.matveev231@company.com',
     phone: '+7 (910) 166-96-64',
@@ -10043,7 +10081,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0912',
     name: 'Irina Ilyin',
-    position: 'Functional Consultant',
+    position: 'Customer Service Manager',
     department: 'Support',
     email: 'irina.ilyin716@company.com',
     phone: '+7 (983) 563-70-99',
@@ -10054,7 +10092,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0913',
     name: 'Boris Smirnov',
-    position: 'Functional Consultant',
+    position: 'HR Manager',
     department: 'HR',
     email: 'boris.smirnov791@company.com',
     phone: '+7 (997) 341-18-60',
@@ -10065,7 +10103,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0914',
     name: 'Dmitry Lavrentiev',
-    position: 'Senior Developer',
+    position: 'Data Analyst',
     department: 'Analytics',
     email: 'dmitry.lavrentiev334@company.com',
     phone: '+7 (968) 834-30-98',
@@ -10076,7 +10114,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0915',
     name: 'Ivan Chernov',
-    position: 'CTO',
+    position: 'Receptionist',
     department: 'Administration',
     email: 'ivan.chernov91@company.com',
     phone: '+7 (995) 279-69-38',
@@ -10087,7 +10125,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0916',
     name: 'Vladimir Smolentsev',
-    position: 'Senior Developer',
+    position: 'Solution Architect',
     department: 'Architecture',
     email: 'vladimir.smolentsev400@company.com',
     phone: '+7 (958) 704-72-86',
@@ -10098,7 +10136,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0917',
     name: 'Aleksandr Rudakov',
-    position: 'Designer',
+    position: 'Architect',
     department: 'Architecture',
     email: 'aleksandr.rudakov193@company.com',
     phone: '+7 (930) 330-33-66',
@@ -10109,7 +10147,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0918',
     name: 'Gennady Smirnov',
-    position: 'Analyst',
+    position: 'SMM Specialist',
     department: 'Marketing',
     email: 'gennady.smirnov1@company.com',
     phone: '+7 (990) 901-86-53',
@@ -10120,7 +10158,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0919',
     name: 'Valery Morozov',
-    position: 'Head of Department',
+    position: 'QC Inspector',
     department: 'Quality Control',
     email: 'valery.morozov210@company.com',
     phone: '+7 (941) 311-50-15',
@@ -10131,7 +10169,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0920',
     name: 'Tatiana Novikov',
-    position: 'Lead Developer',
+    position: 'Helpdesk Operator',
     department: 'Support',
     email: 'tatiana.novikov159@company.com',
     phone: '+7 (918) 985-70-12',
@@ -10153,7 +10191,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0922',
     name: 'Andrey Lebedev',
-    position: 'Junior Developer',
+    position: 'Solution Architect',
     department: 'Architecture',
     email: 'andrey.lebedev135@company.com',
     phone: '+7 (960) 224-80-44',
@@ -10164,7 +10202,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0923',
     name: 'Kristina Nesterov',
-    position: 'DevOps Engineer',
+    position: 'Content Manager',
     department: 'Marketing',
     email: 'kristina.nesterov629@company.com',
     phone: '+7 (921) 674-77-63',
@@ -10175,7 +10213,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0924',
     name: 'Yury Tretyakov',
-    position: 'QA Engineer',
+    position: 'Security Officer',
     department: 'Security',
     email: 'yury.tretyakov8@company.com',
     phone: '+7 (918) 154-46-26',
@@ -10186,7 +10224,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0925',
     name: 'Tatiana Sokolov',
-    position: 'Analyst',
+    position: 'SOC Analyst',
     department: 'Security',
     email: 'tatiana.sokolov349@company.com',
     phone: '+7 (909) 142-80-95',
@@ -10197,7 +10235,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0926',
     name: 'Aleksandr Sonin',
-    position: 'Marketer',
+    position: 'SOC Analyst',
     department: 'Security',
     email: 'aleksandr.sonin389@company.com',
     phone: '+7 (997) 453-52-19',
@@ -10208,7 +10246,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0927',
     name: 'Ivan Egorov',
-    position: 'Middle Developer',
+    position: 'QA Team Lead',
     department: 'QA',
     email: 'ivan.egorov16@company.com',
     phone: '+7 (952) 531-97-99',
@@ -10219,7 +10257,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0928',
     name: 'Liudmila Matveev',
-    position: 'Junior Developer',
+    position: 'Project Manager',
     department: 'Management',
     email: 'liudmila.matveev528@company.com',
     phone: '+7 (955) 191-56-75',
@@ -10230,7 +10268,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0929',
     name: 'Andrey Smolentsev',
-    position: 'DevOps Engineer',
+    position: 'Accountant',
     department: 'Finance',
     email: 'andrey.smolentsev221@company.com',
     phone: '+7 (984) 920-62-90',
@@ -10241,7 +10279,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0930',
     name: 'Yury Gavrilov',
-    position: 'CTO',
+    position: 'QC Inspector',
     department: 'Quality Control',
     email: 'yury.gavrilov591@company.com',
     phone: '+7 (980) 706-45-39',
@@ -10274,7 +10312,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0933',
     name: 'Kristina Petrov',
-    position: 'QA Engineer',
+    position: 'Senior Developer',
     department: 'Development',
     email: 'kristina.petrov893@company.com',
     phone: '+7 (911) 968-86-61',
@@ -10285,7 +10323,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0934',
     name: 'Maksim Leontiev',
-    position: 'Lead Developer',
+    position: 'Office Manager',
     department: 'Administration',
     email: 'maksim.leontiev425@company.com',
     phone: '+7 (921) 768-42-14',
@@ -10296,7 +10334,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0935',
     name: 'Alexey Mironov',
-    position: 'Lead Developer',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'alexey.mironov269@company.com',
     phone: '+7 (944) 269-30-61',
@@ -10307,7 +10345,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0936',
     name: 'Nadezhda Smirnov',
-    position: 'System Administrator',
+    position: 'Solution Architect',
     department: 'Architecture',
     email: 'nadezhda.smirnov968@company.com',
     phone: '+7 (942) 107-63-73',
@@ -10318,7 +10356,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0937',
     name: 'Nikolay Kozlovskiy',
-    position: 'System Administrator',
+    position: 'Information Security Analyst',
     department: 'Security',
     email: 'nikolay.kozlovskiy116@company.com',
     phone: '+7 (955) 683-18-42',
@@ -10329,7 +10367,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0938',
     name: 'Zinaida Egorov',
-    position: 'Middle Developer',
+    position: 'Site Reliability Engineer',
     department: 'DevOps',
     email: 'zinaida.egorov467@company.com',
     phone: '+7 (967) 614-52-52',
@@ -10340,7 +10378,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0939',
     name: 'Vladimir Mironov',
-    position: 'Financial Analyst',
+    position: 'IT Support Engineer',
     department: 'IT',
     email: 'vladimir.mironov15@company.com',
     phone: '+7 (964) 420-19-22',
@@ -10351,7 +10389,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0940',
     name: 'Vitaly Smolentsev',
-    position: 'QA Engineer',
+    position: 'Helpdesk Operator',
     department: 'Support',
     email: 'vitaly.smolentsev992@company.com',
     phone: '+7 (998) 200-37-62',
@@ -10362,7 +10400,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0941',
     name: 'Dmitry Mironov',
-    position: 'Architect',
+    position: 'Network Engineer',
     department: 'IT',
     email: 'dmitry.mironov546@company.com',
     phone: '+7 (999) 936-75-37',
@@ -10373,7 +10411,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0942',
     name: 'Anatoly Sidorov',
-    position: 'Head of Department',
+    position: 'Product Manager',
     department: 'Management',
     email: 'anatoly.sidorov299@company.com',
     phone: '+7 (927) 134-86-48',
@@ -10384,7 +10422,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0943',
     name: 'Oleg Morozov',
-    position: 'Copywriter',
+    position: 'Network Engineer',
     department: 'IT',
     email: 'oleg.morozov267@company.com',
     phone: '+7 (968) 971-90-70',
@@ -10395,7 +10433,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0944',
     name: 'Kristina Ilyin',
-    position: 'Financial Analyst',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'kristina.ilyin400@company.com',
     phone: '+7 (986) 237-28-67',
@@ -10406,7 +10444,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0945',
     name: 'Vladislav Chernov',
-    position: 'Financial Analyst',
+    position: 'Accountant',
     department: 'Finance',
     email: 'vladislav.chernov913@company.com',
     phone: '+7 (973) 835-94-82',
@@ -10417,7 +10455,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0946',
     name: 'Yulia Chernov',
-    position: 'Lead Developer',
+    position: 'Architect',
     department: 'Architecture',
     email: 'yulia.chernov426@company.com',
     phone: '+7 (990) 446-39-43',
@@ -10428,7 +10466,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0947',
     name: 'Yury Novikov',
-    position: 'Designer',
+    position: 'Recruiter',
     department: 'HR',
     email: 'yury.novikov904@company.com',
     phone: '+7 (995) 828-43-29',
@@ -10439,7 +10477,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0948',
     name: 'Kristina Tretyakov',
-    position: 'Designer',
+    position: 'Fullstack Developer',
     department: 'Development',
     email: 'kristina.tretyakov456@company.com',
     phone: '+7 (900) 667-61-57',
@@ -10450,7 +10488,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0949',
     name: 'Svetlana Morozov',
-    position: 'Financial Analyst',
+    position: 'Sales Manager',
     department: 'Sales',
     email: 'svetlana.morozov712@company.com',
     phone: '+7 (957) 905-35-31',
@@ -10461,7 +10499,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0950',
     name: 'Roman Zabara',
-    position: 'Senior Developer',
+    position: 'QC Inspector',
     department: 'Quality Control',
     email: 'roman.zabara257@company.com',
     phone: '+7 (928) 855-93-94',
@@ -10472,7 +10510,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0951',
     name: 'Alisa Mironov',
-    position: 'Manager',
+    position: 'QA Team Lead',
     department: 'QA',
     email: 'alisa.mironov109@company.com',
     phone: '+7 (937) 836-87-58',
@@ -10483,7 +10521,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0952',
     name: 'Igor Sokolov',
-    position: 'Developer',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'igor.sokolov354@company.com',
     phone: '+7 (915) 333-33-59',
@@ -10494,7 +10532,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0953',
     name: 'Evgeny Sidorov',
-    position: 'System Administrator',
+    position: 'Business Analyst',
     department: 'Analytics',
     email: 'evgeny.sidorov894@company.com',
     phone: '+7 (944) 356-61-51',
@@ -10505,7 +10543,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0954',
     name: 'Boris Zabara',
-    position: 'Financial Analyst',
+    position: 'Recruiter',
     department: 'HR',
     email: 'boris.zabara724@company.com',
     phone: '+7 (972) 947-70-65',
@@ -10516,7 +10554,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0955',
     name: 'Andrey Volkov',
-    position: 'CEO',
+    position: 'System Administrator',
     department: 'IT',
     email: 'andrey.volkov81@company.com',
     phone: '+7 (903) 792-46-39',
@@ -10527,7 +10565,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0956',
     name: 'Kirill Leontiev',
-    position: 'Functional Consultant',
+    position: 'Backend Developer',
     department: 'Development',
     email: 'kirill.leontiev226@company.com',
     phone: '+7 (984) 640-17-41',
@@ -10538,7 +10576,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0957',
     name: 'Anna Gavrilov',
-    position: 'System Administrator',
+    position: 'Accountant',
     department: 'Finance',
     email: 'anna.gavrilov962@company.com',
     phone: '+7 (936) 108-40-22',
@@ -10549,7 +10587,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0958',
     name: 'Igor Matveev',
-    position: 'Manager',
+    position: 'Support Specialist',
     department: 'Support',
     email: 'igor.matveev887@company.com',
     phone: '+7 (937) 250-67-78',
@@ -10560,7 +10598,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0959',
     name: 'Kirill Safonov',
-    position: 'HR Manager',
+    position: 'Solution Architect',
     department: 'Architecture',
     email: 'kirill.safonov124@company.com',
     phone: '+7 (989) 130-63-91',
@@ -10571,7 +10609,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0960',
     name: 'Vladislav Lavrentiev',
-    position: 'CTO',
+    position: 'Site Reliability Engineer',
     department: 'DevOps',
     email: 'vladislav.lavrentiev133@company.com',
     phone: '+7 (923) 905-12-38',
@@ -10582,7 +10620,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0961',
     name: 'Nikolay Matveev',
-    position: 'QA Engineer',
+    position: 'Fullstack Developer',
     department: 'Development',
     email: 'nikolay.matveev453@company.com',
     phone: '+7 (963) 506-18-14',
@@ -10593,7 +10631,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0962',
     name: 'Yulia Smolentsev',
-    position: 'Lead Developer',
+    position: 'Content Manager',
     department: 'Marketing',
     email: 'yulia.smolentsev949@company.com',
     phone: '+7 (925) 216-57-62',
@@ -10604,7 +10642,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0963',
     name: 'Anna Chernov',
-    position: 'Functional Consultant',
+    position: 'Recruiter',
     department: 'HR',
     email: 'anna.chernov594@company.com',
     phone: '+7 (962) 997-56-73',
@@ -10615,7 +10653,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0964',
     name: 'Oleg Tretyakov',
-    position: 'CEO',
+    position: 'Network Engineer',
     department: 'IT',
     email: 'oleg.tretyakov418@company.com',
     phone: '+7 (999) 441-35-88',
@@ -10626,7 +10664,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0965',
     name: 'Viktor Yakushev',
-    position: 'Architect',
+    position: 'Talent Acquisition Specialist',
     department: 'HR',
     email: 'viktor.yakushev637@company.com',
     phone: '+7 (988) 581-18-10',
@@ -10637,7 +10675,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0966',
     name: 'Vladimir Dmitriev',
-    position: 'Copywriter',
+    position: 'Senior Developer',
     department: 'Development',
     email: 'vladimir.dmitriev39@company.com',
     phone: '+7 (972) 175-63-59',
@@ -10648,7 +10686,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0967',
     name: 'Tatiana Kuznetsov',
-    position: 'Copywriter',
+    position: 'CFO',
     department: 'Finance',
     email: 'tatiana.kuznetsov128@company.com',
     phone: '+7 (978) 347-22-19',
@@ -10659,7 +10697,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0968',
     name: 'Nadezhda Tikhonov',
-    position: 'Lead Developer',
+    position: 'CI/CD Specialist',
     department: 'DevOps',
     email: 'nadezhda.tikhonov114@company.com',
     phone: '+7 (985) 363-62-86',
@@ -10670,7 +10708,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0969',
     name: 'Boris Bakhtin',
-    position: 'Designer',
+    position: 'Talent Acquisition Specialist',
     department: 'HR',
     email: 'boris.bakhtin879@company.com',
     phone: '+7 (993) 414-91-72',
@@ -10681,7 +10719,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0970',
     name: 'Evgeny Kozlov',
-    position: 'Analyst',
+    position: 'Support Specialist',
     department: 'Support',
     email: 'evgeny.kozlov343@company.com',
     phone: '+7 (909) 460-22-92',
@@ -10692,7 +10730,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0971',
     name: 'Andrey Egorov',
-    position: 'Lead Developer',
+    position: 'IT Support Engineer',
     department: 'IT',
     email: 'andrey.egorov145@company.com',
     phone: '+7 (964) 692-59-12',
@@ -10703,7 +10741,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0972',
     name: 'Alisa Matveev',
-    position: 'Financial Analyst',
+    position: 'CI/CD Specialist',
     department: 'DevOps',
     email: 'alisa.matveev253@company.com',
     phone: '+7 (920) 633-41-51',
@@ -10714,7 +10752,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0973',
     name: 'Boris Kuznetsov',
-    position: 'Junior Developer',
+    position: 'Digital Marketer',
     department: 'Marketing',
     email: 'boris.kuznetsov728@company.com',
     phone: '+7 (917) 871-46-19',
@@ -10725,7 +10763,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0974',
     name: 'Kirill Mironov',
-    position: 'Junior Developer',
+    position: 'Receptionist',
     department: 'Administration',
     email: 'kirill.mironov79@company.com',
     phone: '+7 (917) 715-55-99',
@@ -10736,7 +10774,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0975',
     name: 'Liudmila Dmitriev',
-    position: 'Analyst',
+    position: 'Receptionist',
     department: 'Administration',
     email: 'liudmila.dmitriev899@company.com',
     phone: '+7 (955) 157-30-68',
@@ -10747,7 +10785,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0976',
     name: 'Pavel Safonov',
-    position: 'Copywriter',
+    position: 'Enterprise Architect',
     department: 'Architecture',
     email: 'pavel.safonov919@company.com',
     phone: '+7 (908) 742-55-85',
@@ -10758,7 +10796,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0977',
     name: 'Evgeny Volkov',
-    position: 'DevOps Engineer',
+    position: 'Head of QC',
     department: 'Quality Control',
     email: 'evgeny.volkov379@company.com',
     phone: '+7 (931) 264-45-59',
@@ -10780,7 +10818,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0979',
     name: 'Andrey Zabara',
-    position: 'Chief Architect',
+    position: 'Solution Architect',
     department: 'Architecture',
     email: 'andrey.zabara815@company.com',
     phone: '+7 (941) 382-72-43',
@@ -10791,7 +10829,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0980',
     name: 'Denis Bakhtin',
-    position: 'Middle Developer',
+    position: 'Financial Controller',
     department: 'Finance',
     email: 'denis.bakhtin665@company.com',
     phone: '+7 (937) 743-12-27',
@@ -10802,7 +10840,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0981',
     name: 'Liudmila Egorov',
-    position: 'Senior Developer',
+    position: 'Head of Sales',
     department: 'Sales',
     email: 'liudmila.egorov10@company.com',
     phone: '+7 (927) 685-38-19',
@@ -10813,7 +10851,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0982',
     name: 'Valentina Lavrentiev',
-    position: 'Manager',
+    position: 'QC Inspector',
     department: 'Quality Control',
     email: 'valentina.lavrentiev235@company.com',
     phone: '+7 (994) 683-97-11',
@@ -10824,7 +10862,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0983',
     name: 'Kristina Rudakov',
-    position: 'Analyst',
+    position: 'QC Inspector',
     department: 'Quality Control',
     email: 'kristina.rudakov937@company.com',
     phone: '+7 (932) 646-45-16',
@@ -10835,7 +10873,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0984',
     name: 'Aleksandr Gavrilov',
-    position: 'Manager',
+    position: 'HR Manager',
     department: 'HR',
     email: 'aleksandr.gavrilov679@company.com',
     phone: '+7 (917) 724-51-43',
@@ -10846,7 +10884,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0985',
     name: 'Galina Leontiev',
-    position: 'CFO',
+    position: 'Marketing Manager',
     department: 'Marketing',
     email: 'galina.leontiev665@company.com',
     phone: '+7 (930) 797-25-68',
@@ -10857,7 +10895,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0986',
     name: 'Irina Lebedev',
-    position: 'QA Engineer',
+    position: 'COO',
     department: 'Management',
     email: 'irina.lebedev632@company.com',
     phone: '+7 (979) 320-43-46',
@@ -10868,7 +10906,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0987',
     name: 'Dmitry Petrov',
-    position: 'HR Manager',
+    position: 'Network Engineer',
     department: 'IT',
     email: 'dmitry.petrov577@company.com',
     phone: '+7 (915) 847-40-43',
@@ -10879,7 +10917,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0988',
     name: 'Artem Petrov',
-    position: 'Copywriter',
+    position: 'Senior Developer',
     department: 'Development',
     email: 'artem.petrov455@company.com',
     phone: '+7 (954) 506-89-96',
@@ -10890,7 +10928,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0989',
     name: 'Zinaida Kuznetsov',
-    position: 'Middle Developer',
+    position: 'System Administrator',
     department: 'IT',
     email: 'zinaida.kuznetsov555@company.com',
     phone: '+7 (945) 873-46-66',
@@ -10901,7 +10939,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0990',
     name: 'Pavel Smirnov',
-    position: 'Product Manager',
+    position: 'Customer Service Manager',
     department: 'Support',
     email: 'pavel.smirnov520@company.com',
     phone: '+7 (938) 732-86-17',
@@ -10912,7 +10950,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0991',
     name: 'Ivan Sokolov',
-    position: 'Marketer',
+    position: 'Solution Architect',
     department: 'Architecture',
     email: 'ivan.sokolov625@company.com',
     phone: '+7 (981) 406-43-25',
@@ -10923,7 +10961,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0992',
     name: 'Irina Bakhtin',
-    position: 'Functional Consultant',
+    position: 'Marketing Manager',
     department: 'Marketing',
     email: 'irina.bakhtin901@company.com',
     phone: '+7 (986) 165-61-94',
@@ -10934,7 +10972,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0993',
     name: 'Vladimir Vishnyakov',
-    position: 'Lead Developer',
+    position: 'IT Project Manager',
     department: 'IT',
     email: 'vladimir.vishnyakov981@company.com',
     phone: '+7 (945) 395-81-88',
@@ -10945,7 +10983,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0994',
     name: 'Artem Matveev',
-    position: 'Designer',
+    position: 'Solution Architect',
     department: 'Architecture',
     email: 'artem.matveev336@company.com',
     phone: '+7 (980) 485-19-52',
@@ -10956,7 +10994,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0995',
     name: 'Gennady Rudakov',
-    position: 'CEO',
+    position: 'Administrative Assistant',
     department: 'Administration',
     email: 'gennady.rudakov546@company.com',
     phone: '+7 (916) 605-46-29',
@@ -10967,7 +11005,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0996',
     name: 'Viktor Petrov',
-    position: 'Lead Developer',
+    position: 'CTO',
     department: 'Management',
     email: 'viktor.petrov536@company.com',
     phone: '+7 (920) 998-92-43',
@@ -10978,7 +11016,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0997',
     name: 'Nadezhda Ivanov',
-    position: 'System Administrator',
+    position: 'CI/CD Specialist',
     department: 'DevOps',
     email: 'nadezhda.ivanov831@company.com',
     phone: '+7 (993) 929-43-58',
@@ -10989,7 +11027,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0998',
     name: 'Alisa Rudakov',
-    position: 'CTO',
+    position: 'QA Team Lead',
     department: 'QA',
     email: 'alisa.rudakov928@company.com',
     phone: '+7 (930) 750-38-51',
@@ -11000,7 +11038,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_0999',
     name: 'Vladislav Smolentsev',
-    position: 'Analyst',
+    position: 'Helpdesk Operator',
     department: 'Support',
     email: 'vladislav.smolentsev325@company.com',
     phone: '+7 (915) 567-65-51',
@@ -11011,7 +11049,7 @@ export const MOCK_EMPLOYEES: Employee[] = [
   {
     id: 'emp_1000',
     name: 'Veronika Lebedev',
-    position: 'DevOps Engineer',
+    position: 'Account Executive',
     department: 'Sales',
     email: 'veronika.lebedev332@company.com',
     phone: '+7 (933) 679-28-75',
