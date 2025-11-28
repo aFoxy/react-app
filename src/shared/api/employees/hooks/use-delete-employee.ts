@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { employeesService } from '@shared/api/employees/employees.service'
 import { queryKeys } from '@shared/api/queryKeys'
-import type { Employee } from '@shared/api/employees/types'
+import type { Employee } from '@/schemas/employee-schema'
 
 export const useDeleteEmployee = () => {
   const queryClient = useQueryClient()

@@ -1,32 +1,38 @@
 import { api } from '@shared/api/api-client'
-import type { Employee } from '@shared/api/employees/types'
+import type { CreateEmployeeFields, Employee } from '@/schemas/employee-schema'
+
+export const EMPLOYEES_PATH = 'employees'
 
 export const employeesService = {
   getEmployees: async (): Promise<Employee[]> => {
-    const response = await api.get(`employees`)
+    const response = await api.get(EMPLOYEES_PATH)
 
     return response.data
   },
 
   getEmployee: async (id: string): Promise<Employee> => {
-    const response = await api.get(`employees/${id}`)
+    const response = await api.get(`${EMPLOYEES_PATH}/${id}`)
 
     return response.data
   },
 
-  createEmployee: async (data: Omit<Employee, 'id'>): Promise<Employee> => {
-    return await api.post(`employees`, data)
+  createEmployee: (data: CreateEmployeeFields): Promise<Employee> => {
+    return api.post(EMPLOYEES_PATH, data)
   },
 
-  updateEmployee: async (id: string | number, data: Partial<Employee>): Promise<Employee> => {
-    return await api.patch(`employees/${id}`, data)
+  updateEmployee: (id: string | number, data: Partial<Employee>): Promise<Employee> => {
+    return api.patch(`${EMPLOYEES_PATH}/${id}`, data)
   },
 
-  deleteEmployee: async (id: string): Promise<void> => {
-    await api.delete(`employees/${id}`)
+  deleteEmployee: (id: string): Promise<void> => {
+    return api.delete(`${EMPLOYEES_PATH}/${id}`)
   },
 
-  getDepartments: async (): Promise<string[]> => {
-    return api.get(`employees/departments`)
+  getDepartments: (): Promise<string[]> => {
+    return api.get(`${EMPLOYEES_PATH}/departments`)
+  },
+
+  getPositionsByDepartment: (department: string): Promise<string[]> => {
+    return api.get(`${EMPLOYEES_PATH}/departments/${department}/positions`)
   },
 }

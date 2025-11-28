@@ -1,5 +1,5 @@
 import { CardContent, CardHeader, CardTitle } from '@/shared/ui/card'
-import type { Employee } from '@shared/api/employees/types'
+import type { Employee } from '@/schemas/employee-schema'
 import { formatSalary } from '@features/references/utils'
 
 interface EmployeeViewProps {

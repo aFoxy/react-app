@@ -1,4 +1,4 @@
-import type { Employee } from '@shared/api/employees/types'
+import type { Employee } from '@/schemas/employee-schema'
 import { DataTable } from '@shared/components/DataTable'
 import {
   getCoreRowModel,

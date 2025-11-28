@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form'
-import type { Employee } from '@shared/api/employees/types'
+import type { Employee } from '@/schemas/employee-schema'
 
 type UseLoginFormProps = {
   initValue: Employee | undefined

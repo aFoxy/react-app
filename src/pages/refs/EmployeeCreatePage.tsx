@@ -1,28 +1,32 @@
 import { Button } from '@shared/ui/button'
 import { ArrowLeft } from 'lucide-react'
-import { EmployeeForm } from '@features/references/EmployeeForm'
 import { useEmployeesDepartments } from '@shared/api/employees/hooks/use-employees-departments'
-import type { Employee } from '@shared/api/employees/types'
 import { useReturnNavigation } from '@features/references/hooks/use-return-navigation'
 import { useCreateEmployee } from '@shared/api/employees/hooks/use-create-employee'
 import { toast } from 'sonner'
+import { EmployeeCreateWizard } from '@features/references/EmployeeCreateWizard'
+import { useState } from 'react'
+import type { CreateEmployeeFields } from '@/schemas/employee-schema'
+import { useFormDraft } from '@shared/hooks/use-form-draft'
+const EMPLOYEE_DRAFT_KEY = 'employeeDraft'
 
-export default function EmployeeEditPage() {
-  const employeeDraft: Employee = {
-    position: '',
-    name: '',
-    id: crypto.randomUUID(),
-  }
+export default function EmployeeCreatePage() {
+  const { restoreDraft, saveDraft, clearDraft } = useFormDraft(EMPLOYEE_DRAFT_KEY)
+  const [employeeDraft] = useState<Partial<CreateEmployeeFields> | undefined>(restoreDraft)
+
   const navigateBack = useReturnNavigation()
 
   const departments = useEmployeesDepartments()
   const createMutation = useCreateEmployee({
     onSuccess: (updatedEmployee) => {
       toast.success(`Employee ${updatedEmployee.name} created`)
+      clearDraft()
       navigateBack()
     },
     onError: (error) => {
-      toast.error(`Employee create failed. ${error.message}`)
+      if (error.status !== 400) {
+        toast.error(`Employee create failed. ${error.message}`)
+      }
     },
   })
 
@@ -34,9 +38,12 @@ export default function EmployeeEditPage() {
         </Button>
         <h1>Create employee</h1>
       </div>
-      <EmployeeForm
+      <EmployeeCreateWizard
         departments={departments.data ?? []}
         employee={employeeDraft}
+        isPending={createMutation.isPending}
+        serverError={createMutation.error?.response?.data}
+        onValueChange={(data) => saveDraft(data)}
         onSubmit={(data) => createMutation.mutateAsync(data)}
       />
     </div>

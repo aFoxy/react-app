@@ -5,8 +5,10 @@ import { CardContent, CardHeader } from '@shared/ui/card'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@shared/ui/select'
 import { Field, FieldContent, FieldLabel } from '@shared/ui/field'
 import { Switch } from '@shared/ui/switch'
-import type { Employee } from '@shared/api/employees/types'
+import type { Employee } from '@/schemas/employee-schema'
 import { useEmployeeForm } from '@features/references/hooks/use-employee-form'
+import { usePositionsByDepartment } from '@shared/api/employees/hooks/use-employees-postitions'
+import { useEffect } from 'react'
 
 type EmployeeFormProps = {
   departments: string[]
@@ -15,7 +17,18 @@ type EmployeeFormProps = {
 }
 
 export const EmployeeForm = ({ employee, onSubmit, departments }: EmployeeFormProps) => {
-  const { register, control, handleSubmit } = useEmployeeForm({ initValue: employee })
+  const { register, control, handleSubmit, watch, setValue, getFieldState } = useEmployeeForm({
+    initValue: employee,
+  })
+
+  const selectedDepartment = watch('department')
+  const { data = [] } = usePositionsByDepartment(selectedDepartment)
+
+  useEffect(() => {
+    if (selectedDepartment && getFieldState('department').isDirty) {
+      setValue('position', '')
+    }
+  }, [selectedDepartment, getFieldState, setValue])
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
@@ -49,15 +62,6 @@ export const EmployeeForm = ({ employee, onSubmit, departments }: EmployeeFormPr
 
       <CardContent className="space-y-6">
         <div className="grid grid-cols-2 gap-4">
-          <Field className="gap-1">
-            <FieldContent>
-              <FieldLabel className="text-muted-foreground" htmlFor="email">
-                Position
-              </FieldLabel>
-            </FieldContent>
-            <Input id="position" placeholder="Position" {...register('position')} />
-          </Field>
-
           <Controller
             name="department"
             control={control}
@@ -76,6 +80,32 @@ export const EmployeeForm = ({ employee, onSubmit, departments }: EmployeeFormPr
                     {departments.map((department) => (
                       <SelectItem key={department} value={department}>
                         {department}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </Field>
+            )}
+          />
+
+          <Controller
+            name="position"
+            control={control}
+            render={({ field }) => (
+              <Field className="gap-1">
+                <FieldContent>
+                  <FieldLabel className="text-muted-foreground" htmlFor="position">
+                    Position
+                  </FieldLabel>
+                </FieldContent>
+                <Select value={field.value} onValueChange={field.onChange}>
+                  <SelectTrigger id="position">
+                    <SelectValue placeholder={'Select position...'} />
+                  </SelectTrigger>
+                  <SelectContent side="top">
+                    {data.map((position) => (
+                      <SelectItem key={position} value={position}>
+                        {position}
                       </SelectItem>
                     ))}
                   </SelectContent>

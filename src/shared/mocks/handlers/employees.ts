@@ -3,8 +3,17 @@ import { HttpResponse, http } from 'msw'
 import { API_URL } from '../env'
 import { db, persistDb } from '../db'
 import { networkDelay, requireAuth } from '../utils'
-import { DEPARTMENTS } from '@shared/mocks/employees'
-import type { Employee } from '@shared/api/employees/types'
+import { type Department, DEPARTMENTS, POSITIONS_BY_DEPARTMENT } from '@shared/mocks/employees'
+import type { CreateEmployeeFields, Employee } from '@/schemas/employee-schema'
+import { CreateEmployeeSchema } from '@/schemas/employee-schema'
+
+function checkUniqueEmail(email: string): string | null {
+  const exists = db.employees.findFirst({
+    where: { email: { equals: email } },
+  })
+
+  return exists ? 'Employee with this email already exists' : null
+}
 
 export const employeesHandlers = [
   http.get(`${API_URL}/employees/departments`, async () => {
@@ -12,6 +21,20 @@ export const employeesHandlers = [
 
     try {
       return HttpResponse.json(DEPARTMENTS)
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Server Error'
+
+      return HttpResponse.json({ message: message || 'Server Error' }, { status: 500 })
+    }
+  }),
+
+  http.get(`${API_URL}/employees/departments/:department/positions`, async ({ params }) => {
+    await networkDelay()
+
+    try {
+      const department = params.department as Department
+
+      return HttpResponse.json(POSITIONS_BY_DEPARTMENT[department])
     } catch (error: unknown) {
       const message = error instanceof Error ? error.message : 'Server Error'
 
@@ -79,8 +102,46 @@ export const employeesHandlers = [
         return HttpResponse.json({ message: error }, { status: 401 })
       }
 
-      const data = (await request.json()) as Omit<Employee, 'id'>
-      const result = db.employees.create({ ...data, id: crypto.randomUUID() })
+      const data = (await request.json()) as CreateEmployeeFields
+
+      // / Валидация через Zod
+      const parseResult = CreateEmployeeSchema.safeParse(data)
+
+      if (!parseResult.success) {
+        const fieldErrors: Record<string, string> = {}
+        parseResult.error.issues.forEach((error) => {
+          const path = error.path.join('.')
+          fieldErrors[path] = error.message
+        })
+
+        if (data.email && !fieldErrors.email) {
+          const emailError = checkUniqueEmail(data.email)
+
+          if (emailError) fieldErrors.email = emailError
+        }
+
+        return HttpResponse.json({ fieldErrors }, { status: 400 })
+      }
+
+      // 🔍 Проверка уникальности email
+      if (parseResult.data.email) {
+        const exists = db.employees.findFirst({
+          where: { email: { equals: parseResult.data.email } },
+        })
+
+        if (exists) {
+          return HttpResponse.json(
+            { email: 'Employee with this email already exists' },
+            { status: 400 }
+          )
+        }
+      }
+
+      const result = db.employees.create({
+        ...data,
+        salary: data.salary ?? undefined,
+        id: crypto.randomUUID(),
+      })
       await persistDb('employees')
 
       return HttpResponse.json(result)
@@ -110,7 +171,10 @@ export const employeesHandlers = [
             equals: employeeId,
           },
         },
-        data,
+        data: {
+          ...data,
+          salary: data.salary ?? undefined,
+        },
       })
       await persistDb('employees')
 
