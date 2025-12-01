@@ -1,9 +1,5 @@
 import { Form } from 'react-router'
-import { Input } from '@shared/ui/input'
-import { Controller, useWatch } from 'react-hook-form'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@shared/ui/select'
-import { Field, FieldContent, FieldError, FieldLabel } from '@shared/ui/field'
-import { Switch } from '@shared/ui/switch'
+import { useWatch } from 'react-hook-form'
 import { usePositionsByDepartment } from '@shared/api/employees/hooks/use-employees-postitions'
 import { useEffect, useState } from 'react'
 import { useDebounce } from '@shared/hooks/use-debounce'
@@ -12,6 +8,9 @@ import { useCreateEmployeeForm } from '@features/references/hooks/use-create-emp
 import WizardSteps from '@shared/components/WizardSteps'
 import { Button } from '@shared/ui/button'
 import { findStepByServerError } from '@shared/lib/form-helpers'
+import { EmployeeCreateWizardStepOne } from '@features/references/EmployeeCreateWizardStepOne'
+import { EmployeeCreateWizardStepTwo } from '@features/references/EmployeeCreateWizardStepTwo'
+import { EmployeeCreateWizardStepThree } from '@features/references/EmployeeCreateWizardStepThree'
 
 type FieldName = keyof CreateEmployeeFields | 'root' | `root.${string}`
 
@@ -72,15 +71,14 @@ export const EmployeeCreateWizard = ({
 
   const values = useWatch({ control })
   const debouncedValues = useDebounce(values, 500)
+  const selectedDepartment = watch('department')
+  const { data = [] } = usePositionsByDepartment(selectedDepartment)
 
   useEffect(() => {
     if (isDirty) {
       onValueChange(debouncedValues)
     }
   }, [debouncedValues, onValueChange, isDirty])
-
-  const selectedDepartment = watch('department')
-  const { data = [] } = usePositionsByDepartment(selectedDepartment)
 
   useEffect(() => {
     if (selectedDepartment && getFieldState('department').isDirty) {
@@ -112,191 +110,18 @@ export const EmployeeCreateWizard = ({
         className="flex min-h-[270px] flex-col justify-between gap-6"
         noValidate
       >
-        {step === 0 && (
-          <div className="space-y-2">
-            <div className="grid min-h-[84px] grid-cols-2 gap-4">
-              <Controller
-                name="name"
-                control={control}
-                render={({ field, fieldState }) => (
-                  <Field className="gap-1" data-invalid={fieldState.invalid}>
-                    <FieldLabel className="text-muted-foreground" htmlFor="name">
-                      Name
-                    </FieldLabel>
-                    <Input
-                      {...field}
-                      id="name"
-                      aria-invalid={fieldState.invalid}
-                      placeholder="Name"
-                    />
-                    <FieldError>{fieldState.error?.message}</FieldError>
-                  </Field>
-                )}
-              />
-
-              <Controller
-                name="isActive"
-                control={control}
-                render={({ field }) => (
-                  <Field orientation="horizontal" className="w-fit justify-self-end">
-                    <FieldContent>
-                      <FieldLabel htmlFor="isActive">
-                        {field.value ? 'Active' : 'Inactive'}
-                      </FieldLabel>
-                    </FieldContent>
-                    <Switch id="isActive" checked={field.value} onCheckedChange={field.onChange} />
-                  </Field>
-                )}
-              />
-            </div>
-
-            <div className="grid min-h-[84px] grid-cols-2 gap-4">
-              <Controller
-                name="email"
-                control={control}
-                render={({ field, fieldState }) => (
-                  <Field className="gap-1" data-invalid={fieldState.invalid}>
-                    <FieldLabel className="text-muted-foreground" htmlFor="email">
-                      Email
-                    </FieldLabel>
-                    <Input
-                      {...field}
-                      id="email"
-                      aria-invalid={fieldState.invalid}
-                      placeholder="Email Address"
-                    />
-                    <FieldError>{fieldState.error?.message}</FieldError>
-                  </Field>
-                )}
-              />
-              <Controller
-                name="phone"
-                control={control}
-                render={({ field, fieldState }) => (
-                  <Field className="gap-1" data-invalid={fieldState.invalid}>
-                    <FieldLabel className="text-muted-foreground" htmlFor="phone">
-                      Phone
-                    </FieldLabel>
-                    <Input
-                      {...field}
-                      id="phone"
-                      aria-invalid={fieldState.invalid}
-                      placeholder="Phone"
-                    />
-                    <FieldError>{fieldState.error?.message}</FieldError>
-                  </Field>
-                )}
-              />
-            </div>
-          </div>
-        )}
+        {step === 0 && <EmployeeCreateWizardStepOne control={control} />}
 
         {step === 1 && (
-          <div className="grid grid-cols-2 gap-4">
-            <Controller
-              name="department"
-              control={control}
-              render={({ field, fieldState }) => (
-                <Field className="gap-1" data-invalid={fieldState.invalid}>
-                  <FieldLabel className="text-muted-foreground" htmlFor="department">
-                    Department
-                  </FieldLabel>
-                  <Select
-                    value={field.value}
-                    onValueChange={field.onChange}
-                    onOpenChange={(open) => {
-                      if (!open) field.onBlur()
-                    }}
-                  >
-                    <SelectTrigger id="department" data-invalid={fieldState.invalid}>
-                      <SelectValue placeholder={'Select department...'} />
-                    </SelectTrigger>
-                    <SelectContent side="top">
-                      {departments.map((department) => (
-                        <SelectItem key={department} value={department}>
-                          {department}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FieldError>{fieldState.error?.message}</FieldError>
-                </Field>
-              )}
-            />
-            <Controller
-              name="position"
-              control={control}
-              render={({ field }) => (
-                <Field className="gap-1">
-                  <FieldLabel className="text-muted-foreground" htmlFor="position">
-                    Position
-                  </FieldLabel>
-                  <Select
-                    value={field.value}
-                    onValueChange={field.onChange}
-                    disabled={!values.department}
-                  >
-                    <SelectTrigger id="position">
-                      <SelectValue placeholder={field.value || 'Select position...'} />
-                    </SelectTrigger>
-                    <SelectContent side="top">
-                      {data.map((position) => (
-                        <SelectItem key={position} value={position}>
-                          {position}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </Field>
-              )}
-            />
-          </div>
+          <EmployeeCreateWizardStepTwo
+            control={control}
+            departments={departments}
+            positions={data}
+            department={values.department}
+          />
         )}
 
-        {step === 2 && (
-          <div className="grid grid-cols-2 gap-4">
-            <Controller
-              name="position"
-              control={control}
-              render={({ field, fieldState }) => (
-                <Field className="gap-1" data-invalid={fieldState.invalid}>
-                  <FieldLabel className="text-muted-foreground" htmlFor="hireDate">
-                    Hiring date
-                  </FieldLabel>
-                  <Input
-                    {...field}
-                    aria-invalid={fieldState.invalid}
-                    id="hireDate"
-                    type="date"
-                    placeholder="Hiring date"
-                  />
-                  <FieldError>{fieldState.error?.message}</FieldError>
-                </Field>
-              )}
-            />
-            <Controller
-              name="position"
-              control={control}
-              render={({ fieldState }) => (
-                <Field className="gap-1" data-invalid={fieldState.invalid}>
-                  <FieldLabel className="text-muted-foreground" htmlFor="salary">
-                    Salary
-                  </FieldLabel>
-                  <Input
-                    id="salary"
-                    aria-invalid={fieldState.invalid}
-                    type="number"
-                    placeholder="Salary"
-                    {...register('salary', {
-                      setValueAs: (v) => (v === '' ? null : Number(v)),
-                    })}
-                  />
-                  <FieldError>{fieldState.error?.message}</FieldError>
-                </Field>
-              )}
-            />
-          </div>
-        )}
+        {step === 2 && <EmployeeCreateWizardStepThree control={control} register={register} />}
 
         <div className="mt-8 flex gap-4">
           <Button
