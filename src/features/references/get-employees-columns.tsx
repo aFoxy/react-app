@@ -1,7 +1,7 @@
 import type { ColumnDef } from '@tanstack/react-table'
 import { type Location, NavLink } from 'react-router'
 import { Edit, Trash, View } from 'lucide-react'
-import type { Employee } from '@shared/api/employees/types'
+import type { Employee } from '@/schemas/employee-schema'
 import { dateRangeFilterFn } from '@features/references/utils'
 
 interface GetEmployeesColumnsParams {

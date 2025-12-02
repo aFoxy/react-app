@@ -1,18 +1,19 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { employeesService } from '@shared/api/employees/employees.service'
-import type { Employee } from '@shared/api/employees/types'
 import { queryKeys } from '@shared/api/queryKeys'
+import { AxiosError } from 'axios'
+import type { CreateEmployeeFields, Employee } from '@/schemas/employee-schema'
 
 interface UseCreateEmployeeOptions {
   onSuccess?: (data: Employee) => void
-  onError?: (error: Error) => void
+  onError?: (error: AxiosError) => void
 }
 
 export const useCreateEmployee = (options?: UseCreateEmployeeOptions) => {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: (data: Omit<Employee, 'id'>) => employeesService.createEmployee(data),
+    mutationFn: (data: CreateEmployeeFields) => employeesService.createEmployee(data),
 
     onMutate: async (newEmployee) => {
       // Отменить активные запросы
@@ -51,7 +52,7 @@ export const useCreateEmployee = (options?: UseCreateEmployeeOptions) => {
       options?.onSuccess?.(newEmployee)
     },
 
-    onError: (error: Error, _, context) => {
+    onError: (error: AxiosError<Record<string, string>>, _, context) => {
       // Откатить при ошибке
       if (context?.previousList) {
         queryClient.setQueryData(['employees'], context.previousList)
