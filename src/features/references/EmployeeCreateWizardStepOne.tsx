@@ -1,15 +1,11 @@
-import { Controller } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 import { Field, FieldContent, FieldError, FieldLabel } from '@shared/ui/field'
 import { Input } from '@shared/ui/input'
 import { Switch } from '@shared/ui/switch'
-import type { Control } from 'react-hook-form'
-import type { CreateEmployeeFields } from '@/schemas/employee-schema'
 
-interface EmployeesFilterProps {
-  control: Control<CreateEmployeeFields>
-}
+export function EmployeeCreateWizardStepOne() {
+  const { control } = useFormContext()
 
-export function EmployeeCreateWizardStepOne({ control }: EmployeesFilterProps) {
   return (
     <div className="space-y-2">
       <div className="grid min-h-[84px] grid-cols-2 gap-4">

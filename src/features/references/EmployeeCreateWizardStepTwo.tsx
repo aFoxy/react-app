@@ -1,22 +1,15 @@
-import { Controller } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 import { Field, FieldError, FieldLabel } from '@shared/ui/field'
-import type { Control } from 'react-hook-form'
-import type { CreateEmployeeFields } from '@/schemas/employee-schema'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@shared/ui/select'
+import { usePositionsByDepartment } from '@shared/api/employees/hooks/use-employees-postitions'
+import { useEmployeesDepartments } from '@shared/api/employees/hooks/use-employees-departments'
 
-interface EmployeesFilterProps {
-  control: Control<CreateEmployeeFields>
-  departments: string[]
-  positions: string[]
-  department?: string
-}
+export function EmployeeCreateWizardStepTwo() {
+  const { control, watch } = useFormContext()
+  const selectedDepartment = watch('department')
+  const departments = useEmployeesDepartments().data ?? []
+  const positions = usePositionsByDepartment(selectedDepartment).data ?? []
 
-export function EmployeeCreateWizardStepTwo({
-  control,
-  departments,
-  positions,
-  department,
-}: EmployeesFilterProps) {
   return (
     <div className="grid grid-cols-2 gap-4">
       <Controller
@@ -57,7 +50,11 @@ export function EmployeeCreateWizardStepTwo({
             <FieldLabel className="text-muted-foreground" htmlFor="position">
               Position
             </FieldLabel>
-            <Select value={field.value} onValueChange={field.onChange} disabled={!department}>
+            <Select
+              value={field.value}
+              onValueChange={field.onChange}
+              disabled={!selectedDepartment}
+            >
               <SelectTrigger id="position">
                 <SelectValue placeholder={field.value || 'Select position...'} />
               </SelectTrigger>

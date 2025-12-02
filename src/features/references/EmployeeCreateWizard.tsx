@@ -1,6 +1,5 @@
 import { Form } from 'react-router'
-import { useWatch } from 'react-hook-form'
-import { usePositionsByDepartment } from '@shared/api/employees/hooks/use-employees-postitions'
+import { FormProvider, useWatch } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 import { useDebounce } from '@shared/hooks/use-debounce'
 import type { CreateEmployeeFields } from '@/schemas/employee-schema'
@@ -22,7 +21,6 @@ const STEP_FIELDS: readonly (keyof CreateEmployeeFields)[][] = [
 ]
 
 type EmployeeFormProps = {
-  departments: string[]
   onSubmit: (formValue: CreateEmployeeFields) => void
   onValueChange: (formValue: Partial<CreateEmployeeFields>) => void
   isPending: boolean
@@ -34,29 +32,16 @@ export const EmployeeCreateWizard = ({
   employee,
   onSubmit,
   onValueChange,
-  departments,
   isPending,
   serverError,
 }: EmployeeFormProps) => {
   const [step, setStep] = useState(0)
 
-  const {
-    register,
-    control,
-    handleSubmit,
-    watch,
-    setValue,
-    setError,
-    getFieldState,
-    formState: { isDirty },
-    trigger,
-  } = useCreateEmployeeForm({
-    initValue: employee,
-  })
+  const formMethods = useCreateEmployeeForm({ initValue: employee })
 
   const handleNext = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    const isValid = await trigger(STEP_FIELDS[step])
+    const isValid = await formMethods.trigger(STEP_FIELDS[step])
 
     if (!isValid) return
 
@@ -69,22 +54,14 @@ export const EmployeeCreateWizard = ({
     }
   }
 
-  const values = useWatch({ control })
+  const values = useWatch({ control: formMethods.control })
   const debouncedValues = useDebounce(values, 500)
-  const selectedDepartment = watch('department')
-  const { data = [] } = usePositionsByDepartment(selectedDepartment)
 
   useEffect(() => {
-    if (isDirty) {
+    if (formMethods.formState.isDirty) {
       onValueChange(debouncedValues)
     }
-  }, [debouncedValues, onValueChange, isDirty])
-
-  useEffect(() => {
-    if (selectedDepartment && getFieldState('department').isDirty) {
-      setValue('position', '')
-    }
-  }, [selectedDepartment, getFieldState, setValue])
+  }, [debouncedValues, onValueChange, formMethods.formState.isDirty])
 
   useEffect(() => {
     if (!serverError || !Object.keys(serverError).length) {
@@ -95,9 +72,9 @@ export const EmployeeCreateWizard = ({
     setStep(idx >= 0 ? idx : 0)
 
     Object.entries(serverError).forEach(([name, message]) => {
-      setError(name as FieldName, { type: 'server', message: String(message) })
+      formMethods.setError(name as FieldName, { type: 'server', message: String(message) })
     })
-  }, [serverError, setError])
+  }, [serverError, formMethods.setError])
 
   return (
     <div className="mx-auto max-w-3xl p-6">
@@ -105,53 +82,46 @@ export const EmployeeCreateWizard = ({
         <h2 className="mb-4 text-xl font-semibold">{STEP_TITLE[step]}</h2>
         <WizardSteps step={step} stepsCount={3}></WizardSteps>
       </div>
-      <Form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex min-h-[270px] flex-col justify-between gap-6"
-        noValidate
-      >
-        {step === 0 && <EmployeeCreateWizardStepOne control={control} />}
+      <FormProvider {...formMethods}>
+        <Form
+          onSubmit={formMethods.handleSubmit(onSubmit)}
+          className="flex min-h-[270px] flex-col justify-between gap-6"
+          noValidate
+        >
+          {step === 0 && <EmployeeCreateWizardStepOne />}
+          {step === 1 && <EmployeeCreateWizardStepTwo />}
+          {step === 2 && <EmployeeCreateWizardStepThree />}
 
-        {step === 1 && (
-          <EmployeeCreateWizardStepTwo
-            control={control}
-            departments={departments}
-            positions={data}
-            department={values.department}
-          />
-        )}
-
-        {step === 2 && <EmployeeCreateWizardStepThree control={control} register={register} />}
-
-        <div className="mt-8 flex gap-4">
-          <Button
-            type="button"
-            onClick={handlePrev}
-            disabled={step === 0}
-            className="rounded-md border border-gray-300 px-4 py-2 disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            ← Previous
-          </Button>
-
-          {step < 2 ? (
+          <div className="mt-8 flex gap-4">
             <Button
               type="button"
-              onClick={handleNext}
-              className="ml-auto rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+              onClick={handlePrev}
+              disabled={step === 0}
+              className="rounded-md border border-gray-300 px-4 py-2 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              Next →
+              ← Previous
             </Button>
-          ) : (
-            <Button
-              type="submit"
-              disabled={isPending}
-              className="ml-auto rounded-md bg-green-600 px-4 py-2 text-white hover:bg-green-700 disabled:opacity-50"
-            >
-              {isPending ? 'Creating...' : 'Create'}
-            </Button>
-          )}
-        </div>
-      </Form>
+
+            {step < 2 ? (
+              <Button
+                type="button"
+                onClick={handleNext}
+                className="ml-auto rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+              >
+                Next →
+              </Button>
+            ) : (
+              <Button
+                type="submit"
+                disabled={isPending}
+                className="ml-auto rounded-md bg-green-600 px-4 py-2 text-white hover:bg-green-700 disabled:opacity-50"
+              >
+                {isPending ? 'Creating...' : 'Create'}
+              </Button>
+            )}
+          </div>
+        </Form>
+      </FormProvider>
     </div>
   )
 }

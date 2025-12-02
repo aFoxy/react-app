@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form'
 import type { CreateEmployeeFields } from '@/schemas/employee-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { CreateEmployeeSchema } from '@/schemas/employee-schema'
+import { useEffect } from 'react'
 
 type UseLoginFormProps = {
   initValue: Partial<CreateEmployeeFields> | undefined
@@ -10,7 +11,7 @@ type UseLoginFormProps = {
 export const useCreateEmployeeForm = ({ initValue }: UseLoginFormProps) => {
   const draft = initValue
 
-  return useForm<CreateEmployeeFields>({
+  const formMethods = useForm<CreateEmployeeFields>({
     resolver: zodResolver(CreateEmployeeSchema),
     mode: 'onBlur',
     defaultValues: {
@@ -24,4 +25,14 @@ export const useCreateEmployeeForm = ({ initValue }: UseLoginFormProps) => {
       isActive: draft?.isActive ?? true,
     },
   })
+
+  const selectedDepartment = formMethods.watch('department')
+
+  useEffect(() => {
+    if (selectedDepartment && formMethods.getFieldState('department').isDirty) {
+      formMethods.setValue('position', '')
+    }
+  }, [selectedDepartment, formMethods])
+
+  return { ...formMethods }
 }

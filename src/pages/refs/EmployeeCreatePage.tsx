@@ -1,11 +1,10 @@
 import { Button } from '@shared/ui/button'
 import { ArrowLeft } from 'lucide-react'
-import { useEmployeesDepartments } from '@shared/api/employees/hooks/use-employees-departments'
 import { useReturnNavigation } from '@features/references/hooks/use-return-navigation'
 import { useCreateEmployee } from '@shared/api/employees/hooks/use-create-employee'
 import { toast } from 'sonner'
 import { EmployeeCreateWizard } from '@features/references/EmployeeCreateWizard'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import type { CreateEmployeeFields } from '@/schemas/employee-schema'
 import { useFormDraft } from '@shared/hooks/use-form-draft'
 const EMPLOYEE_DRAFT_KEY = 'employeeDraft'
@@ -15,8 +14,10 @@ export default function EmployeeCreatePage() {
   const [employeeDraft] = useState<Partial<CreateEmployeeFields> | undefined>(restoreDraft)
 
   const navigateBack = useReturnNavigation()
-
-  const departments = useEmployeesDepartments()
+  const handleValueChange = useCallback(
+    (data: Partial<CreateEmployeeFields>) => saveDraft(data),
+    []
+  )
   const createMutation = useCreateEmployee({
     onSuccess: (updatedEmployee) => {
       toast.success(`Employee ${updatedEmployee.name} created`)
@@ -39,11 +40,10 @@ export default function EmployeeCreatePage() {
         <h1>Create employee</h1>
       </div>
       <EmployeeCreateWizard
-        departments={departments.data ?? []}
         employee={employeeDraft}
         isPending={createMutation.isPending}
         serverError={createMutation.error?.response?.data}
-        onValueChange={(data) => saveDraft(data)}
+        onValueChange={handleValueChange}
         onSubmit={(data) => createMutation.mutateAsync(data)}
       />
     </div>

@@ -1,15 +1,9 @@
-import { Controller, type UseFormRegister } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 import { Field, FieldError, FieldLabel } from '@shared/ui/field'
 import { Input } from '@shared/ui/input'
-import type { Control } from 'react-hook-form'
-import type { CreateEmployeeFields } from '@/schemas/employee-schema'
+export function EmployeeCreateWizardStepThree() {
+  const { control, register } = useFormContext()
 
-interface EmployeesFilterProps {
-  control: Control<CreateEmployeeFields>
-  register: UseFormRegister<CreateEmployeeFields>
-}
-
-export function EmployeeCreateWizardStepThree({ control, register }: EmployeesFilterProps) {
   return (
     <div className="grid grid-cols-2 gap-4">
       <Controller
